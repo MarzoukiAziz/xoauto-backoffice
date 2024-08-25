@@ -74,9 +74,6 @@ const components: any = (theme: Theme) => {
         '.MuiTimelineConnector-root': {
           width: '1px !important',
         },
-        ' .simplebar-scrollbar:before': {
-          background: `${theme.palette.grey[300]} !important`,
-        },
         '@keyframes gradient': {
           '0%': {
             backgroundPosition: '0% 50%',
@@ -86,14 +83,6 @@ const components: any = (theme: Theme) => {
           },
           '100% ': {
             backgroundPosition: ' 0% 50%',
-          },
-        },
-        '@keyframes slide': {
-          '0%': {
-            transform: 'translate3d(0, 0, 0)',
-          },
-          '100% ': {
-            transform:  'translate3d(-2086px, 0, 0)',
           },
         },
       },
@@ -117,7 +106,7 @@ const components: any = (theme: Theme) => {
     MuiPaper: {
       styleOverrides: {
         root: {
-          // border: `1px solid ${theme.palette.divider}`,
+          // border: `1px solid ${theme.palette.grey[100]}`,
           backgroundImage: 'none',
         },
       },
@@ -125,7 +114,7 @@ const components: any = (theme: Theme) => {
     MuiStepConnector: {
       styleOverrides: {
         line: {
-          borderColor: theme.palette.divider,
+          borderColor: theme.palette.grey[100],
         },
       },
     },
@@ -259,7 +248,7 @@ const components: any = (theme: Theme) => {
     MuiTableCell: {
       styleOverrides: {
         root: {
-          borderBottom: `1px solid ${theme.palette.divider}`,
+          borderBottom: `1px solid ${theme.palette.grey[100]}`,
         },
       },
     },
@@ -283,7 +272,7 @@ const components: any = (theme: Theme) => {
     MuiLinearProgress: {
       styleOverrides: {
         root: {
-          backgroundColor: theme.palette.grey[200],
+          backgroundColor: '#ecf0f2',
           borderRadius: '6px',
         },
       },
@@ -291,14 +280,14 @@ const components: any = (theme: Theme) => {
     MuiTimelineConnector: {
       styleOverrides: {
         root: {
-          backgroundColor: theme.palette.divider,
+          backgroundColor: theme.palette.grey[100],
         },
       },
     },
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: theme.palette.divider,
+          borderColor: theme.palette.grey[100],
         },
       },
     },
@@ -366,11 +355,7 @@ const components: any = (theme: Theme) => {
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor:
-              theme.palette.mode === 'dark' ? theme.palette.grey[200] : theme.palette.grey[300],
-          },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.grey[300],
+            borderColor: theme.palette.grey[100],
           },
         },
         input: {
@@ -392,7 +377,8 @@ const components: any = (theme: Theme) => {
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          borderColor: `${theme.palette.divider}`,
+          borderLeft: `1px solid ${theme.palette.grey[100]}`,
+          borderRight: `1px solid ${theme.palette.grey[100]}`,
         },
       },
     },

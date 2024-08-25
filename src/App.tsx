@@ -8,10 +8,13 @@ import ScrollToTop from './components/shared/ScrollToTop';
 import Router from './routes/Router';
 import { AppState } from './store/Store';
 
+
 const App: FC = () => {
   const routing = useRoutes(Router);
   const theme = ThemeSettings();
   const customizer = useSelector((state: AppState) => state.customizer);
+
+
 
   return (
     <ThemeProvider theme={theme}>

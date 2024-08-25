@@ -6,7 +6,6 @@ import App from './App';
 import { store } from './store/Store';
 import Spinner from './views/spinner/Spinner';
 import './utils/i18n';
-
 import { AuthProvider } from 'src/guards/jwt/JwtContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -21,3 +20,7 @@ root.render(
     </Suspense>
   </Provider>,
 );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

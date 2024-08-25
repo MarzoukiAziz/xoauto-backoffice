@@ -12,11 +12,11 @@ import {
   Box,
   alpha,
   styled,
-  Skeleton
+  Skeleton,
 } from '@mui/material';
 import { IconEye, IconMessage2, IconPoint } from '@tabler/icons';
 import { format } from 'date-fns';
-import { fetchBlogPost } from 'src/store/apps/blog/BlogSlice';
+import { fetchBlogPost } from 'src/store/blog/BlogSlice';
 import BlankCard from '../../shared/BlankCard';
 import { BlogPostType } from 'src/types/apps/blog';
 
@@ -66,7 +66,7 @@ const BlogFeaturedCard = ({ post, index }: Btype) => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 700);
-    
+
     return () => clearTimeout(timer);
   }, []);
 

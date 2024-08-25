@@ -3,7 +3,7 @@ import { Grid, Pagination } from '@mui/material';
 import BlogCard from './BlogCard';
 import { orderBy } from 'lodash';
 import { useSelector, useDispatch } from 'src/store/Store';
-import { fetchBlogPosts } from 'src/store/apps/blog/BlogSlice';
+import { fetchBlogPosts } from 'src/store/blog/BlogSlice';
 import BlogFeaturedCard from './BlogFeaturedCard';
 import { BlogPostType } from 'src/types/apps/blog';
 

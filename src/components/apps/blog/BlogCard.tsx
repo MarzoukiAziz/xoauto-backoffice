@@ -14,10 +14,10 @@ import {
   Grid,
   Tooltip,
   Box,
-  Skeleton
+  Skeleton,
 } from '@mui/material';
 import { IconEye, IconMessage2, IconPoint } from '@tabler/icons';
-import { fetchBlogPost } from 'src/store/apps/blog/BlogSlice';
+import { fetchBlogPost } from 'src/store/blog/BlogSlice';
 import BlankCard from '../../shared/BlankCard';
 import { BlogPostType } from 'src/types/apps/blog';
 
@@ -41,7 +41,7 @@ const BlogCard = ({ post }: Btype) => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 700);
-    
+
     return () => clearTimeout(timer);
   }, []);
 

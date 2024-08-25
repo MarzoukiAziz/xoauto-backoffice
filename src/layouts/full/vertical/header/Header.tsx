@@ -3,13 +3,8 @@ import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '
 import { useSelector, useDispatch } from 'src/store/Store';
 import { toggleSidebar, toggleMobileSidebar } from 'src/store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons';
-import Notifications from './Notification';
 import Profile from './Profile';
-import Cart from './Cart';
-import Search from './Search';
-import Language from './Language';
 import { AppState } from 'src/store/Store';
-import Navigation from './Navigation';
 import MobileRightSidebar from './MobileRightSidebar';
 
 const Header = () => {
@@ -47,31 +42,8 @@ const Header = () => {
         >
           <IconMenu2 size="20" />
         </IconButton>
-
-        {/* ------------------------------------------- */}
-        {/* Search Dropdown */}
-        {/* ------------------------------------------- */}
-        <Search />
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null}
-
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Language />
-          {/* ------------------------------------------- */}
-          {/* Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          <Cart />
-          {/* ------------------------------------------- */}
-          {/* End Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          <Notifications />
-          {/* ------------------------------------------- */}
-          {/* Toggle Right Sidebar for mobile */}
-          {/* ------------------------------------------- */}
           {lgDown ? <MobileRightSidebar /> : null}
           <Profile />
         </Stack>

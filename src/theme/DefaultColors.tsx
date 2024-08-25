@@ -1,3 +1,5 @@
+import { grey } from '@mui/material/colors';
+
 const baselightTheme = {
   direction: 'ltr',
   palette: {
@@ -50,17 +52,14 @@ const baselightTheme = {
     },
     text: {
       primary: '#2A3547',
-      secondary: '#2A3547',
+      secondary: '#5A6A85',
     },
     action: {
       disabledBackground: 'rgba(73,82,88,0.12)',
       hoverOpacity: 0.02,
       hover: '#f6f9fc',
     },
-    divider: '#e5eaef',
-    background: {
-      default: '#ffffff',
-    },
+    divider: '#ebf1f6',
   },
 };
 
@@ -123,7 +122,7 @@ const baseDarkTheme = {
       hoverOpacity: 0.02,
       hover: '#333F55',
     },
-    divider: '#333F55',
+    divider: grey[100],
     background: {
       default: '#171c23',
       dark: '#171c23',

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { fetchBlogPost } from 'src/store/apps/blog/BlogSlice';
+import { fetchBlogPost } from 'src/store/blog/BlogSlice';
 import { useLocation } from 'react-router-dom';
 import {
   CardContent,
@@ -14,14 +14,14 @@ import {
   Divider,
   TextField,
   Button,
-  Skeleton
+  Skeleton,
 } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import { IconEye, IconMessage2, IconPoint, IconQuote } from '@tabler/icons';
 import { format } from 'date-fns';
 import BlogComment from './BlogComment';
 import { uniqueId } from 'lodash';
-import { addComment } from 'src/store/apps/blog/BlogSlice';
+import { addComment } from 'src/store/blog/BlogSlice';
 import BlankCard from '../../../shared/BlankCard';
 import { AppState, useDispatch, useSelector } from 'src/store/Store';
 import type { BlogPostType, BlogType } from 'src/types/apps/blog';
@@ -77,7 +77,7 @@ const BlogDetail = () => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 700);
-    
+
     return () => clearTimeout(timer);
   }, []);
 

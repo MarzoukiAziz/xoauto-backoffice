@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Box,
-  Menu,
-  Avatar,
-  Typography,
-  Divider,
-  Button,
-  IconButton,
-  Stack
-} from '@mui/material';
-import * as dropdownData from './data';
+import { Box, Menu, Avatar, Typography, Divider, Button, IconButton, Stack } from '@mui/material';
 
 import { IconMail } from '@tabler/icons';
+import useAuth from 'src/guards/authGuard/UseAuth';
 
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 import unlimitedImg from 'src/assets/images/backgrounds/unlimited-bg.png';
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+  const { logout } = useAuth();
+
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
@@ -76,7 +69,7 @@ const Profile = () => {
               Mathew Anderson
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
-            Designer
+              Designer
             </Typography>
             <Typography
               variant="subtitle2"
@@ -91,7 +84,8 @@ const Profile = () => {
           </Box>
         </Stack>
         <Divider />
-        {dropdownData.profile.map((profile) => (
+        {/* TODO: show userinfo */}
+        {/* {dropdownData.profile.map((profile) => (
           <Box key={profile.title}>
             <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
               <Link to={profile.href}>
@@ -142,7 +136,7 @@ const Profile = () => {
               </Link>
             </Box>
           </Box>
-        ))}
+        ))} */}
         <Box mt={2}>
           <Box bgcolor="primary.light" p={3} mb={3} overflow="hidden" position="relative">
             <Box display="flex" justifyContent="space-between">
@@ -158,7 +152,16 @@ const Profile = () => {
               <img src={unlimitedImg} alt="unlimited" className="signup-bg"></img>
             </Box>
           </Box>
-          <Button to="/auth/login" variant="outlined" color="primary" component={Link} fullWidth>
+          <Button
+            onClick={() => {
+              logout();
+            }}
+            to="/auth/login"
+            variant="outlined"
+            color="primary"
+            component={Link}
+            fullWidth
+          >
             Logout
           </Button>
         </Box>
