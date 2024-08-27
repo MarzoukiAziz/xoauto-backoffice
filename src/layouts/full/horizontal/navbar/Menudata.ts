@@ -14,15 +14,15 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: 'Blog',
-    icon: IconChartDonut3,
-    href: '/blog/',
+    title: 'Users',
+    icon: IconUserCircle,
+    href: '/users/',
   },
   {
     id: uniqueId(),
-    title: 'Users',
-    icon: IconUserCircle,
-    href: '/users',
+    title: 'Blog',
+    icon: IconChartDonut3,
+    href: '/blog/',
   },
 ];
 export default Menuitems;

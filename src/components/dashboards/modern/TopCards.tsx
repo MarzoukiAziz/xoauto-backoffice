@@ -20,14 +20,14 @@ const topcards: cardType[] = [
   {
     href: '/user-profile',
     icon: icon2,
-    title: 'Profile',
+    title: 'Users',
     digits: '3,685',
     bgcolor: 'primary',
   },
   {
     href: '/apps/blog/posts',
     icon: icon3,
-    title: 'Blog',
+    title: 'Articles',
     digits: '256',
     bgcolor: 'warning',
   },

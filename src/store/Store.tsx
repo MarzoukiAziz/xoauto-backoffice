@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import CustomizerReducer from './customizer/CustomizerSlice';
 import BlogReducer from './blog/BlogSlice';
+import UserReducer from './user/UserSlice';
 import { combineReducers } from 'redux';
 import {
   useDispatch as useAppDispatch,
@@ -12,12 +13,14 @@ export const store = configureStore({
   reducer: {
     customizer: CustomizerReducer,
     blogReducer: BlogReducer,
+    userReduce: UserReducer,
   },
 });
 
 const rootReducer = combineReducers({
   customizer: CustomizerReducer,
   blogReducer: BlogReducer,
+  userReduce: UserReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

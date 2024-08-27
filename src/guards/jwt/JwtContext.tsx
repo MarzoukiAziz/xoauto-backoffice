@@ -67,16 +67,19 @@ const AuthContext = createContext<any | null>({
 function AuthProvider({ children }: { children: React.ReactElement }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // const API_URL = process.env.REACT_APP_API_URL;
+
+  const API_URL = 'http://localhost:5000/api/v1';
+
   useEffect(() => {
     const initialize = async () => {
       try {
         const accessToken = window.localStorage.getItem('accessToken');
-        if (accessToken) console.log('TOKEN valid: ' + isValidToken(accessToken));
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/my-account`);
+          const response = await axios.get(`${API_URL}/user/my-account`);
           const { user } = response.data;
 
           dispatch({
@@ -111,34 +114,15 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
   }, []);
 
   const signin = async (email: string, password: string) => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/user/login`, {
+    const response = await axios.post(`${API_URL}/user/login`, {
       email,
       password,
     });
     const { accessToken, user } = response.data.data;
 
     setSession(accessToken);
-    console.log('new token:' + accessToken);
     dispatch({
       type: 'LOGIN',
-      payload: {
-        user,
-      },
-    });
-  };
-
-  const signup = async (email: string, password: string, firstName: string, lastName: string) => {
-    const response = await axios.post('/api/account/register', {
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    const { accessToken, user } = response.data;
-
-    window.localStorage.setItem('accessToken', accessToken);
-    dispatch({
-      type: 'REGISTER',
       payload: {
         user,
       },
@@ -157,7 +141,6 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
         method: 'jwt',
         signin,
         logout,
-        signup,
       }}
     >
       {children}
