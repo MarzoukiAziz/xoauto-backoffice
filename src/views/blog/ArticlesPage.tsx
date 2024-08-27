@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
-import UsersTable from './UsersTable';
+import ArticlesTable from './ArticlesTable';
 
 const BCrumb = [
   {
@@ -12,20 +12,20 @@ const BCrumb = [
     title: 'Home',
   },
   {
-    title: 'Users',
+    title: 'Blog',
   },
 ];
 
-const UsersPage = () => (
-  <PageContainer title="Users List" description="this is Users page">
+const ArticlesPage = () => (
+  <PageContainer title="Articles List" description="this is Articles page">
     {/* breadcrumb */}
-    <Breadcrumb title="Users" items={BCrumb} />
+    <Breadcrumb title="Articles" items={BCrumb} />
     {/* end breadcrumb */}
-    <ParentCard title="Users">
+    <ParentCard title="Articles">
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Box>
-            <UsersTable />
+            <ArticlesTable />
           </Box>
         </Grid>
       </Grid>
@@ -33,4 +33,4 @@ const UsersPage = () => (
   </PageContainer>
 );
 
-export default UsersPage;
+export default ArticlesPage;

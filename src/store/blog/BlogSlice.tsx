@@ -3,58 +3,72 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
 
 interface StateType {
-  blogposts: any[];
-  recentPosts: any[];
-  blogSearch: string;
+  articles: any[];
+  recentArticles: any[];
+  articleSearch: string;
   sortBy: string;
-  selectedPost: any;
+  selectedArticle: any;
 }
 
 const initialState = {
-  blogposts: [],
-  recentPosts: [],
-  blogSearch: '',
+  articles: [],
+  recentArticles: [],
+  articleSearch: '',
   sortBy: 'newest',
-  selectedPost: null,
+  selectedArticle: null,
 };
 
-export const BlogSlice = createSlice({
-  name: 'Blog',
+export const ArticleSlice = createSlice({
+  name: 'Article',
   initialState,
   reducers: {
-    getPosts: (state: StateType, action) => {
-      state.blogposts = action.payload;
+    getArticles: (state: StateType, action) => {
+      state.articles = action.payload;
     },
-    getPost: (state: StateType, action) => {
-      state.selectedPost = action.payload;
+    getArticle: (state: StateType, action) => {
+      state.selectedArticle = action.payload;
     },
   },
 });
 
-export const { getPosts, getPost } = BlogSlice.actions;
+export const { getArticles, getArticle } = ArticleSlice.actions;
 
-export const fetchBlogPosts = () => async (dispatch: AppDispatch) => {
+// const API_URL = process.env.REACT_APP_API_URL;
+
+const API_URL = 'http://localhost:5000/api/v1';
+
+export const fetchArticles =
+  (category?: string, keywords?: string, size = 10, page = 1) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      const response = await axios.get(`${API_URL}/article`, {
+        params: {
+          category, // e.g., 'Programming'
+          keywords, // e.g., 'TypeScript'
+          size, // e.g., 10 (number of articles per page)
+          page, // e.g., 1 (page number)
+        },
+      });
+      dispatch(getArticles(response.data.articles));
+    } catch (err) {
+      throw new Error();
+    }
+  };
+
+export const fetchArticle = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get('/api/data/blog/BlogPosts');
-    dispatch(getPosts(response.data));
+    const response = await axios.get(`${API_URL}/article/${id}`, {
+      params: {
+        category: 'Programming',
+        tags: 'TypeScript',
+        page: 2,
+        limit: 10,
+      },
+    });
+    dispatch(getArticles(response.data));
   } catch (err) {
     throw new Error();
   }
 };
-export const addComment = (postId: number, comment: any) => async (dispatch: AppDispatch) => {
-  try {
-    const response = await axios.post('/api/data/blog/post/add', { postId, comment });
-    dispatch(getPosts(response.data.posts));
-  } catch (err: any) {
-    throw new Error(err);
-  }
-};
-export const fetchBlogPost = (title: string) => async (dispatch: AppDispatch) => {
-  try {
-    const response = await axios.post('/api/data/blog/post', { title });
-    dispatch(getPost(response.data.post));
-  } catch (err: any) {
-    throw new Error(err);
-  }
-};
-export default BlogSlice.reducer;
+
+export default ArticleSlice.reducer;
