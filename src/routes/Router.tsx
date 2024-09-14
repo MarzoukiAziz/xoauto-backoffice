@@ -20,6 +20,8 @@ const Dashboard = Loadable(lazy(() => import('../views/dashboard/Modern')));
 
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/ArticlesPage')));
+const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article/ArticleDetailsPage')));
+
 
 /* ****Users***** */
 const UsersPage = Loadable(lazy(() => import('../views/user/UsersPage')));
@@ -36,8 +38,8 @@ const Router = [
       { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
       { path: '/blog/', element: <ArticlesPage /> },
+      { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
       { path: '/users/', element: <UsersPage /> },
-
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },

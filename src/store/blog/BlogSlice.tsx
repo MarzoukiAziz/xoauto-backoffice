@@ -1,13 +1,14 @@
 import axios from 'src/utils/axios';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
+import { ArticleType } from 'src/types/blog';
 
 interface StateType {
-  articles: any[];
-  recentArticles: any[];
+  articles: ArticleType[];
+  recentArticles: ArticleType[];
   articleSearch: string;
   sortBy: string;
-  selectedArticle: any;
+  selectedArticle: ArticleType | null;
 }
 
 const initialState = {
@@ -25,7 +26,7 @@ export const ArticleSlice = createSlice({
     getArticles: (state: StateType, action) => {
       state.articles = action.payload;
     },
-    getArticle: (state: StateType, action) => {
+    getArticle: (state: StateType, action: PayloadAction<ArticleType>) => {
       state.selectedArticle = action.payload;
     },
   },
@@ -39,33 +40,26 @@ const API_URL = 'http://localhost:5000/api/v1';
 
 export const fetchArticles =
   (category?: string, keywords?: string, size = 10, page = 1) =>
-  async (dispatch: AppDispatch) => {
-    try {
-      const response = await axios.get(`${API_URL}/article`, {
-        params: {
-          category, // e.g., 'Programming'
-          keywords, // e.g., 'TypeScript'
-          size, // e.g., 10 (number of articles per page)
-          page, // e.g., 1 (page number)
-        },
-      });
-      dispatch(getArticles(response.data.articles));
-    } catch (err) {
-      throw new Error();
-    }
-  };
+    async (dispatch: AppDispatch) => {
+      try {
+        const response = await axios.get(`${API_URL}/article`, {
+          params: {
+            category,
+            keywords,
+            size,
+            page,
+          },
+        });
+        dispatch(getArticles(response.data.articles));
+      } catch (err) {
+        throw new Error();
+      }
+    };
 
 export const fetchArticle = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/article/${id}`, {
-      params: {
-        category: 'Programming',
-        tags: 'TypeScript',
-        page: 2,
-        limit: 10,
-      },
-    });
-    dispatch(getArticles(response.data));
+    const response = await axios.get(`${API_URL}/article/${id}`);
+    dispatch(getArticle(response.data));
   } catch (err) {
     throw new Error();
   }

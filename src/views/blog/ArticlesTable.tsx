@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'src/store/Store';
 import { orderBy } from 'lodash';
 import { fetchArticles } from 'src/store/blog/BlogSlice';
 import { ArticleType } from 'src/types/blog';
+import { Link } from 'react-router-dom';
 
 const ArticlesTable = () => {
   const [anchorEl, setAnchorEl] = React.useState<{ [key: string]: HTMLElement | null }>({});
@@ -61,7 +62,6 @@ const ArticlesTable = () => {
       state.blogReducer.articleSearch,
     ),
   );
-  console.log(articles);
 
   return (
     <BlankCard>
@@ -88,7 +88,7 @@ const ArticlesTable = () => {
               >
                 <TableCell>
                   <Typography variant="subtitle1" color="textSecondary">
-                    {article.title}
+                    <Link to={"/blog/article/"+article._id}>{article.title}</Link>
                   </Typography>
                 </TableCell>
 
