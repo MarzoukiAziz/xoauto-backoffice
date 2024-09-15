@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
     CardContent,
     Stack,
@@ -9,7 +9,8 @@ import {
     Chip,
     Box,
     Divider,
-    Skeleton
+    Skeleton,
+    Button
 } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import { AppState, useDispatch, useSelector } from 'src/store/Store';
@@ -57,6 +58,12 @@ const ArticleDetailsPage = () => {
         article && <PageContainer title={article?.title} description="this is Article details page">
             <Box>
                 <Breadcrumb title={article?.title} items={BCrumb} />
+                <Box sx={{ paddingBottom: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button variant="contained" disableElevation color="primary" component={Link}
+                        to="/blog/update">
+                        Edit Article
+                    </Button>
+                </Box>
                 <BlankCard>
                     <>
                         {isLoading ? (

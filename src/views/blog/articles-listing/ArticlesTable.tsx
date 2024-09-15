@@ -17,9 +17,9 @@ import BlankCard from '../../../components/shared/BlankCard';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons';
 import { useDispatch, useSelector } from 'src/store/Store';
 import { orderBy } from 'lodash';
-import { fetchArticles } from 'src/store/blog/BlogSlice';
+import { deleteSelectedArticle, fetchArticle, fetchArticles } from 'src/store/blog/BlogSlice';
 import { ArticleType } from 'src/types/blog';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ArticlesTable = () => {
   const [anchorEl, setAnchorEl] = React.useState<{ [key: string]: HTMLElement | null }>({});
@@ -33,7 +33,17 @@ const ArticlesTable = () => {
   };
 
   const handleDeleteArticle = (id: string) => {
-    handleClose(id);
+    if (window.confirm('Are you sure you want to delete this article?')) {
+      dispatch(deleteSelectedArticle(id));
+    }
+  };
+  const navigate = useNavigate();
+
+  const handleEditArticle = (id: string) => {
+    // Fetch the article details and then navigate to the edit page
+    dispatch(fetchArticle(id)).then(() => {
+      navigate(`update`); // Redirect to the edit page
+    });
   };
 
   const dispatch = useDispatch();
@@ -126,7 +136,7 @@ const ArticlesTable = () => {
                       'aria-labelledby': 'basic-button',
                     }}
                   >
-                    <MenuItem onClick={() => handleClose(article._id ?? '')}>
+                    <MenuItem onClick={() => handleEditArticle(article._id ?? '')}>
                       <ListItemIcon>
                         <IconEdit width={18} />
                       </ListItemIcon>

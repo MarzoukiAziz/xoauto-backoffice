@@ -33,15 +33,15 @@ const ArticleForm = () => {
     title: yup
       .string()
       .min(10, 'Too Short!')
-      .max(50, 'Too Long!')
+      .max(150, 'Too Long!')
       .required('Title is Required'),
     subtitle: yup
       .string()
       .min(10, 'Too Short!')
-      .max(100, 'Too Long!')
+      .max(300, 'Too Long!')
       .required('Subtitle is Required'),
     content: yup.string().required('Content is Required'),
-    previewImage: yup.string().required('Preview Image is Required'),
+    previewImg: yup.string().required('Preview Image is Required'),
     category: yup.string().required('Category is Required'),
     readTime: yup.string().required('Read Time is Required'),
     tags: yup.string()
@@ -52,7 +52,7 @@ const ArticleForm = () => {
       title: '',
       subtitle: '',
       content: '',
-      previewImage: '',
+      previewImg: '',
       category: '',
       readTime: '',
       tags: ''
@@ -63,7 +63,7 @@ const ArticleForm = () => {
         title: values.title,
         subtitle: values.subtitle,
         content: values.content,
-        previewImg: values.previewImage,
+        previewImg: values.previewImg,
         category: values.category,
         readTime: Number(values.readTime),
         tags: values.tags,
@@ -117,7 +117,6 @@ const ArticleForm = () => {
             error={formik.touched.subtitle && Boolean(formik.errors.subtitle)}
             helperText={formik.touched.subtitle && formik.errors.subtitle}
           />
-
           <CustomFormLabel htmlFor="content">Content  &#40;html&#41;</CustomFormLabel>
           <CustomTextField
             id="content"
@@ -130,12 +129,12 @@ const ArticleForm = () => {
             error={formik.touched.content && Boolean(formik.errors.content)}
             helperText={formik.touched.content && formik.errors.content}
           />
-          <CustomFormLabel htmlFor="previewImage">Preview Image</CustomFormLabel>
-          <CustomTextField id="previewImage" variant="outlined" fullWidth
-            value={formik.values.previewImage}
+          <CustomFormLabel htmlFor="previewImg">Preview Image</CustomFormLabel>
+          <CustomTextField id="previewImg" variant="outlined" fullWidth
+            value={formik.values.previewImg}
             onChange={formik.handleChange}
-            error={formik.touched.previewImage && Boolean(formik.errors.previewImage)}
-            helperText={formik.touched.previewImage && formik.errors.previewImage}
+            error={formik.touched.previewImg && Boolean(formik.errors.previewImg)}
+            helperText={formik.touched.previewImg && formik.errors.previewImg}
           />
           <CustomFormLabel htmlFor="category">Category</CustomFormLabel>
           <CustomSelect
@@ -173,7 +172,7 @@ const ArticleForm = () => {
             mt: 3, display: 'flex', justifyContent: 'flex-end'
           }}>
             <Button color="primary" variant="contained" type='submit'>
-              Submit
+              Update
             </Button>
           </Box>
         </form>
