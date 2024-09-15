@@ -172,7 +172,7 @@ const ArticleForm = () => {
             mt: 3, display: 'flex', justifyContent: 'flex-end'
           }}>
             <Button color="primary" variant="contained" type='submit'>
-              Update
+              Submit
             </Button>
           </Box>
         </form>

@@ -2,6 +2,7 @@ import axios from 'src/utils/axios';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
 import { ArticleType } from 'src/types/blog';
+import { Category } from '@mui/icons-material';
 
 interface StateType {
   articles: ArticleType[];
@@ -50,13 +51,13 @@ const API_URL = 'http://localhost:5000/api/v1';
 // const API_URL = process.env.REACT_APP_API_URL;
 // Fetch articles from the API
 export const fetchArticles =
-  (keywords?: string, category?: string, size = 10, page = 1) =>
+  (search?: string, wcategory?: string, size = 10, page = 1) =>
     async (dispatch: AppDispatch) => {
       try {
         const response = await axios.get(`${API_URL}/article`, {
           params: {
-            category,
-            keywords,
+            search,
+            Category,
             size,
             page,
           },
