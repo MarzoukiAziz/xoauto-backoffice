@@ -1,5 +1,5 @@
 export interface ArticleType {
-  _id: string;
+  _id?: string;
   title: string;
   subtitle?: string;
   content?: string;

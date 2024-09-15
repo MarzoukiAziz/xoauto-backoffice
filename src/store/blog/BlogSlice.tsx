@@ -29,10 +29,13 @@ export const ArticleSlice = createSlice({
     getArticle: (state: StateType, action: PayloadAction<ArticleType>) => {
       state.selectedArticle = action.payload;
     },
+    addArticle: (state: StateType, action: PayloadAction<ArticleType>) => {
+      state.articles.push(action.payload);
+    },
   },
 });
 
-export const { getArticles, getArticle } = ArticleSlice.actions;
+export const { getArticles, getArticle, addArticle } = ArticleSlice.actions;
 
 // const API_URL = process.env.REACT_APP_API_URL;
 
@@ -62,6 +65,15 @@ export const fetchArticle = (id: string) => async (dispatch: AppDispatch) => {
     dispatch(getArticle(response.data));
   } catch (err) {
     throw new Error();
+  }
+};
+
+export const addNewArticle = (newArticle: ArticleType) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await axios.post(`${API_URL}/article`, newArticle);
+    dispatch(addArticle(response.data));
+  } catch (err) {
+    throw new Error('Failed to add new article');
   }
 };
 

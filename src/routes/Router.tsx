@@ -19,8 +19,9 @@ const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')))
 const Dashboard = Loadable(lazy(() => import('../views/dashboard/Modern')));
 
 /* ****Blog***** */
-const ArticlesPage = Loadable(lazy(() => import('../views/blog/ArticlesPage')));
-const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article/ArticleDetailsPage')));
+const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
+const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article-details/ArticleDetailsPage')));
+const ArticleFormPage = Loadable(lazy(() => import('../views/blog/article-form/ArticleFormPage')));
 
 
 /* ****Users***** */
@@ -39,6 +40,7 @@ const Router = [
       { path: '/dashboard', exact: true, element: <Dashboard /> },
       { path: '/blog/', element: <ArticlesPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
+      { path: '/blog/new', element: <ArticleFormPage /> },
       { path: '/users/', element: <UsersPage /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],

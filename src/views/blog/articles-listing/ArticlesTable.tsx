@@ -13,7 +13,7 @@ import {
   IconButton,
   ListItemIcon,
 } from '@mui/material';
-import BlankCard from '../../components/shared/BlankCard';
+import BlankCard from '../../../components/shared/BlankCard';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons';
 import { useDispatch, useSelector } from 'src/store/Store';
 import { orderBy } from 'lodash';
@@ -82,13 +82,13 @@ const ArticlesTable = () => {
           </TableHead>
           <TableBody>
             {articles.map((article) => (
-              <TableRow
+              article._id && <TableRow
                 key={article._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell>
                   <Typography variant="subtitle1" color="textSecondary">
-                    <Link to={"/blog/article/"+article._id}>{article.title}</Link>
+                    <Link to={"/blog/article/" + article._id}>{article.title}</Link>
                   </Typography>
                 </TableCell>
 
@@ -113,7 +113,7 @@ const ArticlesTable = () => {
                     aria-controls={anchorEl[article._id] ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={anchorEl[article._id] ? 'true' : undefined}
-                    onClick={(e) => handleClick(e, article._id)}
+                    onClick={(e) => handleClick(e, article._id ?? '')}
                   >
                     <IconDotsVertical width={18} />
                   </IconButton>
@@ -121,19 +121,19 @@ const ArticlesTable = () => {
                     id="basic-menu"
                     anchorEl={anchorEl[article._id]}
                     open={Boolean(anchorEl[article._id])}
-                    onClose={() => handleClose(article._id)}
+                    onClose={() => handleClose(article._id ?? '')}
                     MenuListProps={{
                       'aria-labelledby': 'basic-button',
                     }}
                   >
-                    <MenuItem onClick={() => handleClose(article._id)}>
+                    <MenuItem onClick={() => handleClose(article._id ?? '')}>
                       <ListItemIcon>
                         <IconEdit width={18} />
                       </ListItemIcon>
                       Edit
                     </MenuItem>
 
-                    <MenuItem onClick={() => handleDeleteArticle(article._id)}>
+                    <MenuItem onClick={() => handleDeleteArticle(article._id ?? '')}>
                       <ListItemIcon>
                         <IconTrash width={18} />
                       </ListItemIcon>
@@ -145,8 +145,8 @@ const ArticlesTable = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
-    </BlankCard>
+      </TableContainer >
+    </BlankCard >
   );
 };
 
