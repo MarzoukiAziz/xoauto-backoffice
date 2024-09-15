@@ -7,4 +7,6 @@ export interface ArticleType {
   category?: string;
   readTime?: number;
   tags?: string;
+  createdAt?: Date,
+  updatedAt?: Date
 }

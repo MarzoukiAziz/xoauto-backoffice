@@ -54,6 +54,18 @@ const ArticleDetailsPage = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    const formattedDate = (date: Date) => {
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).format(new Date(date));
+    };
+
+
+
     return (
         article && <PageContainer title={article?.title} description="this is Article details page">
             <Box>
@@ -96,10 +108,13 @@ const ArticleDetailsPage = () => {
                                 variant="h6"
                                 fontWeight={600}
                                 color="inherit"
-                                sx={{ textDecoration: 'none' }}
+                                sx={{ textDecoration: 'none', color: 'grey', float: 'right' }}
                             >
-                                Tags: {article?.tags}
+                                Created At: {article?.createdAt ? formattedDate(article.createdAt) : ' N/A'} <br />
+                                Updated At: {article?.updatedAt ? formattedDate(article.updatedAt) : ' N/A'}
                             </Typography>
+                            <br /><br />
+
                             <Box my={3}>
                                 <Typography
                                     gutterBottom
@@ -122,8 +137,18 @@ const ArticleDetailsPage = () => {
                             <hr />
 
                             <div dangerouslySetInnerHTML={{ __html: article.content }} />
-
+                            <br />
+                            <Typography
+                                gutterBottom
+                                variant="h6"
+                                fontWeight={600}
+                                color="inherit"
+                                sx={{ textDecoration: 'none' }}
+                            >
+                                Tags: {article?.tags}
+                            </Typography>
                         </CardContent>
+
                     </>
                 </BlankCard>
                 <BlankCard sx={{ mt: 3, p: 0 }}>
