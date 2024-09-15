@@ -46,11 +46,11 @@ export const ArticleSlice = createSlice({
 export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle } = ArticleSlice.actions;
 
 const API_URL = 'http://localhost:5000/api/v1';
-// const API_URL = process.env.REACT_APP_API_URL;
 
+// const API_URL = process.env.REACT_APP_API_URL;
 // Fetch articles from the API
 export const fetchArticles =
-  (category?: string, keywords?: string, size = 10, page = 1) =>
+  (keywords?: string, category?: string, size = 10, page = 1) =>
     async (dispatch: AppDispatch) => {
       try {
         const response = await axios.get(`${API_URL}/article`, {
