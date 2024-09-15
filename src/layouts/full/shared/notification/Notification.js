@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { Snackbar, Alert, AlertTitle } from '@mui/material';
 
-const Welcome = () => {
+const Notification = ({ title, subtitle, severity = 'info', customColor = '' }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
   };
 
-  const handleClose = (reason) => {
+  const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
+
   React.useEffect(() => {
-    // Update the document title using the browser API
     const timer = setTimeout(() => {
       handleClick();
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -33,16 +33,20 @@ const Welcome = () => {
       >
         <Alert
           onClose={handleClose}
-          severity="info"
+          severity={severity}
           variant="filled"
-          sx={{ width: '100%', color: 'white' }}
+          sx={{
+            width: '100%',
+            color: 'white',
+            backgroundColor: customColor || '', // Apply custom color if provided
+          }}
         >
-          <AlertTitle>Welcome To Modernize</AlertTitle>
-          Easy to customize the Template!!!
+          <AlertTitle>{title}</AlertTitle>
+          {subtitle}
         </Alert>
       </Snackbar>
     </React.Fragment>
   );
 };
 
-export default Welcome;
+export default Notification;

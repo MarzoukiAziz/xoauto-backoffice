@@ -13,7 +13,7 @@ import Social from 'src/components/dashboards/modern/Social';
 import SellingProducts from 'src/components/dashboards/modern/SellingProducts';
 import WeeklyStats from 'src/components/dashboards/modern/WeeklyStats';
 import TopPerformers from 'src/components/dashboards/modern/TopPerformers';
-import Welcome from 'src/layouts/full/shared/welcome/Welcome';
+import Notification from 'src/layouts/full/shared/notification/Notification';
 
 const Modern = () => {
   return (
@@ -71,7 +71,7 @@ const Modern = () => {
           </Grid>
         </Grid>
         {/* column */}
-        <Welcome />
+        <Notification title="Welcome To XoAuto Admin Panel" subtitle="Have a good day!" severity="info" />
       </Box>
     </PageContainer>
   );

@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
-import Table2 from './UsersTable';
+import UsersTable from './UsersTable';
 
 const BCrumb = [
   {
@@ -25,7 +25,7 @@ const UsersPage = () => (
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Box>
-            <Table2 />
+            <UsersTable />
           </Box>
         </Grid>
       </Grid>

@@ -21,7 +21,7 @@ import img1 from 'src/assets/images/profile/user-1.jpg';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons';
 import { useDispatch, useSelector } from 'src/store/Store';
 import { activateUserById, deleteUserById, fetchUsers } from 'src/store/user/UserSlice';
-import { userType } from 'src/types/users';
+import { userType } from 'src/types/user';
 import { orderBy } from 'lodash';
 
 const UsersTable = () => {

@@ -1,60 +1,111 @@
 import axios from 'src/utils/axios';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
+import { ArticleType } from 'src/types/blog';
 
 interface StateType {
-  blogposts: any[];
-  recentPosts: any[];
-  blogSearch: string;
+  articles: ArticleType[];
+  recentArticles: ArticleType[];
+  articleSearch: string;
   sortBy: string;
-  selectedPost: any;
+  selectedArticle: ArticleType | null;
 }
 
-const initialState = {
-  blogposts: [],
-  recentPosts: [],
-  blogSearch: '',
+const initialState: StateType = {
+  articles: [],
+  recentArticles: [],
+  articleSearch: '',
   sortBy: 'newest',
-  selectedPost: null,
+  selectedArticle: null,
 };
 
-export const BlogSlice = createSlice({
-  name: 'Blog',
+export const ArticleSlice = createSlice({
+  name: 'Article',
   initialState,
   reducers: {
-    getPosts: (state: StateType, action) => {
-      state.blogposts = action.payload;
+    getArticles: (state, action: PayloadAction<ArticleType[]>) => {
+      state.articles = action.payload;
     },
-    getPost: (state: StateType, action) => {
-      state.selectedPost = action.payload;
+    getArticle: (state, action: PayloadAction<ArticleType>) => {
+      state.selectedArticle = action.payload;
+    },
+    addArticle: (state, action: PayloadAction<ArticleType>) => {
+      state.articles.push(action.payload);
+    },
+    updateArticle: (state, action: PayloadAction<ArticleType>) => {
+      state.articles = state.articles.map(article =>
+        article._id === action.payload._id ? action.payload : article
+      );
+    },
+    deleteArticle: (state, action: PayloadAction<string>) => {
+      state.articles = state.articles.filter(article => article._id !== action.payload);
     },
   },
 });
 
-export const { getPosts, getPost } = BlogSlice.actions;
+export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle } = ArticleSlice.actions;
 
-export const fetchBlogPosts = () => async (dispatch: AppDispatch) => {
+const API_URL = 'http://localhost:5000/api/v1';
+
+// const API_URL = process.env.REACT_APP_API_URL;
+// Fetch articles from the API
+export const fetchArticles =
+  (keywords?: string, category?: string, size = 10, page = 1) =>
+    async (dispatch: AppDispatch) => {
+      try {
+        const response = await axios.get(`${API_URL}/article`, {
+          params: {
+            category,
+            keywords,
+            size,
+            page,
+          },
+        });
+        dispatch(getArticles(response.data.articles));
+      } catch (err) {
+        throw new Error();
+      }
+    };
+
+// Fetch a specific article by ID
+export const fetchArticle = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get('/api/data/blog/BlogPosts');
-    dispatch(getPosts(response.data));
+    const response = await axios.get(`${API_URL}/article/${id}`);
+    dispatch(getArticle(response.data));
   } catch (err) {
     throw new Error();
   }
 };
-export const addComment = (postId: number, comment: any) => async (dispatch: AppDispatch) => {
+
+// Add a new article
+export const addNewArticle = (newArticle: ArticleType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post('/api/data/blog/post/add', { postId, comment });
-    dispatch(getPosts(response.data.posts));
-  } catch (err: any) {
-    throw new Error(err);
+    const response = await axios.post(`${API_URL}/article`, newArticle);
+    dispatch(addArticle(response.data));
+  } catch (err) {
+    throw new Error('Failed to add new article');
   }
 };
-export const fetchBlogPost = (title: string) => async (dispatch: AppDispatch) => {
+
+// Update an existing article
+export const updateArticleById = (updatedArticle: ArticleType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post('/api/data/blog/post', { title });
-    dispatch(getPost(response.data.post));
-  } catch (err: any) {
-    throw new Error(err);
+    const response = await axios.put(`${API_URL}/article/${updatedArticle._id}`, updatedArticle);
+
+    dispatch(updateArticle(response.data));
+  } catch (err) {
+    throw new Error('Failed to update article');
   }
 };
-export default BlogSlice.reducer;
+
+// Delete an article
+export const deleteSelectedArticle = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    await axios.delete(`${API_URL}/article/${id}`);
+    dispatch(deleteArticle(id));
+  } catch (err) {
+    throw new Error('Failed to delete article');
+  }
+};
+
+export default ArticleSlice.reducer;

@@ -19,8 +19,11 @@ const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')))
 const Dashboard = Loadable(lazy(() => import('../views/dashboard/Modern')));
 
 /* ****Blog***** */
-const Blog = Loadable(lazy(() => import('../views/blog/Blog')));
-const BlogDetail = Loadable(lazy(() => import('../views/blog/BlogPost')));
+const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
+const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article-details/ArticleDetailsPage')));
+const ArticleFormPage = Loadable(lazy(() => import('../views/blog/article-form/ArticleFormPage')));
+const ArticleUpdatePage = Loadable(lazy(() => import('../views/blog/article-update/ArticleUpdatePage')));
+
 
 /* ****Users***** */
 const UsersPage = Loadable(lazy(() => import('../views/user/UsersPage')));
@@ -36,10 +39,11 @@ const Router = [
     children: [
       { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
-      { path: '/blog/', element: <Blog /> },
-      { path: '/blog/detail/:id', element: <BlogDetail /> },
+      { path: '/blog/', element: <ArticlesPage /> },
+      { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
+      { path: '/blog/new', element: <ArticleFormPage /> },
+      { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
-
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
