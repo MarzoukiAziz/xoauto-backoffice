@@ -13,14 +13,14 @@ export const store = configureStore({
   reducer: {
     customizer: CustomizerReducer,
     blogReducer: BlogReducer,
-    userReduce: UserReducer,
+    userReducer: UserReducer,
   },
 });
 
 const rootReducer = combineReducers({
   customizer: CustomizerReducer,
   blogReducer: BlogReducer,
-  userReduce: UserReducer,
+  userReducer: UserReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

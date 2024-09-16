@@ -41,10 +41,16 @@ export const ArticleSlice = createSlice({
     deleteArticle: (state, action: PayloadAction<string>) => {
       state.articles = state.articles.filter(article => article._id !== action.payload);
     },
+    deleteComment: (state, action: PayloadAction<{ commentId: string }>) => {
+      if (state.selectedArticle?.comments) {
+        state.selectedArticle.comments = state.selectedArticle.comments.filter(comment => comment._id !== action.payload.commentId);
+      }
+
+    },
   },
 });
 
-export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle } = ArticleSlice.actions;
+export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle, deleteComment } = ArticleSlice.actions;
 
 const API_URL = 'http://localhost:5000/api/v1';
 
@@ -69,10 +75,15 @@ export const fetchArticles =
     };
 
 // Fetch a specific article by ID
-export const fetchArticle = (id: string) => async (dispatch: AppDispatch) => {
+export const fetchArticle = (id: string, withComments = false) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/article/${id}`);
-    dispatch(getArticle(response.data));
+    const responseArticle = await axios.get(`${API_URL}/article/${id}`);
+    const article = responseArticle.data
+    if (withComments) {
+      const responseComments = await axios.get(`${API_URL}/comment/article/${id}`);
+      article.comments = responseComments.data
+    }
+    dispatch(getArticle(article));
   } catch (err) {
     throw new Error();
   }
@@ -106,6 +117,16 @@ export const deleteSelectedArticle = (id: string) => async (dispatch: AppDispatc
     dispatch(deleteArticle(id));
   } catch (err) {
     throw new Error('Failed to delete article');
+  }
+};
+
+// Delete a comment
+export const deleteSelectedComment = (commentId: string) => async (dispatch: AppDispatch) => {
+  try {
+    await axios.delete(`${API_URL}/comment/${commentId}`);
+    dispatch(deleteComment({ commentId }));
+  } catch (err) {
+    throw new Error('Failed to delete comment');
   }
 };
 

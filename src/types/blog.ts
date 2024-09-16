@@ -8,5 +8,17 @@ export interface ArticleType {
   readTime?: number;
   tags?: string;
   createdAt?: Date,
-  updatedAt?: Date
+  updatedAt?: Date,
+  comments?: CommentType[],
+}
+
+export interface CommentType {
+  _id: string;
+  uid: string;
+  articleId: string;
+  content: string;
+  answerTo: string;
+  createdAt?: Date,
+  updatedAt?: Date,
+  replies: CommentType[];
 }
