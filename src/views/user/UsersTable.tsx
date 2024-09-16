@@ -21,7 +21,7 @@ import img1 from 'src/assets/images/profile/user-1.jpg';
 import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons';
 import { useDispatch, useSelector } from 'src/store/Store';
 import { activateUserById, deleteUserById, fetchUsers } from 'src/store/user/UserSlice';
-import { userType } from 'src/types/user';
+import { UserType } from 'src/types/user';
 import { orderBy } from 'lodash';
 
 const UsersTable = () => {
@@ -55,7 +55,7 @@ const UsersTable = () => {
   }, [dispatch]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const filterUsers = (users: userType[], sortBy: string, _cSearch: string) => {
+  const filterUsers = (users: UserType[], sortBy: string, _cSearch: string) => {
     // SORT BY
 
     if (sortBy === 'newest') {
@@ -69,7 +69,7 @@ const UsersTable = () => {
   };
 
   const users = useSelector((state) =>
-    filterUsers(state.userReduce.users, state.userReduce.sortBy, state.userReduce.userSearch),
+    filterUsers(state.userReducer.users, state.userReducer.sortBy, state.userReducer.userSearch),
   );
 
   return (

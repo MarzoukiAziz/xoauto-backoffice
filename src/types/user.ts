@@ -1,19 +1,19 @@
-export interface userType {
+export interface UserType {
   _id: string;
   name: string;
   email: string;
-  roles: Record<string, any>; // assuming roles is an object with dynamic keys
-  phone?: string; // optional
-  avatar?: string; // optional
-  pro?: boolean; // optional
-  email_verified?: boolean; // optional
-  phone_number_verified?: boolean; // optional
-  favoris?: string[]; // optional array of strings
+  roles: Record<string, any>;
+  phone?: string;
+  avatar?: string;
+  pro?: boolean;
+  email_verified?: boolean;
+  phone_number_verified?: boolean;
+  favoris?: string[];
   deleted: boolean;
-  passwordResetToken?: string; // optional
-  passwordResetExpires?: Date; // optional
-  createdAt?: Date; // added by timestamps
-  updatedAt?: Date; // added by timestamps
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 export interface GallaryType {
   id: string;

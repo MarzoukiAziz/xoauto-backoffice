@@ -1,12 +1,13 @@
 import axios from 'src/utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
+import { UserType } from 'src/types/user';
 
 interface StateType {
-  users: any[];
+  users: UserType[];
   userSearch: string;
   sortBy: string;
-  selectedUser: any;
+  selectedUser: UserType | null;
 }
 
 const initialState = {

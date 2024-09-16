@@ -15,20 +15,21 @@ import {
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import { AppState, useDispatch, useSelector } from 'src/store/Store';
 import { fetchArticle } from 'src/store/blog/BlogSlice';
-import { ArticleType } from 'src/types/blog';
+import { ArticleType, CommentType } from 'src/types/blog';
 import BlankCard from 'src/components/shared/BlankCard';
 import PageContainer from 'src/components/container/PageContainer';
+import ArticleComment from './ArticleComment';
+import { reorderComments } from 'src/utils/usefulFunctions/reorderComments';
+import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
 const ArticleDetailsPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams<{ id: string }>();
     useEffect(() => {
         if (id) {
-            dispatch(fetchArticle(id));
+            dispatch(fetchArticle(id, true));
         }
     }, [dispatch, id]);
-
-    // Get post
     const article: ArticleType | any = useSelector((state: AppState) => state.blogReducer.selectedArticle);
     const BCrumb = [
         {
@@ -53,18 +54,6 @@ const ArticleDetailsPage = () => {
 
         return () => clearTimeout(timer);
     }, []);
-
-    const formattedDate = (date: Date) => {
-        return new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        }).format(new Date(date));
-    };
-
-
 
     return (
         article && <PageContainer title={article?.title} description="this is Article details page">
@@ -158,13 +147,17 @@ const ArticleDetailsPage = () => {
                             <Typography variant="h4" fontWeight={600}>
                                 Comments
                             </Typography>
-                            {/* <Box px={1.5} py={1} color="primary.main" bgcolor={'primary.light'}>
-                       <Typography variant="h6" fontWeight={600}>
-                           {post?.comments.length}
-                       </Typography>
-                   </Box> */}
+                            <Box px={1.5} py={1} color="primary.main" bgcolor={'primary.light'}>
+                                <Typography variant="h6" fontWeight={600}>
+                                    {article?.comments.length}
+                                </Typography>
+                            </Box>
                         </Stack>
-
+                        <Box>
+                            {reorderComments(article?.comments).map((comment: CommentType | any) => {
+                                return <ArticleComment comment={comment} key={comment._id} />;
+                            })}
+                        </Box>
                     </CardContent>
                 </BlankCard>
             </Box>
