@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import CustomizerReducer from './customizer/CustomizerSlice';
 import BlogReducer from './blog/BlogSlice';
 import UserReducer from './user/UserSlice';
+import NotificationReducer from './notification/NotificationSlice';
 import { combineReducers } from 'redux';
 import {
   useDispatch as useAppDispatch,
@@ -12,6 +13,7 @@ import {
 export const store = configureStore({
   reducer: {
     customizer: CustomizerReducer,
+    notification: NotificationReducer,
     blogReducer: BlogReducer,
     userReducer: UserReducer,
   },
@@ -19,6 +21,7 @@ export const store = configureStore({
 
 const rootReducer = combineReducers({
   customizer: CustomizerReducer,
+  notification: NotificationReducer,
   blogReducer: BlogReducer,
   userReducer: UserReducer,
 });

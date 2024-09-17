@@ -20,6 +20,7 @@ import { orderBy } from 'lodash';
 import { deleteSelectedArticle, fetchArticle, fetchArticles } from 'src/store/blog/BlogSlice';
 import { ArticleType } from 'src/types/blog';
 import { Link, useNavigate } from 'react-router-dom';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
 const ArticlesTable = () => {
   const [anchorEl, setAnchorEl] = React.useState<{ [key: string]: HTMLElement | null }>({});
@@ -34,7 +35,21 @@ const ArticlesTable = () => {
 
   const handleDeleteArticle = (id: string) => {
     if (window.confirm('Are you sure you want to delete this article?')) {
-      dispatch(deleteSelectedArticle(id));
+      try {
+        dispatch(deleteSelectedArticle(id));
+        dispatch(showNotification({
+          title: 'Success',
+          subtitle: 'Article Deleted successfully!',
+          severity: 'success',
+        }));
+      } catch (error) {
+        dispatch(showNotification({
+          title: 'Error',
+          subtitle: 'Failed to delete the article.',
+          severity: 'error',
+        }));
+      }
+
     }
   };
   const navigate = useNavigate();

@@ -141,7 +141,7 @@ const ArticleDetailsPage = () => {
                     </>
                 </BlankCard>
                 <BlankCard sx={{ mt: 3, p: 0 }}>
-                    <CardContent>
+                    {article?.comments && <CardContent>
 
                         <Stack direction="row" gap={2} alignItems="center" mb={3} mt={5}>
                             <Typography variant="h4" fontWeight={600}>
@@ -158,7 +158,7 @@ const ArticleDetailsPage = () => {
                                 return <ArticleComment comment={comment} key={comment._id} />;
                             })}
                         </Box>
-                    </CardContent>
+                    </CardContent>}
                 </BlankCard>
             </Box>
         </PageContainer>)
