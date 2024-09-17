@@ -6,11 +6,8 @@ import {
   FormControlLabel,
   Button,
   Stack,
-  Divider,
   Alert,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-
 import { loginType } from 'src/types/auth/auth';
 import CustomCheckbox from 'src/components/forms/theme-elements/CustomCheckbox';
 import CustomTextField from 'src/components/forms/theme-elements/CustomTextField';
@@ -19,8 +16,10 @@ import { Form, useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import useAuth from 'src/guards/authGuard/UseAuth';
 import useMounted from 'src/guards/authGuard/UseMounted';
+import { dispatch } from 'src/store/Store';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
-const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
+const AuthLogin = ({ title, subtitle }: loginType) => {
   const mounted = useMounted();
   const { signin } = useAuth();
 
@@ -32,6 +31,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
   });
 
   const formik = useFormik({
+    //Only in dev
     initialValues: {
       email: 'contact@azizmarzouki.com',
       password: 'Password123!',
@@ -47,11 +47,21 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
         if (mounted.current) {
           setStatus({ success: true });
           setSubmitting(true);
+          dispatch(showNotification({
+            title: 'Welcome!',
+            subtitle: 'Login successfully',
+            severity: 'success',
+          }));
         }
       } catch (err: any) {
         if (mounted.current) {
           setStatus({ success: false });
           setErrors({ submit: err.message });
+          dispatch(showNotification({
+            title: 'Login Error',
+            subtitle: "Verify your credentiels!",
+            severity: 'error',
+          }));
           setSubmitting(false);
         }
       }
@@ -66,23 +76,6 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
           {title}
         </Typography>
       ) : null}
-
-      {subtext}
-
-      <Box mt={3}>
-        <Divider>
-          <Typography
-            component="span"
-            color="textSecondary"
-            variant="h6"
-            fontWeight="400"
-            position="relative"
-            px={2}
-          >
-            or sign in with
-          </Typography>
-        </Divider>
-      </Box>
       {errors.submit && (
         <Box mt={2}>
           <Alert severity="error">{errors.submit}</Alert>
@@ -121,17 +114,6 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
                   label="Remeber this Device"
                 />
               </FormGroup>
-              <Typography
-                component={Link}
-                to="/auth/reset-password"
-                fontWeight="500"
-                sx={{
-                  textDecoration: 'none',
-                  color: 'primary.main',
-                }}
-              >
-                Forgot Password ?
-              </Typography>
             </Stack>
           </Stack>
           <Box>

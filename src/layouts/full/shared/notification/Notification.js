@@ -11,7 +11,7 @@ const Notification = () => {
     if (reason === 'clickaway') {
       return;
     }
-    setActive(false);
+    dispatch(setActive(false));
   };
 
   useEffect(() => {
