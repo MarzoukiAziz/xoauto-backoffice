@@ -59,15 +59,16 @@ const API_URL = 'http://localhost:5000/api/v1';
 // const API_URL = process.env.REACT_APP_API_URL;
 // Fetch articles from the API
 export const fetchArticles =
-  (search?: string, wcategory?: string, size = 10, page = 1) =>
+  (keywords?: string, category?: string, size = 10, page = 1, sort = "desc") =>
     async (dispatch: AppDispatch) => {
       try {
         const response = await axios.get(`${API_URL}/article`, {
           params: {
-            search,
-            wcategory,
+            category,
+            keywords,
             size,
             page,
+            sort
           },
         });
         dispatch(getArticles(response.data));

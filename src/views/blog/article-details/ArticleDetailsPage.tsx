@@ -165,7 +165,7 @@ const ArticleDetailsPage = () => {
                                         <ArticleComment comment={comment} key={comment._id} />
                                     ))}
                                 </Box>
-                                <Stack alignItems="center" mt={3}>
+                                <Stack alignItems="center" mt={3} mb={3}>
                                     <Pagination
                                         count={Math.ceil(article?.comments.length / commentsPerPage)}
                                         page={currentPage}
