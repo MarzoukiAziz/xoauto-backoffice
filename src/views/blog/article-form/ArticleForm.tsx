@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, MenuItem } from '@mui/material';
 import ParentCard from 'src/components/shared/ParentCard';
 import CustomFormLabel from 'src/components/forms/theme-elements/CustomFormLabel';
@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import { addNewArticle } from 'src/store/blog/BlogSlice';
 import { dispatch } from 'src/store/Store';
 import { useNavigate } from 'react-router';
-import Notification from 'src/layouts/full/shared/notification/Notification';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
 //TODO change categories place
 const categories = [
@@ -22,8 +22,6 @@ const categories = [
 
 const ArticleForm = () => {
   const navigate = useNavigate();
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationData, setNotificationData] = useState({ title: '', subtitle: '', severity: '' });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('category', event.target.value);
@@ -71,14 +69,18 @@ const ArticleForm = () => {
 
       try {
         await dispatch(addNewArticle(articleData));
-        setNotificationData({ title: 'Success', subtitle: 'Article added successfully!', severity: 'success' });
-        setShowNotification(true);
-        setTimeout(() => {
-          navigate('/blog');
-        }, 2000);
+        dispatch(showNotification({
+          title: 'Success',
+          subtitle: 'Article added successfully!',
+          severity: 'success',
+        }));
+        navigate('/blog');
       } catch (error) {
-        setNotificationData({ title: 'Error', subtitle: 'Failed to add the article.', severity: 'error' });
-        setShowNotification(true);
+        dispatch(showNotification({
+          title: 'Error',
+          subtitle: 'Failed to ceate the article.',
+          severity: 'error',
+        }));
       }
     },
   });
@@ -177,9 +179,7 @@ const ArticleForm = () => {
           </Box>
         </form>
       </ParentCard>
-      {showNotification && (
-        <Notification title={notificationData.title} subtitle={notificationData.subtitle} severity={notificationData.severity} />
-      )}</>
+    </>
   );
 };
 

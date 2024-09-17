@@ -1,32 +1,33 @@
-import * as React from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Snackbar, Alert, AlertTitle } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActive } from 'src/store/notification/NotificationSlice';
 
-const Notification = ({ title, subtitle, severity = 'info', customColor = '' }) => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
+const Notification = () => {
+  const dispatch = useDispatch();
+  const { active, title, subtitle, severity, customColor } = useSelector((state) => state.notification);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    dispatch(setActive(false));
   };
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      handleClick();
-    }, 500);
+  useEffect(() => {
+    if (active) {
+      const timer = setTimeout(() => {
+        dispatch(setActive(false));
+      }, 6000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [active, dispatch]);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Snackbar
-        open={open}
+        open={active}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         autoHideDuration={6000}
         onClose={handleClose}
@@ -38,14 +39,14 @@ const Notification = ({ title, subtitle, severity = 'info', customColor = '' }) 
           sx={{
             width: '100%',
             color: 'white',
-            backgroundColor: customColor || '', // Apply custom color if provided
+            backgroundColor: customColor || '',
           }}
         >
           <AlertTitle>{title}</AlertTitle>
           {subtitle}
         </Alert>
       </Snackbar>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

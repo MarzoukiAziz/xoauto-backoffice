@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { } from 'react';
 import { Box, Button, MenuItem } from '@mui/material';
 import ParentCard from 'src/components/shared/ParentCard';
 import CustomFormLabel from 'src/components/forms/theme-elements/CustomFormLabel';
@@ -9,9 +9,9 @@ import { useFormik } from 'formik';
 import { updateArticleById } from 'src/store/blog/BlogSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import Notification from 'src/layouts/full/shared/notification/Notification';
 import { AppState, dispatch } from 'src/store/Store';
 import { ArticleType } from 'src/types/blog';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
 // TODO: Change categories list if needed
 const categories = [
@@ -24,9 +24,6 @@ const categories = [
 
 const ArticleUpdateForm = () => {
     const navigate = useNavigate();
-    const [showNotification, setShowNotification] = useState(false);
-    const [notificationData, setNotificationData] = useState({ title: '', subtitle: '', severity: '' });
-
     const selectedArticle: ArticleType | any = useSelector((state: AppState) => state.blogReducer.selectedArticle);
     const formik = useFormik({
         initialValues: selectedArticle,
@@ -61,12 +58,18 @@ const ArticleUpdateForm = () => {
 
             try {
                 await dispatch(updateArticleById(articleData));
-                setNotificationData({ title: 'Success', subtitle: 'Article Updated successfully!', severity: 'success' });
-                setShowNotification(true);
+                dispatch(showNotification({
+                    title: 'Success',
+                    subtitle: 'Article Updated successfully!',
+                    severity: 'success',
+                }));
                 navigate(`/blog/article/${selectedArticle._id}`);
             } catch (error) {
-                setNotificationData({ title: 'Error', subtitle: 'Failed to update the article.', severity: 'error' });
-                setShowNotification(true);
+                dispatch(showNotification({
+                    title: 'Error',
+                    subtitle: 'Failed to update the article.',
+                    severity: 'error',
+                }));
             }
         },
     });
@@ -169,13 +172,7 @@ const ArticleUpdateForm = () => {
                 </form>
             </ParentCard>
 
-            {showNotification && (
-                <Notification
-                    title={notificationData.title}
-                    subtitle={notificationData.subtitle}
-                    severity={notificationData.severity}
-                />
-            )}
+
         </>
     );
 };

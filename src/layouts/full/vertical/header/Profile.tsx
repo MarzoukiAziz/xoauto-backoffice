@@ -7,6 +7,8 @@ import useAuth from 'src/guards/authGuard/UseAuth';
 
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 import unlimitedImg from 'src/assets/images/backgrounds/unlimited-bg.png';
+import { dispatch } from 'src/store/Store';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -155,6 +157,11 @@ const Profile = () => {
           <Button
             onClick={() => {
               logout();
+              dispatch(showNotification({
+                title: 'Logout Successfully!',
+                subtitle: 'See you soon',
+                severity: 'info',
+              }));
             }}
             to="/auth/login"
             variant="outlined"

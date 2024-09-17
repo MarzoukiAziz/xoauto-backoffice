@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
-
 import TopCards from 'src/components/dashboards/modern/TopCards';
 import RevenueUpdates from 'src/components/dashboards/modern/RevenueUpdates';
 import YearlyBreakup from 'src/components/dashboards/modern/YearlyBreakup';
@@ -13,7 +12,6 @@ import Social from 'src/components/dashboards/modern/Social';
 import SellingProducts from 'src/components/dashboards/modern/SellingProducts';
 import WeeklyStats from 'src/components/dashboards/modern/WeeklyStats';
 import TopPerformers from 'src/components/dashboards/modern/TopPerformers';
-import Notification from 'src/layouts/full/shared/notification/Notification';
 
 const Modern = () => {
   return (
@@ -71,7 +69,6 @@ const Modern = () => {
           </Grid>
         </Grid>
         {/* column */}
-        <Notification title="Welcome To XoAuto Admin Panel" subtitle="Have a good day!" severity="info" />
       </Box>
     </PageContainer>
   );
