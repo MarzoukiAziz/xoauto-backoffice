@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import {
   TableContainer,
   Table,
@@ -12,25 +12,74 @@ import {
   MenuItem,
   IconButton,
   ListItemIcon,
+  Pagination,
+  Select,
+  MenuItem as SelectMenuItem,
+  FormControl,
+  InputLabel,
+  SelectChangeEvent,
+  Box,
+  Button,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import BlankCard from '../../../components/shared/BlankCard';
-import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons';
-import { useDispatch, useSelector } from 'src/store/Store';
-import { orderBy } from 'lodash';
+import { IconDotsVertical, IconEdit, IconSearch, IconTrash } from '@tabler/icons';
+import { dispatch, useSelector } from 'src/store/Store';
 import { deleteSelectedArticle, fetchArticle, fetchArticles } from 'src/store/blog/BlogSlice';
 import { ArticleType } from 'src/types/blog';
 import { Link, useNavigate } from 'react-router-dom';
 import { showNotification } from 'src/store/notification/NotificationSlice';
 
 const ArticlesTable = () => {
-  const [anchorEl, setAnchorEl] = React.useState<{ [key: string]: HTMLElement | null }>({});
+  //TODO change categories place
+  const categories = [
+    "Essais",
+    "Nouveautés",
+    "Technologies",
+    "Tendances",
+    "AutoSport"
+  ]
+  const [anchorEl, setAnchorEl] = useState<{ [key: string]: HTMLElement | null }>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(8);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [search, setSearch] = useState('');
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, articleId: string) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value)
+  };
+
+  const navigate = useNavigate();
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>, articleId: string) => {
     setAnchorEl((prevState) => ({ ...prevState, [articleId]: event.currentTarget }));
   };
 
-  const handleClose = (userId: string) => {
-    setAnchorEl((prevState) => ({ ...prevState, [userId]: null }));
+  const handleClose = (articleId: string) => {
+    setAnchorEl((prevState) => ({ ...prevState, [articleId]: null }));
+  };
+
+  useEffect(() => {
+    dispatch(fetchArticles(search, selectedCategory, pageSize, currentPage, sortOrder));
+  }, [dispatch, currentPage, pageSize, search, selectedCategory, sortOrder]);
+
+  const articles: ArticleType[] = useSelector((state) => state.blogReducer.articles);
+  const articlesCount: number = useSelector((state) => state.blogReducer.count);
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleSortOrderChange = (event: SelectChangeEvent<"asc" | "desc">) => {
+    const newSortOrder = event.target.value as 'asc' | 'desc';
+    setSortOrder(newSortOrder);
+  };
+
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategory(event.target.value as string);
+    setCurrentPage(1);
   };
 
   const handleDeleteArticle = (id: string) => {
@@ -49,129 +98,130 @@ const ArticlesTable = () => {
           severity: 'error',
         }));
       }
-
     }
   };
-  const navigate = useNavigate();
 
   const handleEditArticle = (id: string) => {
-    // Fetch the article details and then navigate to the edit page
     dispatch(fetchArticle(id)).then(() => {
-      navigate(`update`); // Redirect to the edit page
+      navigate('update');
     });
   };
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchArticles());
-  }, [dispatch]);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const filterArticles = (articles: ArticleType[], sortBy: string, _cSearch: string) => {
-    // SORT BY
-
-    if (sortBy === 'newest') {
-      articles = orderBy(articles, ['createdAt'], ['desc']);
-    }
-    if (sortBy === 'oldest') {
-      articles = orderBy(articles, ['createdAt'], ['asc']);
-    }
-
-    return articles;
-  };
-
-  const articles = useSelector((state) =>
-    filterArticles(
-      state.blogReducer.articles,
-      state.blogReducer.sortBy,
-      state.blogReducer.articleSearch,
-    ),
-  );
-
   return (
-    <BlankCard>
-      <TableContainer>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">Title </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="h6">Category</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="h6">ReadTime</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {articles.map((article) => (
-              article._id && <TableRow
-                key={article._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    <Link to={"/blog/article/" + article._id}>{article.title}</Link>
-                  </Typography>
-                </TableCell>
 
-                <TableCell>
-                  <Chip
-                    label={article.category}
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.warning.light,
-                      color: (theme) => theme.palette.warning.main,
-                    }}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {article.readTime}
-                  </Typography>
-                </TableCell>
+    <>
+      <Box sx={{ paddingBottom: 2, display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel>Category</InputLabel>
+            <Select value={selectedCategory || ''} onChange={handleCategoryChange}>
+              <SelectMenuItem value="">All</SelectMenuItem>
+              {categories.map(cat => <SelectMenuItem value={cat} key={cat}>{cat}</SelectMenuItem>)}
+            </Select>
+          </FormControl>
 
-                <TableCell>
-                  <IconButton
-                    id="basic-button"
-                    aria-controls={anchorEl[article._id] ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={anchorEl[article._id] ? 'true' : undefined}
-                    onClick={(e) => handleClick(e, article._id ?? '')}
-                  >
-                    <IconDotsVertical width={18} />
-                  </IconButton>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl[article._id]}
-                    open={Boolean(anchorEl[article._id])}
-                    onClose={() => handleClose(article._id ?? '')}
-                    MenuListProps={{
-                      'aria-labelledby': 'basic-button',
-                    }}
-                  >
-                    <MenuItem onClick={() => handleEditArticle(article._id ?? '')}>
-                      <ListItemIcon>
-                        <IconEdit width={18} />
-                      </ListItemIcon>
-                      Edit
-                    </MenuItem>
-
-                    <MenuItem onClick={() => handleDeleteArticle(article._id ?? '')}>
-                      <ListItemIcon>
-                        <IconTrash width={18} />
-                      </ListItemIcon>
-                      Delete
-                    </MenuItem>
-                  </Menu>
-                </TableCell>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel>Sort by</InputLabel>
+            <Select value={sortOrder} onChange={handleSortOrderChange}>
+              <SelectMenuItem value="desc">Newest</SelectMenuItem>
+              <SelectMenuItem value="asc">Oldest</SelectMenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconSearch size="1.1rem" />
+                </InputAdornment>
+              ),
+            }}
+            placeholder="Search Article"
+            size="small"
+            onChange={handleSearch}
+            value={search}
+          /></Box>
+        <Button variant="contained" disableElevation color="primary" component={Link}
+          to="new">
+          New Article
+        </Button>
+      </Box>
+      <BlankCard>
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell><Typography variant="h6">Title</Typography></TableCell>
+                <TableCell><Typography variant="h6">Category</Typography></TableCell>
+                <TableCell><Typography variant="h6">Read Time</Typography></TableCell>
+                <TableCell><Typography variant="h6">Actions</Typography></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer >
-    </BlankCard >
+            </TableHead>
+            <TableBody>
+              {articles.map((article) => (
+                article._id && (
+                  <TableRow key={article._id}>
+                    <TableCell>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        <Link to={`/blog/article/${article._id}`}>{article.title}</Link>
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={article.category}
+                        sx={{
+                          backgroundColor: (theme) => theme.palette.warning.light,
+                          color: (theme) => theme.palette.warning.main,
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {article.readTime} min
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        onClick={(e) => handleClick(e, article._id ?? '')}
+                        aria-controls={anchorEl[article._id] ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={anchorEl[article._id] ? 'true' : undefined}
+                      >
+                        <IconDotsVertical width={18} />
+                      </IconButton>
+                      <Menu
+                        anchorEl={anchorEl[article._id]}
+                        open={Boolean(anchorEl[article._id])}
+                        onClose={() => handleClose(article._id ?? '')}
+                      >
+                        <MenuItem onClick={() => handleEditArticle(article._id ?? '')}>
+                          <ListItemIcon>
+                            <IconEdit width={18} />
+                          </ListItemIcon>
+                          Edit
+                        </MenuItem>
+                        <MenuItem onClick={() => handleDeleteArticle(article._id ?? '')}>
+                          <ListItemIcon>
+                            <IconTrash width={18} />
+                          </ListItemIcon>
+                          Delete
+                        </MenuItem>
+                      </Menu>
+                    </TableCell>
+                  </TableRow>
+                )
+              ))}
+            </TableBody>
+          </Table>
+          {/* Pagination Controls */}
+          <Pagination
+            count={Math.ceil(articlesCount / pageSize)}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            sx={{ mt: 2, mb: 3, display: 'flex', justifyContent: 'center' }}
+          />
+        </TableContainer>
+      </BlankCard></>
   );
 };
 
