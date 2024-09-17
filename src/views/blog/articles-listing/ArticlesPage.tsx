@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Box, Button, Grid, InputAdornment, TextField } from '@mui/material';
 
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
@@ -7,7 +7,7 @@ import ParentCard from 'src/components/shared/ParentCard';
 import ArticlesTable from './ArticlesTable';
 import { Link } from 'react-router-dom';
 import { IconSearch } from '@tabler/icons';
-import { dispatch } from 'src/store/Store';
+import { dispatch, useSelector } from 'src/store/Store';
 import { fetchArticles } from 'src/store/blog/BlogSlice';
 
 const BCrumb = [
@@ -22,7 +22,10 @@ const BCrumb = [
 
 
 const ArticlesPage = () => {
-  const [search, setSearch] = React.useState('');
+  const [search, setSearch] = useState('');
+  const articlesCount = useSelector((state) =>
+    state.blogReducer.count
+  );
 
   useEffect(() => {
     dispatch(fetchArticles());
@@ -36,7 +39,7 @@ const ArticlesPage = () => {
     }
   }, [search, dispatch]);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   };
 
@@ -45,7 +48,7 @@ const ArticlesPage = () => {
     {/* breadcrumb */}
     <Breadcrumb title="Articles" items={BCrumb} />
     {/* end breadcrumb */}
-    <ParentCard title="Articles">
+    <ParentCard title={`Articles (${articlesCount})`}>
       <Grid container spacing={3}>
 
         <Grid item xs={12}>

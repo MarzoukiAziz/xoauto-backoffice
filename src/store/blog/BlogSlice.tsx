@@ -2,11 +2,11 @@ import axios from 'src/utils/axios';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'src/store/Store';
 import { ArticleType } from 'src/types/blog';
-import { Category } from '@mui/icons-material';
 
 interface StateType {
   articles: ArticleType[];
   recentArticles: ArticleType[];
+  count: number;
   articleSearch: string;
   sortBy: string;
   selectedArticle: ArticleType | null;
@@ -15,6 +15,7 @@ interface StateType {
 const initialState: StateType = {
   articles: [],
   recentArticles: [],
+  count: 0,
   articleSearch: '',
   sortBy: 'newest',
   selectedArticle: null,
@@ -24,8 +25,9 @@ export const ArticleSlice = createSlice({
   name: 'Article',
   initialState,
   reducers: {
-    getArticles: (state, action: PayloadAction<ArticleType[]>) => {
-      state.articles = action.payload;
+    getArticles: (state, action: PayloadAction<any>) => {
+      state.articles = action.payload.articles;
+      state.count = action.payload.count;
     },
     getArticle: (state, action: PayloadAction<ArticleType>) => {
       state.selectedArticle = action.payload;
@@ -63,12 +65,13 @@ export const fetchArticles =
         const response = await axios.get(`${API_URL}/article`, {
           params: {
             search,
-            Category,
+            wcategory,
             size,
             page,
           },
         });
-        dispatch(getArticles(response.data.articles));
+        dispatch(getArticles(response.data));
+        console.log(response.data)
       } catch (err) {
         throw new Error();
       }
