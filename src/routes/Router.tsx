@@ -18,6 +18,9 @@ const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')))
 /* ****Pages***** */
 const Dashboard = Loadable(lazy(() => import('../views/dashboard/Modern')));
 
+/* ****Ads***** */
+import AdsPage from 'src/views/ads/ads-listing/AdsPage';
+
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
 const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article-details/ArticleDetailsPage')));
@@ -39,6 +42,7 @@ const Router = [
     children: [
       { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
+      { path: '/ad/', element: <AdsPage /> },
       { path: '/blog/', element: <ArticlesPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
       { path: '/blog/new', element: <ArticleFormPage /> },

@@ -1,4 +1,4 @@
-import { IconChartDonut3, IconAperture, IconUserCircle } from '@tabler/icons';
+import { IconUserCircle, IconCar, IconPencil, IconDashboard } from '@tabler/icons';
 import { uniqueId } from 'lodash';
 
 const Menuitems = [
@@ -9,7 +9,7 @@ const Menuitems = [
   {
     id: uniqueId(),
     title: 'Dashboard',
-    icon: IconAperture,
+    icon: IconDashboard,
     href: '/dashboard',
   },
   {
@@ -20,8 +20,14 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
+    title: 'Ads',
+    icon: IconCar,
+    href: '/ad/',
+  },
+  {
+    id: uniqueId(),
     title: 'Blog',
-    icon: IconChartDonut3,
+    icon: IconPencil,
     href: '/blog/',
   },
 ];

@@ -14,7 +14,7 @@ interface MenuitemsType {
   variant?: string;
   external?: boolean;
 }
-import { IconUserCircle, IconChartDonut3, IconAperture } from '@tabler/icons';
+import { IconUserCircle, IconCar, IconPencil, IconDashboard } from '@tabler/icons';
 
 const Menuitems: MenuitemsType[] = [
   {
@@ -24,7 +24,7 @@ const Menuitems: MenuitemsType[] = [
   {
     id: uniqueId(),
     title: 'Dashboard',
-    icon: IconAperture,
+    icon: IconDashboard,
     href: '/dashboard',
   },
   {
@@ -35,8 +35,14 @@ const Menuitems: MenuitemsType[] = [
   },
   {
     id: uniqueId(),
+    title: 'Ads',
+    icon: IconCar,
+    href: '/ad/',
+  },
+  {
+    id: uniqueId(),
     title: 'Blog',
-    icon: IconChartDonut3,
+    icon: IconPencil,
     href: '/blog/',
   },
 ];
