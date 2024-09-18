@@ -66,7 +66,6 @@ export const fetchUser = (id: string) => async (dispatch: AppDispatch) => {
 };
 export const deleteUserById = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    console.log('deleting ' + id);
     await axios.delete(`${API_URL}/user/${id}`);
     dispatch(deleteUser(id));
   } catch (err: any) {
@@ -75,7 +74,6 @@ export const deleteUserById = (id: string) => async (dispatch: AppDispatch) => {
 };
 export const activateUserById = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    console.log('deleting ' + id);
     await axios.post(`${API_URL}/user/activate-user/${id}`);
     dispatch(activateUser(id));
   } catch (err: any) {

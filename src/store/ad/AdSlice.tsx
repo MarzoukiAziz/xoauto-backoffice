@@ -35,7 +35,7 @@ export const AdSlice = createSlice({
             state.ads.push(action.payload);
         },
         updateAd: (state, action: PayloadAction<AdType>) => {
-            state.ads = state.ads.map(ad => ad._id === action.payload._id ? action.payload : ad);
+            state.selectedAd = action.payload;
         },
         deleteAd: (state, action: PayloadAction<string>) => {
             state.ads = state.ads.filter(ad => ad._id !== action.payload);
@@ -48,8 +48,6 @@ export const { getAds, getAd, addAd, updateAd, deleteAd } = AdSlice.actions;
 
 // API URL
 const API_URL = 'http://localhost:5000/api/v1';
-
-// Thunk actions
 
 // Fetch ads from the API
 export const fetchAds =

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -12,7 +12,7 @@ import { AdType } from 'src/types/ad';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 import { dispatch } from 'src/store/Store';
 import { showNotification } from 'src/store/notification/NotificationSlice';
-import { deleteSelectedAd } from 'src/store/ad/AdSlice';
+import { deleteSelectedAd, updateAdById } from 'src/store/ad/AdSlice';
 
 type AdDetailProps = {
   ad: AdType;
@@ -32,12 +32,32 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
           subtitle: 'Ad Deleted successfully!',
           severity: 'success',
         }));
-        navigate('/ad');
+        navigate('/ad')
 
       } catch (error) {
         dispatch(showNotification({
           title: 'Error',
           subtitle: 'Failed to delete the Ad.',
+          severity: 'error',
+        }));
+      }
+    }
+  };
+  const handleToggleAdStatus = () => {
+    const action = ad.active ? "deactivate" : "activate"
+    if (window.confirm(`Are you sure you want to ${action} this ad?`)) {
+      try {
+        const updatedAd = { ...ad, active: !ad.active };
+        dispatch(updateAdById(updatedAd));
+        dispatch(showNotification({
+          title: 'Success',
+          subtitle: `Ad ${action}d successfully!`,
+          severity: 'success',
+        }));
+      } catch (error) {
+        dispatch(showNotification({
+          title: 'Error',
+          subtitle: `Failed to ${action} the Ad.`,
           severity: 'error',
         }));
       }
@@ -68,17 +88,15 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
       <Grid container spacing={2} mt={3}>
         <Grid item xs={12} lg={4} md={6}>
           <Button
-            color="primary"
+            color={ad.active ? "warning" : "success"}
             size="large"
             fullWidth
-            component={Link}
             variant="contained"
-            to="/apps/eco-checkout"
-
-          // onClick={() => dispatch(addToCart(ad))}
+            onClick={() => handleToggleAdStatus()}
           >
             {ad.active ? "Deactivate" : "Activate"}
           </Button>
+
         </Grid>
         <Grid item xs={12} lg={4} md={6}>
           <Button

@@ -30,7 +30,7 @@ const AdsTable = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   useEffect(() => {
     dispatch(fetchAds(pageSize, currentPage, sortOrder));
-  }, [dispatch, currentPage, pageSize, sortOrder]);
+  }, [currentPage, pageSize, sortOrder]);
 
   const ads: AdType[] = useSelector((state) => state.adReducer.ads);
   const adsCount: number = useSelector((state) => state.adReducer.count);
@@ -87,7 +87,7 @@ const AdsTable = () => {
                     </TableCell>
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
-                        {ad.price} €
+                        €{Intl.NumberFormat('en-US').format(ad.price)}
                       </Typography>
                     </TableCell>
                     <TableCell>

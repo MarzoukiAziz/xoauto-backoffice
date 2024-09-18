@@ -72,7 +72,6 @@ export const fetchArticles =
           },
         });
         dispatch(getArticles(response.data));
-        console.log(response.data)
       } catch (err) {
         throw new Error();
       }
