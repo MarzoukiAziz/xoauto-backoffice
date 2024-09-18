@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import CustomizerReducer from './customizer/CustomizerSlice';
 import BlogReducer from './blog/BlogSlice';
 import UserReducer from './user/UserSlice';
+import AdReducer from './ad/AdSlice';
 import NotificationReducer from './notification/NotificationSlice';
 import { combineReducers } from 'redux';
 import {
@@ -16,6 +17,7 @@ export const store = configureStore({
     notification: NotificationReducer,
     blogReducer: BlogReducer,
     userReducer: UserReducer,
+    adReducer: AdReducer
   },
 });
 
@@ -24,6 +26,7 @@ const rootReducer = combineReducers({
   notification: NotificationReducer,
   blogReducer: BlogReducer,
   userReducer: UserReducer,
+  adReducer: AdReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
