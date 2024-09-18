@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { useSelector } from 'src/store/Store';
 import { Link } from 'react-router-dom';
-import logo from 'src/assets/images/logos/logo.png';
-
+import logoLight from 'src/assets/images/logos/logo-light.png';
+import logoDark from 'src/assets/images/logos/logo-dark.png';
+import logoSmallLight from 'src/assets/images/logos/logo-sm-light.png';
+import logoSmallDark from 'src/assets/images/logos/logo-sm-dark.png';
 import { styled } from '@mui/material';
 import { AppState } from 'src/store/Store';
 
@@ -15,24 +17,17 @@ const Logo: FC = () => {
     display: 'block',
   }));
 
-  if (customizer.activeDir === 'ltr') {
-    return (
-      <LinkStyled to="/">
-        {customizer.activeMode === 'dark' ? (
-          <img src={logo} alt={logo} width={'180px'} />
-        ) : (
-          <img src={logo} alt={logo} width={'180px'} />
-        )}
-      </LinkStyled>
-    );
-  }
+  const ImgStyled = styled('img')(() => ({
+    width: '100%',
+    height: 'auto',
+  }));
 
   return (
     <LinkStyled to="/">
       {customizer.activeMode === 'dark' ? (
-        <img src={logo} alt={logo} width={'180px'} />
+        <ImgStyled src={customizer.isCollapse ? logoSmallLight : logoLight} alt="XoAuto Logo Light" />
       ) : (
-        <img src={logo} alt={logo} width={'180px'} />
+        <ImgStyled src={customizer.isCollapse ? logoSmallDark : logoDark} alt="XoAuto Logo Dark" />
       )}
     </LinkStyled>
   );
