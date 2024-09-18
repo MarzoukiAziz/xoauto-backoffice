@@ -1,17 +1,19 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-    Box
+    Grid
 } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
-import { AppState, useDispatch, useSelector } from 'src/store/Store';
+import { AppState, dispatch, useSelector } from 'src/store/Store';
 import PageContainer from 'src/components/container/PageContainer';
 import { fetchAdById } from 'src/store/ad/AdSlice';
 import { AdType } from 'src/types/ad';
+import ChildCard from 'src/components/shared/ChildCard';
+import AdCarousel from './adCarousel';
+import AdDetail from './adDetail';
+import AdDesc from './adDesc';
 
 const AdDetailsPage = () => {
-    const dispatch = useDispatch();
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -28,28 +30,29 @@ const AdDetailsPage = () => {
         { title: 'Ad Details' },
     ];
 
-    const [isLoading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 700);
-        console.log(isLoading)
-
-        return () => clearTimeout(timer);
-    }, []);
-
     return (
         ad && (
-            <PageContainer title={ad?.title} description="this is Ad details page">
-                <Box>
-                    <Breadcrumb title={ad?.title} items={BCrumb} />
-                    <Box sx={{ paddingBottom: 2, display: 'flex', justifyContent: 'flex-end' }}>
-
-                        {/* todo: delete desactive ad */}
-                    </Box>
-
-                </Box>
+            <PageContainer title="Shop List" description="this is Shop List page">
+                <Breadcrumb title={ad.title} items={BCrumb} />
+                <Grid container spacing={3} sx={{ maxWidth: { lg: '1055px', xl: '1200px' } }}>
+                    <Grid item xs={12} sm={12} lg={12}>
+                        <ChildCard>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} sm={12} lg={6}>
+                                    <AdCarousel ad={ad} />
+                                </Grid>
+                                <Grid item xs={12} sm={12} lg={6}>
+                                    <AdDetail ad={ad} />
+                                </Grid>
+                            </Grid>
+                        </ChildCard>
+                    </Grid>
+                    <Grid item xs={12} sm={12} lg={12}>
+                        <AdDesc ad={ad} />
+                    </Grid>
+                    <Grid item xs={12} sm={12} lg={12}>
+                    </Grid>
+                </Grid>
             </PageContainer>
         )
     );
