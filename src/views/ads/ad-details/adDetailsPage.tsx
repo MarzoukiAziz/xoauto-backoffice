@@ -53,7 +53,7 @@ const AdDetailsPage = () => {
 
     return (
         ad && user && (
-            <PageContainer title="Shop List" description="this is Shop List page">
+            <PageContainer title={ad.title} description={ad.title}>
                 <Breadcrumb title={ad.title} items={BCrumb} />
                 <Grid container spacing={3} sx={{ maxWidth: { lg: '1055px', xl: '1200px' } }}>
                     <Grid item xs={12} sm={12} lg={12}>
