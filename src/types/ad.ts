@@ -10,35 +10,35 @@ export interface AdType {
     version?: string;
     category: string;
     mileage: number;
-    firstRegistration: {
+    first_registration: {
         month?: number;
         year: number;
     };
-    fuelType: string;
+    fuel_type: string;
     seats?: number;
     color?: string;
-    critAir?: string;
+    crit_air?: string;
     horsepower?: number;
-    powerKw?: number;
-    autonomyWltpKm?: number;
-    optionsVehicule: {
-        headsUpDisplay?: boolean;
-        parkingAssist?: boolean;
-        towHitch?: boolean;
-        roofRacks?: boolean;
+    power_kw?: number;
+    autonomy_wltp_km?: number;
+    options_vehicule: {
+        heads_up_display?: boolean;
+        parking_assist?: boolean;
+        tow_hitch?: boolean;
+        roof_racks?: boolean;
         bluetooth?: boolean;
-        rearCamera?: boolean;
-        automaticClimateControl?: boolean;
+        rear_camera?: boolean;
+        automatic_climate_control?: boolean;
         gps?: boolean;
-        nonSmoker?: boolean;
-        firstHand?: boolean;
-        rearRadar?: boolean;
-        leatherSeats?: boolean;
-        heatedSeats?: boolean;
-        manufacturerWarranty?: boolean;
-        soundSystem?: boolean;
+        non_smoker?: boolean;
+        first_hand?: boolean;
+        rear_radar?: boolean;
+        leather_seats?: boolean;
+        heated_seats?: boolean;
+        manufacturer_warranty?: boolean;
+        sound_system?: boolean;
         sunroof?: boolean;
-        panoramicRoof?: boolean;
+        panoramic_roof?: boolean;
         others?: string[];
     };
     courant: {
@@ -46,11 +46,11 @@ export interface AdType {
         DC?: string;
     };
     photos: string[];
-    interiorVideo?: string;
-    exteriorVideo?: string;
+    interior_video?: string;
+    exterior_video?: string;
     address?: string;
-    phoneNumber?: string;
-    maskPhone: boolean;
+    phone_number?: string;
+    mask_phone: boolean;
     active: boolean;
     createdAt?: Date;
     updatedAt?: Date;
