@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
     Grid
@@ -12,6 +12,8 @@ import ChildCard from 'src/components/shared/ChildCard';
 import AdCarousel from './adCarousel';
 import AdDetail from './adDetail';
 import AdDesc from './adDesc';
+import { UserType } from 'src/types/user';
+import axios from 'src/utils/axios';
 
 const AdDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -23,6 +25,25 @@ const AdDetailsPage = () => {
     }, [dispatch, id]);
 
     const ad: AdType | any = useSelector((state: AppState) => state.adReducer.selectedAd);
+    const [user, setUser] = useState<UserType>();
+
+    // TODO: correct this later
+    const API_URL = 'http://localhost:5000/api/v1';
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/user/${ad.uid}`);
+                setUser(response.data);
+            } catch (err) {
+                console.error('Error fetching user:', err);
+            }
+        };
+
+        if (ad) {
+            fetchUser();
+        }
+    }, [ad]);
 
     const BCrumb = [
         { to: '/', title: 'Home' },
@@ -31,7 +52,7 @@ const AdDetailsPage = () => {
     ];
 
     return (
-        ad && (
+        ad && user && (
             <PageContainer title="Shop List" description="this is Shop List page">
                 <Breadcrumb title={ad.title} items={BCrumb} />
                 <Grid container spacing={3} sx={{ maxWidth: { lg: '1055px', xl: '1200px' } }}>
@@ -42,15 +63,13 @@ const AdDetailsPage = () => {
                                     <AdCarousel ad={ad} />
                                 </Grid>
                                 <Grid item xs={12} sm={12} lg={6}>
-                                    <AdDetail ad={ad} />
+                                    <AdDetail ad={ad} username={user.name} />
                                 </Grid>
                             </Grid>
                         </ChildCard>
                     </Grid>
                     <Grid item xs={12} sm={12} lg={12}>
-                        <AdDesc ad={ad} />
-                    </Grid>
-                    <Grid item xs={12} sm={12} lg={12}>
+                        <AdDesc ad={ad} user={user} />
                     </Grid>
                 </Grid>
             </PageContainer>

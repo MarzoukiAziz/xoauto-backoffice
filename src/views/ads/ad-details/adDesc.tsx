@@ -3,12 +3,15 @@ import { Table, TableBody, TableCell, TableContainer, TableRow, Typography, Pape
 import ChildCard from 'src/components/shared/ChildCard';
 import { AdType } from 'src/types/ad';
 import { a11yProps, TabPanel } from './tabPanel';
+import { UserType } from 'src/types/user';
+import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
 type AdDescProps = {
     ad: AdType;
+    user: UserType
 };
 
-const AdDesc = ({ ad }: AdDescProps) => {
+const AdDesc = ({ ad, user }: AdDescProps) => {
     const [value, setValue] = useState(0);
     const handleChange = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -69,7 +72,7 @@ const AdDesc = ({ ad }: AdDescProps) => {
                                     <TableCell>{ad.power_kw ?? "N/A"}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Autonomy WltpKm</TableCell>
+                                    <TableCell>Autonomy Wlt/Km</TableCell>
                                     <TableCell>{ad.autonomy_wltp_km ?? "N/A"}</TableCell>
                                 </TableRow>
                             </TableBody>
@@ -144,15 +147,30 @@ const AdDesc = ({ ad }: AdDescProps) => {
                 </TabPanel>
 
                 <TabPanel value={value} index={3}>
-                    <Typography variant="h6">Contact Information</Typography>
+                    <Typography variant="h6">Ad Contact Information</Typography><br />
                     <p>
-                        {ad.address ? `Address: ${ad.address}` : "Address not provided"}
+                        {ad.address ? `Address : ${ad.address}` : "Address not provided"}
                     </p>
-                    <p>Phone: {ad.phone_number} - {ad.mask_phone ? "Phone number is hidden." : "Phone number not provided"}</p>
+                    <p>Phone : {ad.phone_number} - {ad.mask_phone ? "Hidden" : ''}</p>
+
+                    <br /><br />
+                    <Typography variant="h6">User Information</Typography><br />
+                    <p>
+                        {`Name : ${user.name}`}
+                    </p>
+                    <p>
+                        {`Email : ${user.email}`}
+                    </p>
+                    <p>
+                        {`Member since : ${user.createdAt ? formattedDate(user.createdAt) : 'N/A'}`}
+                    </p>
+                    <p>
+                        {`Pro: ${user.pro ? "Yes" : "No"}`}
+                    </p>
                 </TabPanel>
 
                 <TabPanel value={value} index={4}>
-                    <Typography variant="h6">Statics Soon ..</Typography>
+                    <Typography variant="h6"> Soon ..</Typography>
                 </TabPanel>
             </Box>
         </ChildCard>)

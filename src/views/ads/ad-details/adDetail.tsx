@@ -13,9 +13,10 @@ import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
 type AdDetailProps = {
   ad: AdType;
+  username: string
 };
 
-const AdDetail = ({ ad }: AdDetailProps) => {
+const AdDetail = ({ ad, username }: AdDetailProps) => {
   const theme = useTheme();
 
   return (
@@ -30,11 +31,11 @@ const AdDetail = ({ ad }: AdDetailProps) => {
         {ad.title}
       </Typography>
       <Typography variant="subtitle2" mt={1} color={theme.palette.text.secondary}>
-        Brand: {ad.brand} <br />
-        Model: {ad.model} <br />
-        Version: {ad.version} <br />
-        Mileage: {Intl.NumberFormat('en-US').format(ad.mileage)} KM<br />
-        FirstRegistration: {ad.first_registration.month ?? ''} {ad.first_registration.month ? " / " : ""}{ad.first_registration.year} <br />
+        Brand: <strong>{ad.brand}</strong> <br />
+        Model: <strong>{ad.model}</strong> <br />
+        Version: <strong>{ad.version}</strong> <br />
+        Mileage: <strong>{Intl.NumberFormat('en-US').format(ad.mileage)} KM</strong><br />
+        FirstRegistration:<strong>{ad.first_registration.month ?? ''} {ad.first_registration.month ? " / " : ""}{ad.first_registration.year}</strong>  <br />
       </Typography>
       <Typography mt={2} variant="h4" fontWeight={600}>
         €{Intl.NumberFormat('en-US').format(ad.price)}
@@ -68,6 +69,7 @@ const AdDetail = ({ ad }: AdDetailProps) => {
         </Grid>
       </Grid>
       <Typography color="textSecondary" variant="body1" mt={4}>
+        By : <strong>{username}</strong> <br />
         Created At : {ad.createdAt ? formattedDate(ad.createdAt) : "N/A"} <br />
         Updated At : {ad.updatedAt ? formattedDate(ad.updatedAt) : "N/A"}
       </Typography>
