@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -10,6 +10,9 @@ import {
 } from '@mui/material';
 import { AdType } from 'src/types/ad';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
+import { dispatch } from 'src/store/Store';
+import { showNotification } from 'src/store/notification/NotificationSlice';
+import { deleteSelectedAd } from 'src/store/ad/AdSlice';
 
 type AdDetailProps = {
   ad: AdType;
@@ -18,6 +21,28 @@ type AdDetailProps = {
 
 const AdDetail = ({ ad, username }: AdDetailProps) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleDeleteAd = (id: string) => {
+    if (window.confirm('Are you sure you want to delete this ad?')) {
+      try {
+        dispatch(deleteSelectedAd(id));
+        dispatch(showNotification({
+          title: 'Success',
+          subtitle: 'Ad Deleted successfully!',
+          severity: 'success',
+        }));
+        navigate('/ad');
+
+      } catch (error) {
+        dispatch(showNotification({
+          title: 'Error',
+          subtitle: 'Failed to delete the Ad.',
+          severity: 'error',
+        }));
+      }
+    }
+  };
 
   return (
     <Box p={2}>
@@ -61,8 +86,7 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
             size="large"
             fullWidth
             variant="contained"
-
-          // onClick={() => dispatch(addToCart(ad)) && handleClick()}
+            onClick={() => handleDeleteAd(ad._id)}
           >
             Delete
           </Button>
