@@ -19,8 +19,9 @@ const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')))
 const Dashboard = Loadable(lazy(() => import('../views/dashboard/Modern')));
 
 /* ****Ads***** */
-import AdsPage from 'src/views/ads/ads-listing/AdsPage';
-import AdDetailsPage from 'src/views/ads/ad-details/adDetailsPage';
+const AdsPage = Loadable(lazy(() => import('../views/ads/ads-listing/AdsPage')));
+const AdDetailsPage = Loadable(lazy(() => import('../views/ads/ad-details/AdDetailsPage')));
+const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdatePage')));
 
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
@@ -44,6 +45,7 @@ const Router = [
       { path: '/', element: <Navigate to="/dashboard" /> },
       { path: '/dashboard', exact: true, element: <Dashboard /> },
       { path: '/ad/', element: <AdsPage /> },
+      { path: '/ad/edit/:id', element: <AdUpdatePage /> },
       { path: '/ad/:id', element: <AdDetailsPage /> },
       { path: '/blog/', element: <ArticlesPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },

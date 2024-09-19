@@ -9,9 +9,9 @@ import PageContainer from 'src/components/container/PageContainer';
 import { fetchAdById } from 'src/store/ad/AdSlice';
 import { AdType } from 'src/types/ad';
 import ChildCard from 'src/components/shared/ChildCard';
-import AdCarousel from './adCarousel';
-import AdDetail from './adDetail';
-import AdDesc from './adDesc';
+import AdCarousel from './AdCarousel';
+import AdDetail from './AdDetail';
+import AdDesc from './AdDesc';
 import { UserType } from 'src/types/user';
 import axios from 'src/utils/axios';
 
