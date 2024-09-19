@@ -14,7 +14,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <PageContainer title="XoAuto Dashboard" description="this is XoAuto Dashboard page">
+    <PageContainer title="Dashboard" description="this is XoAuto Dashboard page">
       <Box>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>
