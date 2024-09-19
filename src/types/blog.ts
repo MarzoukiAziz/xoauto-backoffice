@@ -9,7 +9,9 @@ export interface ArticleType {
   tags?: string;
   createdAt?: Date,
   updatedAt?: Date,
+  views?: number,
   comments?: CommentType[],
+  commentCount?: number
 }
 
 export interface CommentType {

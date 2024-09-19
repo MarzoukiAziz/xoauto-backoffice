@@ -63,7 +63,7 @@ const ArticlesTable = () => {
 
   useEffect(() => {
     dispatch(fetchArticles(search, selectedCategory, pageSize, currentPage, sortOrder));
-  }, [dispatch, currentPage, pageSize, search, selectedCategory, sortOrder]);
+  }, [currentPage, pageSize, search, selectedCategory, sortOrder]);
 
   const articles: ArticleType[] = useSelector((state) => state.blogReducer.articles);
   const articlesCount: number = useSelector((state) => state.blogReducer.count);
@@ -152,7 +152,8 @@ const ArticlesTable = () => {
               <TableRow>
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
                 <TableCell><Typography variant="h6">Category</Typography></TableCell>
-                <TableCell><Typography variant="h6">Read Time</Typography></TableCell>
+                <TableCell><Typography variant="h6">Views</Typography></TableCell>
+                <TableCell><Typography variant="h6">Comments</Typography></TableCell>
                 <TableCell><Typography variant="h6">Actions</Typography></TableCell>
               </TableRow>
             </TableHead>
@@ -169,14 +170,19 @@ const ArticlesTable = () => {
                       <Chip
                         label={article.category}
                         sx={{
-                          backgroundColor: (theme) => theme.palette.warning.light,
-                          color: (theme) => theme.palette.warning.main,
+                          backgroundColor: (theme) => theme.palette.secondary.light,
+                          color: (theme) => theme.palette.secondary.main,
                         }}
                       />
                     </TableCell>
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
-                        {article.readTime} min
+                        {article.views}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {article.commentCount}
                       </Typography>
                     </TableCell>
                     <TableCell>
@@ -212,7 +218,6 @@ const ArticlesTable = () => {
               ))}
             </TableBody>
           </Table>
-          {/* Pagination Controls */}
           <Pagination
             count={Math.ceil(articlesCount / pageSize)}
             page={currentPage}

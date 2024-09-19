@@ -22,7 +22,7 @@ const AdDetailsPage = () => {
         if (id) {
             dispatch(fetchAdById(id));
         }
-    }, [dispatch, id]);
+    }, [id]);
 
     const ad: AdType | any = useSelector((state: AppState) => state.adReducer.selectedAd);
     const [user, setUser] = useState<UserType>();
