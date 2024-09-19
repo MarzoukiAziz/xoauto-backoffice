@@ -30,7 +30,7 @@ const Login = () => (
         }}
       >
         <Box position="relative">
-          <Box px={3}>
+          <Box px={3} pt={3}>
             <Logo />
           </Box>
           <Box

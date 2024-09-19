@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -96,7 +96,18 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
           >
             {ad.active ? "Deactivate" : "Activate"}
           </Button>
-
+        </Grid>
+        <Grid item xs={12} lg={4} md={6}>
+          <Button
+            color="secondary"
+            size="large"
+            fullWidth
+            variant="contained"
+            component={Link}
+            to={`/ad/edit/${ad._id}`}
+          >
+            Edit
+          </Button>
         </Grid>
         <Grid item xs={12} lg={4} md={6}>
           <Button
@@ -117,7 +128,7 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
       </Typography>
       <Typography color="textSecondary" variant="body1" mt={4}>
       </Typography>
-    </Box>
+    </Box >
   );
 };
 

@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Typography, Paper, Box, Tabs, Tab } from '@mui/material';
 import ChildCard from 'src/components/shared/ChildCard';
 import { AdType } from 'src/types/ad';
-import { a11yProps, TabPanel } from './tabPanel';
+import { a11yProps, TabPanel } from './TabPanel';
 import { UserType } from 'src/types/user';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
@@ -43,6 +43,12 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
                     <Typography >
                         {ad.description}
                     </Typography>
+                    <br /><br />
+                    <Typography variant="h6">Current Charging:</Typography>
+                    <ul>
+                        {ad.courant.AC && <li>AC: {ad.courant.AC}</li>}
+                        {ad.courant.DC && <li>DC: {ad.courant.DC}</li>}
+                    </ul>
                     <br /><br />
                     <TableContainer component={Paper}>
                         <Table>
@@ -100,14 +106,17 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
                         {ad.options_vehicule?.sound_system && <li>Sound System</li>}
                         {ad.options_vehicule?.sunroof && <li>Sunroof</li>}
                         {ad.options_vehicule?.panoramic_roof && <li>Panoramic Roof</li>}
-                        {ad.options_vehicule?.others?.length ? <li>Other Options: {ad.options_vehicule.others.join(', ')}</li> : ""}
+                        <br />
+                        <li>Others : </li>
+                        <ul>
+                            {ad.options_vehicule?.others?.length ? (
+                                ad.options_vehicule.others.map((option, index) => (
+                                    option.length ? <li key={index}>{option}</li> : ""
+                                ))
+                            ) : ""}
+                        </ul>
                     </ul>
-                    <br /><br />
-                    <Typography variant="h6">Current Charging:</Typography>
-                    <ul>
-                        {ad.courant.AC && <li>AC: {ad.courant.AC}</li>}
-                        {ad.courant.DC && <li>DC: {ad.courant.DC}</li>}
-                    </ul>
+
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <Typography variant="h6">Videos</Typography><br />
@@ -151,7 +160,7 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
                     <p>
                         {ad.address ? `Address : ${ad.address}` : "Address not provided"}
                     </p>
-                    <p>Phone : {ad.phone_number} - {ad.mask_phone ? "Hidden" : ''}</p>
+                    <p>Phone : {ad.phone_number}{ad.mask_phone ? " - Hidden" : ''}</p>
 
                     <br /><br />
                     <Typography variant="h6">User Information</Typography><br />
