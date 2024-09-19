@@ -63,8 +63,8 @@ const AdsTable = () => {
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
                 <TableCell><Typography variant="h6">Category</Typography></TableCell>
                 <TableCell><Typography variant="h6">Price</Typography></TableCell>
+                <TableCell><Typography variant="h6">Views</Typography></TableCell>
                 <TableCell><Typography variant="h6">Created At</Typography></TableCell>
-
               </TableRow>
             </TableHead>
             <TableBody>
@@ -88,6 +88,11 @@ const AdsTable = () => {
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
                         €{Intl.NumberFormat('en-US').format(ad.price)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {ad.views}
                       </Typography>
                     </TableCell>
                     <TableCell>

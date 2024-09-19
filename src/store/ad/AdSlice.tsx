@@ -55,7 +55,7 @@ export const fetchAds =
         async (dispatch: AppDispatch) => {
             try {
                 const response = await axios.get(`${API_URL}/ads`, {
-                    params: { size, page, sort },
+                    params: { size, page, sort, includeViews: true },
                 });
                 dispatch(getAds(response.data));
             } catch (err) {
@@ -66,7 +66,9 @@ export const fetchAds =
 // Fetch a specific ad by ID
 export const fetchAdById = (id: string) => async (dispatch: AppDispatch) => {
     try {
-        const response = await axios.get(`${API_URL}/ads/${id}`);
+        const response = await axios.get(`${API_URL}/ads/${id}`, {
+            params: { view: false, includeViews: true },
+        });
         dispatch(getAd(response.data));
     } catch (err) {
         throw new Error('Failed to fetch ad');
