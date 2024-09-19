@@ -80,7 +80,11 @@ export const fetchArticles =
 // Fetch a specific article by ID
 export const fetchArticle = (id: string, withComments = false) => async (dispatch: AppDispatch) => {
   try {
-    const responseArticle = await axios.get(`${API_URL}/article/${id}`);
+    const responseArticle = await axios.get(`${API_URL}/article/${id}`, {
+      params: {
+        view: false,
+      },
+    });
     const article = responseArticle.data
     if (withComments) {
       const responseComments = await axios.get(`${API_URL}/comment/article/${id}`);

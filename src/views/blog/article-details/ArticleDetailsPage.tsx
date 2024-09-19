@@ -103,7 +103,6 @@ const ArticleDetailsPage = () => {
                                 <br />
                                 <Chip label={article?.category} size="small" sx={{ marginTop: 2 }} />
                                 <br />
-                                <br />
                                 <Typography
                                     gutterBottom
                                     variant="h6"
@@ -111,6 +110,7 @@ const ArticleDetailsPage = () => {
                                     color="inherit"
                                     sx={{ textDecoration: 'none', color: 'grey', float: 'right' }}
                                 >
+                                    Views : {article.views} <br />
                                     Created At: {article?.createdAt ? formattedDate(article.createdAt) : ' N/A'} <br />
                                     Updated At: {article?.updatedAt ? formattedDate(article.updatedAt) : ' N/A'}
                                 </Typography>
