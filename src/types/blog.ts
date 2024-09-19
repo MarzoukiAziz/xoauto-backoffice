@@ -11,6 +11,7 @@ export interface ArticleType {
   updatedAt?: Date,
   views?: number,
   comments?: CommentType[],
+  commentCount?: number
 }
 
 export interface CommentType {

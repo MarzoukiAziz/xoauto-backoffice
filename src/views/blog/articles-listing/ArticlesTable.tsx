@@ -153,6 +153,7 @@ const ArticlesTable = () => {
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
                 <TableCell><Typography variant="h6">Category</Typography></TableCell>
                 <TableCell><Typography variant="h6">Views</Typography></TableCell>
+                <TableCell><Typography variant="h6">Comments</Typography></TableCell>
                 <TableCell><Typography variant="h6">Actions</Typography></TableCell>
               </TableRow>
             </TableHead>
@@ -169,14 +170,19 @@ const ArticlesTable = () => {
                       <Chip
                         label={article.category}
                         sx={{
-                          backgroundColor: (theme) => theme.palette.warning.light,
-                          color: (theme) => theme.palette.warning.main,
+                          backgroundColor: (theme) => theme.palette.secondary.light,
+                          color: (theme) => theme.palette.secondary.main,
                         }}
                       />
                     </TableCell>
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
                         {article.views}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {article.commentCount}
                       </Typography>
                     </TableCell>
                     <TableCell>
