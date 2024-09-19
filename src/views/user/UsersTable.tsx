@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'src/store/Store';
 import { activateUserById, deleteUserById, fetchUsers } from 'src/store/user/UserSlice';
 import { UserType } from 'src/types/user';
 import { orderBy } from 'lodash';
+import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
 const UsersTable = () => {
   const [anchorEl, setAnchorEl] = React.useState<{ [key: string]: HTMLElement | null }>({});
@@ -85,6 +86,9 @@ const UsersTable = () => {
                 <Typography variant="h6">Email</Typography>
               </TableCell>
               <TableCell>
+                <Typography variant="h6">Last Login</Typography>
+              </TableCell>
+              <TableCell>
                 <Typography variant="h6">Pro</Typography>
               </TableCell>
               <TableCell>
@@ -111,6 +115,11 @@ const UsersTable = () => {
                 <TableCell>
                   <Typography variant="subtitle1" color="textSecondary">
                     {user.email}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {user.lastLogin ? formattedDate(user.lastLogin) : "N/A"}
                   </Typography>
                 </TableCell>
 

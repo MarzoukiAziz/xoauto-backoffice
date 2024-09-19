@@ -14,6 +14,7 @@ export interface UserType {
   passwordResetExpires?: Date;
   createdAt?: Date;
   updatedAt?: Date;
+  lastLogin?: Date;
 }
 export interface GallaryType {
   id: string;
