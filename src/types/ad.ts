@@ -54,4 +54,5 @@ export interface AdType {
     active: boolean;
     createdAt?: Date;
     updatedAt?: Date;
+    views?: number
 }
