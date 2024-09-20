@@ -6,6 +6,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
 import ArticlesTable from './ArticlesTable';
 import { useSelector } from 'src/store/Store';
+import BlogBcImg from 'src/assets/images/breadcrumb/BlogBc.png';
 
 const BCrumb = [
   {
@@ -24,9 +25,7 @@ const ArticlesPage = () => {
   );
 
   return (<PageContainer title="Articles List" description="this is Articles page">
-    {/* breadcrumb */}
-    <Breadcrumb title="Articles" items={BCrumb} />
-    {/* end breadcrumb */}
+    <Breadcrumb title="Articles" items={BCrumb} breadcrumbImg={BlogBcImg} />
     <ParentCard title={`Articles (${articlesCount})`}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
