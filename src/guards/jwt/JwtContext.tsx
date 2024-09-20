@@ -78,10 +78,8 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
-
           const response = await axios.get(`${API_URL}/user/my-account`);
-          const { user } = response.data;
-
+          const { user } = response.data.data;
           dispatch({
             type: 'INITIALIZE',
             payload: {
