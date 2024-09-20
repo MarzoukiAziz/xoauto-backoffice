@@ -8,10 +8,12 @@ interface StateType {
   userSearch: string;
   sortBy: string;
   selectedUser: UserType | null;
+  count: number;
 }
 
 const initialState = {
   users: [],
+  count: 0,
   userSearch: '',
   sortBy: 'newest',
   selectedUser: null,
@@ -22,7 +24,8 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     getUsers: (state: StateType, action) => {
-      state.users = action.payload;
+      state.users = action.payload.users;
+      state.count = action.payload.count;
     },
     getUser: (state: StateType, action) => {
       state.selectedUser = action.payload;
@@ -48,9 +51,17 @@ export const { getUsers, getUser, deleteUser, activateUser } = UserSlice.actions
 
 const API_URL = 'http://localhost:5000/api/v1';
 
-export const fetchUsers = () => async (dispatch: AppDispatch) => {
+export const fetchUsers = (role?: string, keywords?: string, size = 10, page = 1, sort = "desc") => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/user`);
+    const response = await axios.get(`${API_URL}/user`, {
+      params: {
+        role,
+        keywords,
+        size,
+        page,
+        sort
+      },
+    });
     dispatch(getUsers(response.data));
   } catch (err) {
     throw new Error();

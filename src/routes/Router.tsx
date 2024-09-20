@@ -32,6 +32,7 @@ const ArticleUpdatePage = Loadable(lazy(() => import('../views/blog/article-upda
 
 /* ****Users***** */
 const UsersPage = Loadable(lazy(() => import('../views/user/UsersPage')));
+const AdminsPage = Loadable(lazy(() => import('../views/user/AdminsPage')));
 
 const Router = [
   {
@@ -52,6 +53,7 @@ const Router = [
       { path: '/blog/new', element: <ArticleFormPage /> },
       { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
+      { path: '/admins/', element: <AdminsPage /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },

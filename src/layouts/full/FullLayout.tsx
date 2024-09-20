@@ -6,8 +6,6 @@ import { AppState } from 'src/store/Store';
 import Header from './vertical/header/Header';
 import Sidebar from './vertical/sidebar/Sidebar';
 import Customizer from './shared/customizer/Customizer';
-import Navigation from '../full/horizontal/navbar/Navigation';
-import HorizontalHeader from '../full/horizontal/header/Header';
 import Notification from './shared/notification/Notification';
 
 const MainWrapper = styled('div')(() => ({
@@ -33,13 +31,7 @@ const FullLayout: FC = () => {
 
   return (
     <MainWrapper>
-      {/* ------------------------------------------- */}
-      {/* Sidebar */}
-      {/* ------------------------------------------- */}
-      {customizer.isHorizontal ? '' : <Sidebar />}
-      {/* ------------------------------------------- */}
-      {/* Main Wrapper */}
-      {/* ------------------------------------------- */}
+      <Sidebar />
       <PageWrapper
         className="page-wrapper"
         sx={{
@@ -48,29 +40,16 @@ const FullLayout: FC = () => {
           }),
         }}
       >
-        {/* ------------------------------------------- */}
-        {/* Header */}
-        {/* ------------------------------------------- */}
-        {customizer.isHorizontal ? <HorizontalHeader /> : <Header />}
-        {/* PageContent */}
-        {customizer.isHorizontal ? <Navigation /> : ''}
+        <Header />
         <Container
           sx={{
             maxWidth: customizer.isLayout === 'boxed' ? 'lg' : '100%!important',
           }}
         >
-          {/* ------------------------------------------- */}
-          {/* PageContent */}
-          {/* ------------------------------------------- */}
-
           <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>
             <Outlet />
             <Notification />
           </Box>
-
-          {/* ------------------------------------------- */}
-          {/* End Page */}
-          {/* ------------------------------------------- */}
         </Container>
         <Customizer />
       </PageWrapper>
