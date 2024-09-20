@@ -141,7 +141,7 @@ const UsersTable = ({ role }: UsersTableProps) => {
                     <Stack direction="row" alignItems="center" spacing={2}>
                       <Avatar
                         src={user.avatar ?? img1}
-                        alt={user.avatar}
+                        alt={`${user.name} avatar`}
                         sx={{ width: 42, height: 42 }}
                       />
                       <Box>
