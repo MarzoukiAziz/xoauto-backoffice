@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Typography, Box, Breadcrumbs, Link, Theme } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-
-import breadcrumbImg from 'src/assets/images/breadcrumb/ChatBc.png';
 import { IconCircle } from '@tabler/icons';
 
 interface BreadCrumbType {
@@ -10,9 +8,10 @@ interface BreadCrumbType {
   items?: any[];
   title: string;
   children?: JSX.Element;
+  breadcrumbImg?: any
 }
 
-const Breadcrumb = ({ subtitle, items, title, children }: BreadCrumbType) => (
+const Breadcrumb = ({ subtitle, items, title, children, breadcrumbImg }: BreadCrumbType) => (
   <Grid
     container
     sx={{
@@ -43,16 +42,16 @@ const Breadcrumb = ({ subtitle, items, title, children }: BreadCrumbType) => (
       >
         {items
           ? items.map((item) => (
-              <div key={item.title}>
-                {item.to ? (
-                  <Link underline="none" color="inherit" component={NavLink} to={item.to}>
-                    {item.title}
-                  </Link>
-                ) : (
-                  <Typography color="textPrimary">{item.title}</Typography>
-                )}
-              </div>
-            ))
+            <div key={item.title}>
+              {item.to ? (
+                <Link underline="none" color="inherit" component={NavLink} to={item.to}>
+                  {item.title}
+                </Link>
+              ) : (
+                <Typography color="textPrimary">{item.title}</Typography>
+              )}
+            </div>
+          ))
           : ''}
       </Breadcrumbs>
     </Grid>
@@ -70,7 +69,7 @@ const Breadcrumb = ({ subtitle, items, title, children }: BreadCrumbType) => (
         ) : (
           <>
             <Box sx={{ top: '0px', position: 'absolute' }}>
-              <img src={breadcrumbImg} alt={breadcrumbImg} width={'165px'} />
+              <img src={breadcrumbImg} alt="BreadCrumb Image" height={'135px'} />
             </Box>
           </>
         )}

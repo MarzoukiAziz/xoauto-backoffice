@@ -6,6 +6,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
 import AdsTable from './AdsTable';
 import { useSelector } from 'src/store/Store';
+import AdsBcImg from 'src/assets/images/breadcrumb/AdsBc.png';
 
 const BCrumb = [
   {
@@ -23,9 +24,7 @@ const AdsPage = () => {
   );
 
   return (<PageContainer title="Ads List" description="this is Ads page">
-    {/* breadcrumb */}
-    <Breadcrumb title="Ads" items={BCrumb} />
-    {/* end breadcrumb */}
+    <Breadcrumb title="Ads" items={BCrumb} breadcrumbImg={AdsBcImg} />
     <ParentCard title={`Ads (${adsCount})`}>
       <Grid container spacing={3}>
         <Grid item xs={12}>

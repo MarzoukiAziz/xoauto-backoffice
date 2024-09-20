@@ -7,6 +7,7 @@ import { AdType } from 'src/types/ad';
 import { fetchAdById, updateAdById } from 'src/store/ad/AdSlice';
 import { showNotification } from 'src/store/notification/NotificationSlice';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
+import AdsBcImg from 'src/assets/images/breadcrumb/AdsBc.png';
 
 const AdUpdatePage = () => {
     const { id } = useParams<{ id: string }>();
@@ -81,7 +82,7 @@ const AdUpdatePage = () => {
 
     return (adData &&
         <PageContainer title="Edit Ad" description="This is the edit Ad page">
-            <Breadcrumb title="Edit Ad" items={BCrumb} />
+            <Breadcrumb title="Edit Ad" items={BCrumb} breadcrumbImg={AdsBcImg} />
 
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
