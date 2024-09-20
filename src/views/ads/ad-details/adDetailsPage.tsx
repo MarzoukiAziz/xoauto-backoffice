@@ -42,7 +42,7 @@ const AdDetailsPage = () => {
                                     <AdCarousel ad={ad} />
                                 </Grid>
                                 <Grid item xs={12} sm={12} lg={6}>
-                                    <AdDetail ad={ad} username={ad.uid.name} />
+                                    <AdDetail ad={ad} username={ad.uid?.name} />
                                 </Grid>
                             </Grid>
                         </ChildCard>

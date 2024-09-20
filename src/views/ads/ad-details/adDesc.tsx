@@ -165,12 +165,12 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
                     <br /><br />
                     <Typography variant="h6">User Information</Typography><br />
                     <Box display="flex" alignItems="center">
-                        <Avatar src={user.avatar ? user.avatar : ProfileImg} alt="Admin Avatar" sx={{ width: 95, height: 95 }} />
+                        <Avatar src={user?.avatar ? user.avatar : ProfileImg} alt="Admin Avatar" sx={{ width: 95, height: 95 }} />
                         <Box ml={2}> {/* Adds margin to the left of the text box */}
-                            <Typography variant="body1">{`Name: ${user.name}`}</Typography>
-                            <Typography variant="body1">{`Email: ${user.email}`}</Typography>
-                            <Typography variant="body1">{`Member since: ${user.createdAt ? formattedDate(user.createdAt) : 'N/A'}`}</Typography>
-                            <Typography variant="body1">{`Pro: ${user.pro ? "Yes" : "No"}`}</Typography>
+                            <Typography variant="body1">{`Name: ${user?.name}`}</Typography>
+                            <Typography variant="body1">{`Email: ${user?.email}`}</Typography>
+                            <Typography variant="body1">{`Member since: ${user?.createdAt ? formattedDate(user.createdAt) : 'N/A'}`}</Typography>
+                            <Typography variant="body1">{`Pro: ${user?.pro ? "Yes" : "No"}`}</Typography>
                         </Box>
                     </Box>
                 </TabPanel>

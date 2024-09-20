@@ -65,7 +65,7 @@ const UserAdsTable = ({ uid }: UserAdsTableProps) => {
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
                 <TableCell><Typography variant="h6">Price</Typography></TableCell>
                 <TableCell><Typography variant="h6">Views</Typography></TableCell>
-                <TableCell><Typography variant="h6">Created At</Typography></TableCell>
+                <TableCell><Typography variant="h6">Published At</Typography></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
