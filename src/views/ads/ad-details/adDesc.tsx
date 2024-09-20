@@ -1,10 +1,11 @@
 import React, { SyntheticEvent, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableRow, Typography, Paper, Box, Tabs, Tab } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableRow, Typography, Paper, Box, Tabs, Tab, Avatar } from '@mui/material';
 import ChildCard from 'src/components/shared/ChildCard';
 import { AdType } from 'src/types/ad';
 import { a11yProps, TabPanel } from './TabPanel';
 import { UserType } from 'src/types/user';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
+import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 
 type AdDescProps = {
     ad: AdType;
@@ -157,25 +158,21 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
 
                 <TabPanel value={value} index={3}>
                     <Typography variant="h6">Ad Contact Information</Typography><br />
-                    <p>
+                    <Typography variant="body1">
                         {ad.address ? `Address : ${ad.address}` : "Address not provided"}
-                    </p>
-                    <p>Phone : {ad.phone_number}{ad.mask_phone ? " - Hidden" : ''}</p>
-
+                    </Typography>
+                    <Typography variant="body1">Phone : {ad.phone_number}{ad.mask_phone ? " - Hidden" : ''}</Typography>
                     <br /><br />
                     <Typography variant="h6">User Information</Typography><br />
-                    <p>
-                        {`Name : ${user.name}`}
-                    </p>
-                    <p>
-                        {`Email : ${user.email}`}
-                    </p>
-                    <p>
-                        {`Member since : ${user.createdAt ? formattedDate(user.createdAt) : 'N/A'}`}
-                    </p>
-                    <p>
-                        {`Pro: ${user.pro ? "Yes" : "No"}`}
-                    </p>
+                    <Box display="flex" alignItems="center">
+                        <Avatar src={user.avatar ? user.avatar : ProfileImg} alt="Admin Avatar" sx={{ width: 95, height: 95 }} />
+                        <Box ml={2}> {/* Adds margin to the left of the text box */}
+                            <Typography variant="body1">{`Name: ${user.name}`}</Typography>
+                            <Typography variant="body1">{`Email: ${user.email}`}</Typography>
+                            <Typography variant="body1">{`Member since: ${user.createdAt ? formattedDate(user.createdAt) : 'N/A'}`}</Typography>
+                            <Typography variant="body1">{`Pro: ${user.pro ? "Yes" : "No"}`}</Typography>
+                        </Box>
+                    </Box>
                 </TabPanel>
 
                 <TabPanel value={value} index={4}>
