@@ -22,6 +22,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import ArticleComment from './ArticleComment';
 import { reorderComments } from 'src/utils/usefulFunctions/reorderComments';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
+import BlogBcImg from 'src/assets/images/breadcrumb/BlogBc.png';
 
 const ArticleDetailsPage = () => {
     const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const ArticleDetailsPage = () => {
         article && (
             <PageContainer title={article?.title} description="this is Article details page">
                 <Box>
-                    <Breadcrumb title={article?.title} items={BCrumb} />
+                    <Breadcrumb title={article?.title} items={BCrumb} breadcrumbImg={BlogBcImg} />
                     <Box sx={{ paddingBottom: 2, display: 'flex', justifyContent: 'flex-end' }}>
                         <Button
                             variant="contained"

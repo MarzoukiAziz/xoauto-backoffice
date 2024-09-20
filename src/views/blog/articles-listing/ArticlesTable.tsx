@@ -40,18 +40,23 @@ const ArticlesTable = () => {
     "Tendances",
     "AutoSport"
   ]
+  const articles: ArticleType[] = useSelector((state) => state.blogReducer.articles);
+  const articlesCount: number = useSelector((state) => state.blogReducer.count);
   const [anchorEl, setAnchorEl] = useState<{ [key: string]: HTMLElement | null }>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchArticles(search, selectedCategory, pageSize, currentPage, sortOrder));
+  }, [currentPage, pageSize, search, selectedCategory, sortOrder]);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   };
-
-  const navigate = useNavigate();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>, articleId: string) => {
     setAnchorEl((prevState) => ({ ...prevState, [articleId]: event.currentTarget }));
@@ -60,13 +65,6 @@ const ArticlesTable = () => {
   const handleClose = (articleId: string) => {
     setAnchorEl((prevState) => ({ ...prevState, [articleId]: null }));
   };
-
-  useEffect(() => {
-    dispatch(fetchArticles(search, selectedCategory, pageSize, currentPage, sortOrder));
-  }, [currentPage, pageSize, search, selectedCategory, sortOrder]);
-
-  const articles: ArticleType[] = useSelector((state) => state.blogReducer.articles);
-  const articlesCount: number = useSelector((state) => state.blogReducer.count);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
