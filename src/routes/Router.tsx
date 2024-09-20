@@ -34,6 +34,7 @@ const BlogSettingsPage = Loadable(lazy(() => import('../views/blog/blog-settings
 /* ****Users***** */
 const UsersPage = Loadable(lazy(() => import('../views/user/users-listing/UsersPage')));
 const AdminsPage = Loadable(lazy(() => import('../views/user/users-listing/AdminsPage')));
+const UserDetailsPage = Loadable(lazy(() => import('../views/user/user-details/UserDetailsPage')));
 
 const Router = [
   {
@@ -55,6 +56,7 @@ const Router = [
       { path: '/blog/new', element: <ArticleFormPage /> },
       { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
+      { path: '/user/:id', element: <UserDetailsPage /> },
       { path: '/admins/', element: <AdminsPage /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
