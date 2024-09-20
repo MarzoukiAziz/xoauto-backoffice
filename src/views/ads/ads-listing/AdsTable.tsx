@@ -7,7 +7,6 @@ import {
   TableCell,
   TableBody,
   Typography,
-  Chip,
   Pagination,
   Select,
   MenuItem as SelectMenuItem,
@@ -32,7 +31,7 @@ const AdsTable = () => {
     dispatch(fetchAds("", pageSize, currentPage, sortOrder));
   }, [currentPage, pageSize, sortOrder]);
 
-  const ads: AdType[] = useSelector((state) => state.adReducer.ads);
+  const ads: AdType[] | any[] = useSelector((state) => state.adReducer.ads);
   const adsCount: number = useSelector((state) => state.adReducer.count);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
@@ -61,10 +60,10 @@ const AdsTable = () => {
             <TableHead>
               <TableRow>
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
-                <TableCell><Typography variant="h6">Category</Typography></TableCell>
+                <TableCell><Typography variant="h6">Publisher</Typography></TableCell>
                 <TableCell><Typography variant="h6">Price</Typography></TableCell>
                 <TableCell><Typography variant="h6">Views</Typography></TableCell>
-                <TableCell><Typography variant="h6">Created At</Typography></TableCell>
+                <TableCell><Typography variant="h6">Published At</Typography></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -77,13 +76,7 @@ const AdsTable = () => {
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Chip
-                        label={ad.category}
-                        sx={{
-                          backgroundColor: (theme) => theme.palette.warning.light,
-                          color: (theme) => theme.palette.warning.main,
-                        }}
-                      />
+                      {ad.uid?.name}
                     </TableCell>
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
