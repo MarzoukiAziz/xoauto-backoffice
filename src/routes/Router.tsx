@@ -32,8 +32,8 @@ const BlogSettingsPage = Loadable(lazy(() => import('../views/blog/blog-settings
 
 
 /* ****Users***** */
-const UsersPage = Loadable(lazy(() => import('../views/user/UsersPage')));
-const AdminsPage = Loadable(lazy(() => import('../views/user/AdminsPage')));
+const UsersPage = Loadable(lazy(() => import('../views/user/users-listing/UsersPage')));
+const AdminsPage = Loadable(lazy(() => import('../views/user/users-listing/AdminsPage')));
 
 const Router = [
   {

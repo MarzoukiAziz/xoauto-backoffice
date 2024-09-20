@@ -3,7 +3,7 @@ import { Box, Grid } from '@mui/material';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
-import UsersTable from './UsersTable';
+import UsersTable from '../UsersTable';
 import { useSelector } from 'src/store/Store';
 import AdminsBcImg from 'src/assets/images/breadcrumb/AdminsBc.png';
 

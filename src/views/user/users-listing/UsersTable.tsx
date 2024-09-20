@@ -24,7 +24,7 @@ import {
   SelectChangeEvent,
   Pagination,
 } from '@mui/material';
-import BlankCard from '../../components/shared/BlankCard';
+import BlankCard from '../../../components/shared/BlankCard';
 import img1 from 'src/assets/images/profile/user-1.jpg';
 import { IconDotsVertical, IconEdit, IconSearch, IconTrash } from '@tabler/icons';
 import { dispatch, useSelector } from 'src/store/Store';
