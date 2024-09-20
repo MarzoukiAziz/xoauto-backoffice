@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
 import { Box, Grid } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import TopCards from 'src/components/dashboards/TopCards';
-import { useSelector } from 'react-redux';
-import { AppState, dispatch } from 'src/store/Store';
+import { AppState, dispatch, useSelector } from 'src/store/Store';
 import { fetchDashboardHighlights } from 'src/store/inshights/InshightsSlice';
+import { fetchCategories } from 'src/store/blog/ArticleCatgorySlice';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   const highlights = useSelector((state: AppState) => state.inshightsReducer.dashboardHighlights);
 
   useEffect(() => {
+    dispatch(fetchCategories());
     dispatch(fetchDashboardHighlights());
-  }, []);
+  }, [dispatch]);
 
   return (
     <PageContainer title="Dashboard" description="this is XoAuto Dashboard page">

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import CustomizerReducer from './customizer/CustomizerSlice';
 import BlogReducer from './blog/BlogSlice';
+import ArticleCatgoryReducer from './blog/ArticleCatgorySlice';
 import UserReducer from './user/UserSlice';
 import AdReducer from './ad/AdSlice';
 import NotificationReducer from './notification/NotificationSlice';
@@ -17,6 +18,7 @@ export const store = configureStore({
     customizer: CustomizerReducer,
     notification: NotificationReducer,
     blogReducer: BlogReducer,
+    articleCatgoryReducer: ArticleCatgoryReducer,
     userReducer: UserReducer,
     adReducer: AdReducer,
     inshightsReducer: InshightsReducer
@@ -27,10 +29,10 @@ const rootReducer = combineReducers({
   customizer: CustomizerReducer,
   notification: NotificationReducer,
   blogReducer: BlogReducer,
+  articleCatgoryReducer: ArticleCatgoryReducer,
   userReducer: UserReducer,
   adReducer: AdReducer,
   inshightsReducer: InshightsReducer
-
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
