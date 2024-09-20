@@ -24,13 +24,14 @@ import {
   SelectChangeEvent,
   Pagination,
 } from '@mui/material';
-import BlankCard from '../../components/shared/BlankCard';
+import BlankCard from '../../../components/shared/BlankCard';
 import img1 from 'src/assets/images/profile/user-1.jpg';
 import { IconDotsVertical, IconEdit, IconSearch, IconTrash } from '@tabler/icons';
 import { dispatch, useSelector } from 'src/store/Store';
 import { activateUserById, deleteUserById, fetchUsers } from 'src/store/user/UserSlice';
 import { UserType } from 'src/types/user';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
+import { Link } from 'react-router-dom';
 
 type UsersTableProps = {
   role: string
@@ -145,7 +146,10 @@ const UsersTable = ({ role }: UsersTableProps) => {
                         sx={{ width: 42, height: 42 }}
                       />
                       <Box>
-                        <Typography variant="h6">{user.name}</Typography>
+                        <Typography
+                          component={Link}
+                          to={`/user/${user._id}`}
+                          variant="h6">{user.name}</Typography>
                       </Box>
                     </Stack>
                   </TableCell>

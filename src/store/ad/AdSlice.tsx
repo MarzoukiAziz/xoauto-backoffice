@@ -51,11 +51,11 @@ const API_URL = 'http://localhost:5000/api/v1';
 
 // Fetch ads from the API
 export const fetchAds =
-    (size = 10, page = 1, sort = 'desc') =>
+    (uid = "", size = 10, page = 1, sort = 'desc') =>
         async (dispatch: AppDispatch) => {
             try {
                 const response = await axios.get(`${API_URL}/ads`, {
-                    params: { size, page, sort, includeViews: true },
+                    params: { size, page, sort, includeViews: true, uid },
                 });
                 dispatch(getAds(response.data));
             } catch (err) {
