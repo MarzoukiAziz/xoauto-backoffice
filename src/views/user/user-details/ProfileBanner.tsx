@@ -16,6 +16,8 @@ import {
 import BlankCard from 'src/components/shared/BlankCard';
 import { UserType } from 'src/types/user';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
+import { useSelector } from 'react-redux';
+import { AppState } from 'src/store/Store';
 
 type ProfileBannerProps = {
   user: UserType
@@ -35,6 +37,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
   const handleSendEmail = (email: string) => {
     window.location.href = "mailto:" + email;
   };
+  const adsCount: number = useSelector((state: AppState) => state.adReducer.count);
 
   return (
     <>
@@ -54,7 +57,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
                   <IconCar width="20" />
                 </Typography>
                 <Typography variant="h4" fontWeight="600">
-                  23
+                  {adsCount}
                 </Typography>
                 <Typography color="textSecondary" variant="h6" fontWeight={400}>
                   Ads

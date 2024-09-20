@@ -9,6 +9,7 @@ import { AppState, dispatch } from 'src/store/Store';
 import { fetchUser } from 'src/store/user/UserSlice';
 import { UserType } from 'src/types/user';
 import { useSelector } from 'react-redux';
+import UserAdsTable from './UserAdsTable';
 
 const UserDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,6 +35,7 @@ const UserDetailsPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item sm={12} lg={8} xs={12}>
+                    <UserAdsTable uid={user._id} />
                 </Grid>
             </Grid>
         </PageContainer>)

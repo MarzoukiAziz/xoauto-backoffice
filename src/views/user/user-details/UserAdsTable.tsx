@@ -7,7 +7,6 @@ import {
   TableCell,
   TableBody,
   Typography,
-  Chip,
   Pagination,
   Select,
   MenuItem as SelectMenuItem,
@@ -23,17 +22,20 @@ import { fetchAds } from 'src/store/ad/AdSlice';
 import { AdType } from 'src/types/ad';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
-const AdsTable = () => {
+type UserAdsTableProps = {
+  uid: string
+}
 
+const UserAdsTable = ({ uid }: UserAdsTableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  useEffect(() => {
-    dispatch(fetchAds("", pageSize, currentPage, sortOrder));
-  }, [currentPage, pageSize, sortOrder]);
-
   const ads: AdType[] = useSelector((state) => state.adReducer.ads);
   const adsCount: number = useSelector((state) => state.adReducer.count);
+
+  useEffect(() => {
+    dispatch(fetchAds(uid, pageSize, currentPage, sortOrder));
+  }, [uid, currentPage, pageSize, sortOrder]);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
@@ -61,7 +63,6 @@ const AdsTable = () => {
             <TableHead>
               <TableRow>
                 <TableCell><Typography variant="h6">Title</Typography></TableCell>
-                <TableCell><Typography variant="h6">Category</Typography></TableCell>
                 <TableCell><Typography variant="h6">Price</Typography></TableCell>
                 <TableCell><Typography variant="h6">Views</Typography></TableCell>
                 <TableCell><Typography variant="h6">Created At</Typography></TableCell>
@@ -75,15 +76,6 @@ const AdsTable = () => {
                       <Typography variant="subtitle1" color="textSecondary">
                         <Link to={`/ad/${ad._id}`}>{ad.title}</Link>
                       </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={ad.category}
-                        sx={{
-                          backgroundColor: (theme) => theme.palette.warning.light,
-                          color: (theme) => theme.palette.warning.main,
-                        }}
-                      />
                     </TableCell>
                     <TableCell>
                       <Typography variant="subtitle1" color="textSecondary">
@@ -118,4 +110,4 @@ const AdsTable = () => {
   );
 };
 
-export default AdsTable;
+export default UserAdsTable;
