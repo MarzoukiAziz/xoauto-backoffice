@@ -28,6 +28,7 @@ const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/
 const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article-details/ArticleDetailsPage')));
 const ArticleFormPage = Loadable(lazy(() => import('../views/blog/article-form/ArticleFormPage')));
 const ArticleUpdatePage = Loadable(lazy(() => import('../views/blog/article-update/ArticleUpdatePage')));
+const BlogSettingsPage = Loadable(lazy(() => import('../views/blog/blog-settings/BlogSettingsPage')));
 
 
 /* ****Users***** */
@@ -49,6 +50,7 @@ const Router = [
       { path: '/ad/edit/:id', element: <AdUpdatePage /> },
       { path: '/ad/:id', element: <AdDetailsPage /> },
       { path: '/blog/', element: <ArticlesPage /> },
+      { path: '/blog/settings', element: <BlogSettingsPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
       { path: '/blog/new', element: <ArticleFormPage /> },
       { path: '/blog/update', element: <ArticleUpdatePage /> },
