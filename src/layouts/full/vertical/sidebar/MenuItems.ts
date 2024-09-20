@@ -56,7 +56,20 @@ const Menuitems: MenuitemsType[] = [
     id: uniqueId(),
     title: 'Blog',
     icon: IconPencil,
-    href: '/blog/',
+    children: [
+      {
+        id: uniqueId(),
+        title: 'Articles',
+        icon: IconPoint,
+        href: '/blog/',
+      },
+      {
+        id: uniqueId(),
+        title: 'Settings',
+        icon: IconPoint,
+        href: '/blog/settings',
+      },
+    ],
   },
 ];
 

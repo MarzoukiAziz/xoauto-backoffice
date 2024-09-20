@@ -25,23 +25,16 @@ import {
 } from '@mui/material';
 import BlankCard from '../../../components/shared/BlankCard';
 import { IconDotsVertical, IconEdit, IconSearch, IconTrash } from '@tabler/icons';
-import { dispatch, useSelector } from 'src/store/Store';
+import { AppState, dispatch, useSelector } from 'src/store/Store';
 import { deleteSelectedArticle, fetchArticle, fetchArticles } from 'src/store/blog/BlogSlice';
 import { ArticleType } from 'src/types/blog';
 import { Link, useNavigate } from 'react-router-dom';
 import { showNotification } from 'src/store/notification/NotificationSlice';
 
 const ArticlesTable = () => {
-  //TODO change categories place
-  const categories = [
-    "Essais",
-    "Nouveautés",
-    "Technologies",
-    "Tendances",
-    "AutoSport"
-  ]
   const articles: ArticleType[] = useSelector((state) => state.blogReducer.articles);
   const articlesCount: number = useSelector((state) => state.blogReducer.count);
+  const categories = useSelector((state: AppState) => state.articleCatgoryReducer.categories);
   const [anchorEl, setAnchorEl] = useState<{ [key: string]: HTMLElement | null }>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
@@ -114,7 +107,7 @@ const ArticlesTable = () => {
             <InputLabel>Category</InputLabel>
             <Select value={selectedCategory || ''} onChange={handleCategoryChange}>
               <SelectMenuItem value="">All</SelectMenuItem>
-              {categories.map(cat => <SelectMenuItem value={cat} key={cat}>{cat}</SelectMenuItem>)}
+              {categories.map(cat => <SelectMenuItem value={cat.name} key={cat.name}>{cat.name}</SelectMenuItem>)}
             </Select>
           </FormControl>
 

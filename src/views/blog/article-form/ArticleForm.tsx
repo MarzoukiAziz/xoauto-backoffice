@@ -7,21 +7,13 @@ import CustomSelect from 'src/components/forms/theme-elements/CustomSelect';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { addNewArticle } from 'src/store/blog/BlogSlice';
-import { dispatch } from 'src/store/Store';
+import { AppState, dispatch, useSelector } from 'src/store/Store';
 import { useNavigate } from 'react-router';
 import { showNotification } from 'src/store/notification/NotificationSlice';
 
-//TODO change categories place
-const categories = [
-  "Essais",
-  "Nouveautés",
-  "Technologies",
-  "Tendances",
-  "AutoSport"
-]
-
 const ArticleForm = () => {
   const navigate = useNavigate();
+  const categories = useSelector((state: AppState) => state.articleCatgoryReducer.categories);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('category', event.target.value);
@@ -152,8 +144,8 @@ const ArticleForm = () => {
             }}
           >
             {categories.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
+              <MenuItem key={option.name} value={option.name}>
+                {option.name}
               </MenuItem>
             ))}
           </CustomSelect>

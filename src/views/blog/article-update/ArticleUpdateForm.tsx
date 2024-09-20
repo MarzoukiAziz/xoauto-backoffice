@@ -13,18 +13,11 @@ import { AppState, dispatch } from 'src/store/Store';
 import { ArticleType } from 'src/types/blog';
 import { showNotification } from 'src/store/notification/NotificationSlice';
 
-// TODO: Change categories list if needed
-const categories = [
-    "Essais",
-    "Nouveautés",
-    "Technologies",
-    "Tendances",
-    "AutoSport"
-];
-
 const ArticleUpdateForm = () => {
     const navigate = useNavigate();
     const selectedArticle: ArticleType | any = useSelector((state: AppState) => state.blogReducer.selectedArticle);
+    const categories = useSelector((state: AppState) => state.articleCatgoryReducer.categories);
+
     const formik = useFormik({
         initialValues: selectedArticle,
         validationSchema: yup.object({
@@ -137,8 +130,8 @@ const ArticleUpdateForm = () => {
                         sx={{ mb: 2 }}
                     >
                         {categories.map((option) => (
-                            <MenuItem key={option} value={option}>
-                                {option}
+                            <MenuItem key={option.name} value={option.name}>
+                                {option.name}
                             </MenuItem>
                         ))}
                     </CustomSelect>

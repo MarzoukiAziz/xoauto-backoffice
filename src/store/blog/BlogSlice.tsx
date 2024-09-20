@@ -5,18 +5,14 @@ import { ArticleType } from 'src/types/blog';
 
 interface StateType {
   articles: ArticleType[];
-  recentArticles: ArticleType[];
   count: number;
-  articleSearch: string;
   sortBy: string;
   selectedArticle: ArticleType | null;
 }
 
 const initialState: StateType = {
   articles: [],
-  recentArticles: [],
   count: 0,
-  articleSearch: '',
   sortBy: 'newest',
   selectedArticle: null,
 };

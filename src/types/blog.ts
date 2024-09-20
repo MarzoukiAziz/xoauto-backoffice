@@ -24,3 +24,8 @@ export interface CommentType {
   updatedAt?: Date,
   replies: CommentType[];
 }
+
+export interface ArticleCategoryType {
+  _id?: string,
+  name: string
+}
