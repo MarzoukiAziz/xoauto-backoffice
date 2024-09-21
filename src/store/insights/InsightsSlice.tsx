@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DashboardHighlightsType } from '../../types/inshights'
+import { DashboardHighlightsType } from '../../types/insights'
 import { AppDispatch } from 'src/store/Store';
 import axios from 'src/utils/axios';
 
@@ -18,8 +18,8 @@ const initialState: StateType = {
     }
 };
 
-export const InshightsSlice = createSlice({
-    name: 'Inshights',
+export const InsightsSlice = createSlice({
+    name: 'Insights',
     initialState,
     reducers: {
         getDashboardHighlights: (state, action: PayloadAction<DashboardHighlightsType>) => {
@@ -28,16 +28,16 @@ export const InshightsSlice = createSlice({
     },
 });
 
-export const { getDashboardHighlights } = InshightsSlice.actions;
+export const { getDashboardHighlights } = InsightsSlice.actions;
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const fetchDashboardHighlights = () => async (dispatch: AppDispatch) => {
     try {
-        const response = await axios.get(`${API_URL}/inshights/dashboard-highlights`);
+        const response = await axios.get(`${API_URL}/insights/dashboard-highlights`);
         dispatch(getDashboardHighlights(response.data));
     } catch (err) {
         throw new Error();
     }
 };
 
-export default InshightsSlice.reducer;
+export default InsightsSlice.reducer;

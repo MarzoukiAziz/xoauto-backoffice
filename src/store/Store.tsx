@@ -5,7 +5,7 @@ import ArticleCatgoryReducer from './blog/ArticleCatgorySlice';
 import UserReducer from './user/UserSlice';
 import AdReducer from './ad/AdSlice';
 import NotificationReducer from './notification/NotificationSlice';
-import InshightsReducer from './inshights/InshightsSlice';
+import InsightsReducer from './insights/InsightsSlice';
 import { combineReducers } from 'redux';
 import {
   useDispatch as useAppDispatch,
@@ -21,7 +21,7 @@ export const store = configureStore({
     articleCatgoryReducer: ArticleCatgoryReducer,
     userReducer: UserReducer,
     adReducer: AdReducer,
-    inshightsReducer: InshightsReducer
+    insightsReducer: InsightsReducer
   },
 });
 
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   articleCatgoryReducer: ArticleCatgoryReducer,
   userReducer: UserReducer,
   adReducer: AdReducer,
-  inshightsReducer: InshightsReducer
+  insightsReducer: InsightsReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

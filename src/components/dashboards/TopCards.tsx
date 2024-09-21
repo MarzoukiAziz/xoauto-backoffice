@@ -6,7 +6,7 @@ import icon2 from '../../assets/images/svgs/icon-user-male.svg';
 import icon3 from '../../assets/images/svgs/icon-car.svg';
 import icon4 from '../../assets/images/svgs/icon-view.svg';
 import icon5 from '../../assets/images/svgs/icon-article.svg';
-import { DashboardHighlightsType } from 'src/types/inshights';
+import { DashboardHighlightsType } from 'src/types/insights';
 
 interface cardType {
   href: string;
