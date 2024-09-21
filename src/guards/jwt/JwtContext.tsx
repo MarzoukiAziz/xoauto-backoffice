@@ -64,12 +64,10 @@ const AuthContext = createContext<any | null>({
   logout: () => Promise.resolve(),
 });
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function AuthProvider({ children }: { children: React.ReactElement }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // const API_URL = process.env.REACT_APP_API_URL;
-
-  const API_URL = 'http://localhost:5000/api/v1';
 
   useEffect(() => {
     const initialize = async () => {

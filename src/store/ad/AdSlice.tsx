@@ -47,7 +47,7 @@ export const AdSlice = createSlice({
 export const { getAds, getAd, addAd, updateAd, deleteAd } = AdSlice.actions;
 
 // API URL
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Fetch ads from the API
 export const fetchAds =

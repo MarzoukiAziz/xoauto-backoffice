@@ -29,7 +29,7 @@ export const ArticleCategorySlice = createSlice({
 
 export const { getCategories, addCategory, deleteCategory } = ArticleCategorySlice.actions;
 
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Fetch categories from the API
 export const fetchCategories = () => async (dispatch: AppDispatch) => {

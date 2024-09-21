@@ -50,9 +50,8 @@ export const ArticleSlice = createSlice({
 
 export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle, deleteComment } = ArticleSlice.actions;
 
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
-// const API_URL = process.env.REACT_APP_API_URL;
 // Fetch articles from the API
 export const fetchArticles =
   (keywords?: string, category?: string, size = 10, page = 1, sort = "desc") =>

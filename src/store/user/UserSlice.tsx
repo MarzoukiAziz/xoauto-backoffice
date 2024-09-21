@@ -47,9 +47,7 @@ export const UserSlice = createSlice({
 
 export const { getUsers, getUser, deleteUser, activateUser } = UserSlice.actions;
 
-// const API_URL = process.env.REACT_APP_API_URL;
-
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const fetchUsers = (role?: string, keywords?: string, size = 10, page = 1, sort = "desc") => async (dispatch: AppDispatch) => {
   try {
