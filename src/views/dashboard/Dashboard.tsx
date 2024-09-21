@@ -2,12 +2,12 @@ import { Box, Grid } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import TopCards from 'src/components/dashboards/TopCards';
 import { AppState, dispatch, useSelector } from 'src/store/Store';
-import { fetchDashboardHighlights } from 'src/store/inshights/InshightsSlice';
+import { fetchDashboardHighlights } from 'src/store/insights/InsightsSlice';
 import { fetchCategories } from 'src/store/blog/ArticleCatgorySlice';
 import { useEffect } from 'react';
 
 const Dashboard = () => {
-  const highlights = useSelector((state: AppState) => state.inshightsReducer.dashboardHighlights);
+  const highlights = useSelector((state: AppState) => state.insightsReducer.dashboardHighlights);
 
   useEffect(() => {
     dispatch(fetchCategories());
