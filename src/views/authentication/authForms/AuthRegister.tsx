@@ -18,6 +18,9 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
   const registerSchema = Yup.object().shape({
     UserName: Yup.string().required('UserName is required'),
     email: Yup.string().email('Email is invalid').required('Email is required'),
+    phone: Yup.string()
+      .matches(/^\+?\d+$/, 'Phone number must start with a + and contain only numbers')
+      .required('Phone number is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
@@ -31,6 +34,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
     initialValues: {
       UserName: 'ma9doni',
       email: 'marzouki.mohamedaziz@esprit.tn',
+      phone: '+21654136336',
       password: '8FejkPvD1cH8MW51&&',
       submit: null,
     },
@@ -39,7 +43,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
 
     onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
       try {
-        await signup(values.email, values.UserName, values.password);
+        await signup(values.email, values.UserName, values.phone, values.password);
         navigate('/auth/confirm-email/' + values.email);
         if (mounted.current) {
           setStatus({ success: true });
@@ -108,6 +112,15 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
                 {...getFieldProps('email')}
                 error={Boolean(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
+              />
+              <CustomFormLabel htmlFor="phone">Phone Number</CustomFormLabel>
+              <CustomTextField
+                id="phone"
+                variant="outlined"
+                fullWidth
+                {...getFieldProps('phone')}
+                error={Boolean(touched.phone && errors.phone)}
+                helperText={touched.phone && errors.phone}
               />
               <CustomFormLabel htmlFor="password">Password</CustomFormLabel>
               <CustomTextField

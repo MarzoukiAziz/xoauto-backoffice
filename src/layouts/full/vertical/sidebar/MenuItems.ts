@@ -29,22 +29,9 @@ const Menuitems: MenuitemsType[] = [
   },
   {
     id: uniqueId(),
-    title: 'Members',
+    title: 'Users',
     icon: IconUserCircle,
-    children: [
-      {
-        id: uniqueId(),
-        title: 'Users',
-        icon: IconPoint,
-        href: '/users/',
-      },
-      {
-        id: uniqueId(),
-        title: 'Admins',
-        icon: IconPoint,
-        href: '/admins/',
-      },
-    ],
+    href: '/users/',
   },
   {
     id: uniqueId(),

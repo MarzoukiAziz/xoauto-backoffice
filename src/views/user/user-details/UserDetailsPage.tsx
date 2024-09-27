@@ -12,34 +12,36 @@ import { useSelector } from 'react-redux';
 import UserAdsTable from './UserAdsTable';
 
 const UserDetailsPage = () => {
-    const { id } = useParams<{ id: string }>();
-    const user: UserType | any = useSelector((state: AppState) => state.userReducer.selectedUser);
+  const { id } = useParams<{ id: string }>();
+  const user: UserType | any = useSelector((state: AppState) => state.userReducer.selectedUser);
 
-    useEffect(() => {
-        if (id) {
-            dispatch(fetchUser(id));
-        }
-    }, [id]);
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchUser(id));
+    }
+  }, [id]);
 
-    return (
-        (user && <PageContainer title={user.name} description="this is User Profile page">
+  return (
+    user && (
+      <PageContainer title={user.name} description="this is User Profile page">
+        <Grid container spacing={3}>
+          <Grid item sm={12}>
+            <ProfileBanner user={user} />
+          </Grid>
+          <Grid item sm={12} lg={4} xs={12}>
             <Grid container spacing={3}>
-                <Grid item sm={12}>
-                    <ProfileBanner user={user} />
-                </Grid>
-                <Grid item sm={12} lg={4} xs={12}>
-                    <Grid container spacing={3}>
-                        <Grid item sm={12}>
-                            <IntroCard user={user} />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item sm={12} lg={8} xs={12}>
-                    <UserAdsTable uid={user._id} />
-                </Grid>
+              <Grid item sm={12}>
+                <IntroCard user={user} />
+              </Grid>
             </Grid>
-        </PageContainer>)
-    );
+          </Grid>
+          <Grid item sm={12} lg={8} xs={12}>
+            <UserAdsTable uid={user._id} />
+          </Grid>
+        </Grid>
+      </PageContainer>
+    )
+  );
 };
 
 export default UserDetailsPage;
