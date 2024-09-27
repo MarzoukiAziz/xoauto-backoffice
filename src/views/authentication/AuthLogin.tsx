@@ -35,8 +35,8 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
   const formik = useFormik({
     //Only in dev
     initialValues: {
-      email: 'marzoukiaziz38@gmail.com',
-      password: 'NOKIAXL147a&',
+      email: 'marzouki.mohamedaziz@esprit.tn',
+      password: '8FejkPvD1cH8MW51&&',
       submit: null,
     },
 
@@ -49,21 +49,25 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
         if (mounted.current) {
           setStatus({ success: true });
           setSubmitting(true);
-          dispatch(showNotification({
-            title: 'Welcome!',
-            subtitle: 'Login successfully',
-            severity: 'success',
-          }));
+          dispatch(
+            showNotification({
+              title: 'Welcome!',
+              subtitle: 'Login successfully',
+              severity: 'success',
+            }),
+          );
         }
       } catch (err: any) {
         if (mounted.current) {
           setStatus({ success: false });
           setErrors({ submit: err.message });
-          dispatch(showNotification({
-            title: 'Login Error',
-            subtitle: "Verify your credentiels!",
-            severity: 'error',
-          }));
+          dispatch(
+            showNotification({
+              title: 'Login Error',
+              subtitle: 'Verify your credentiels!',
+              severity: 'error',
+            }),
+          );
           setSubmitting(false);
         }
       }
@@ -84,21 +88,21 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
         </Box>
       )}
 
-<AuthSocialButtons title="Sign in with" />
-    <Box mt={3}>
-      <Divider>
-        <Typography
-          component="span"
-          color="textSecondary"
-          variant="h6"
-          fontWeight="400"
-          position="relative"
-          px={2}
-        >
-          or sign in with
-        </Typography>
-      </Divider>
-    </Box>
+      <AuthSocialButtons title="Sign in with" />
+      <Box mt={3}>
+        <Divider>
+          <Typography
+            component="span"
+            color="textSecondary"
+            variant="h6"
+            fontWeight="400"
+            position="relative"
+            px={2}
+          >
+            or sign in with
+          </Typography>
+        </Divider>
+      </Box>
       <FormikProvider value={formik}>
         <Form onSubmit={handleSubmit}>
           <Stack>

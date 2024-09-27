@@ -119,10 +119,11 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
     });
   };
 
-  const signup = async (email: string, username: string, password: string) => {
+  const signup = async (email: string, username: string, phone: string, password: string) => {
     await axios.post(`${API_URL}/cognito/signup`, {
       email,
       username,
+      phone,
       password,
     });
   };
