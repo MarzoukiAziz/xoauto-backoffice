@@ -1,15 +1,15 @@
 import React from 'react';
-import { Grid, Box, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Grid, Box, Typography, Stack } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import img1 from 'src/assets/images/backgrounds/login-bg.svg';
 import Logo from 'src/layouts/full/shared/logo/Logo';
-import AuthLogin from './AuthLogin';
-import Notification from 'src/layouts/full/shared/notification/Notification';
-import { Link } from 'react-router-dom';
 
-const Login = () => (
-  <PageContainer title="Login" description="this is Login page">
-    <Grid container spacing={0} sx={{ overflowX: 'hidden' }}>
+import AuthRegister from './authForms/AuthRegister';
+
+const Register = () => (
+  <PageContainer title="Register" description="this is Register page">
+    <Grid container spacing={0} justifyContent="center" sx={{ overflowX: 'hidden' }}>
       <Grid
         item
         xs={12}
@@ -67,23 +67,28 @@ const Login = () => (
         alignItems="center"
       >
         <Box p={4}>
-          <AuthLogin
-            title="Welcome to XoAuto Admin Panel"
+          <AuthRegister
+            title="Welcome to XoAutoTeam"
+            subtext={
+              <Typography variant="subtitle1" color="textSecondary" mb={1}>
+                XoAuto Admin Dashboard
+              </Typography>
+            }
             subtitle={
               <Stack direction="row" spacing={1} mt={3}>
-                <Typography color="textSecondary" variant="h6" fontWeight="500">
-                  New to XoAuto Team?
+                <Typography color="textSecondary" variant="h6" fontWeight="400">
+                  Already have an Account?
                 </Typography>
                 <Typography
                   component={Link}
-                  to="/auth/register"
+                  to="/auth/login"
                   fontWeight="500"
                   sx={{
                     textDecoration: 'none',
                     color: 'primary.main',
                   }}
                 >
-                  Create an account
+                  Sign In
                 </Typography>
               </Stack>
             }
@@ -91,8 +96,7 @@ const Login = () => (
         </Box>
       </Grid>
     </Grid>
-    <Notification />
   </PageContainer>
 );
 
-export default Login;
+export default Register;

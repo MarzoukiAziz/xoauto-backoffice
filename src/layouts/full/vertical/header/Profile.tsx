@@ -20,7 +20,7 @@ const Profile = () => {
     setAnchorEl2(null);
   };
 
-  return (
+  return (user &&
     <Box>
       <IconButton
         size="large"

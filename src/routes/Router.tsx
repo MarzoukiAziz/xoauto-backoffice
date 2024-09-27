@@ -10,6 +10,8 @@ const Error = Loadable(lazy(() => import('../views/authentication/Error')));
 
 // authentication
 const Login = Loadable(lazy(() => import('../views/authentication/Login')));
+const Register = Loadable(lazy(() => import('../views/authentication/Register')));
+const TwoSteps = Loadable(lazy(() => import('../views/authentication/TwoSteps')));
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -25,11 +27,16 @@ const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdate
 
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
-const ArticleDetailsPage = Loadable(lazy(() => import('../views/blog/article-details/ArticleDetailsPage')));
+const ArticleDetailsPage = Loadable(
+  lazy(() => import('../views/blog/article-details/ArticleDetailsPage')),
+);
 const ArticleFormPage = Loadable(lazy(() => import('../views/blog/article-form/ArticleFormPage')));
-const ArticleUpdatePage = Loadable(lazy(() => import('../views/blog/article-update/ArticleUpdatePage')));
-const BlogSettingsPage = Loadable(lazy(() => import('../views/blog/blog-settings/BlogSettingsPage')));
-
+const ArticleUpdatePage = Loadable(
+  lazy(() => import('../views/blog/article-update/ArticleUpdatePage')),
+);
+const BlogSettingsPage = Loadable(
+  lazy(() => import('../views/blog/blog-settings/BlogSettingsPage')),
+);
 
 /* ****Users***** */
 const UsersPage = Loadable(lazy(() => import('../views/user/users-listing/UsersPage')));
@@ -71,11 +78,13 @@ const Router = [
     children: [
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
+      { path: '/auth/register', element: <Register /> },
+      { path: '/auth/confirm-email/:email', element: <TwoSteps /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
   {
-    path: '/auth',
+    path: '/',
     element: <BlankLayout />,
     children: [
       { path: '404', element: <Error /> },

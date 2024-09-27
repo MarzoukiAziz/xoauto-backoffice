@@ -7,6 +7,7 @@ import {
   Button,
   Stack,
   Alert,
+  Divider,
 } from '@mui/material';
 import { loginType } from 'src/types/auth/auth';
 import CustomCheckbox from 'src/components/forms/theme-elements/CustomCheckbox';
@@ -18,6 +19,7 @@ import useAuth from 'src/guards/authGuard/UseAuth';
 import useMounted from 'src/guards/authGuard/UseMounted';
 import { dispatch } from 'src/store/Store';
 import { showNotification } from 'src/store/notification/NotificationSlice';
+import AuthSocialButtons from './authForms/AuthSocialButtons';
 
 const AuthLogin = ({ title, subtitle }: loginType) => {
   const mounted = useMounted();
@@ -33,8 +35,8 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
   const formik = useFormik({
     //Only in dev
     initialValues: {
-      email: 'contact@azizmarzouki.com',
-      password: 'Password123!',
+      email: 'marzoukiaziz38@gmail.com',
+      password: 'NOKIAXL147a&',
       submit: null,
     },
 
@@ -81,6 +83,22 @@ const AuthLogin = ({ title, subtitle }: loginType) => {
           <Alert severity="error">{errors.submit}</Alert>
         </Box>
       )}
+
+<AuthSocialButtons title="Sign in with" />
+    <Box mt={3}>
+      <Divider>
+        <Typography
+          component="span"
+          color="textSecondary"
+          variant="h6"
+          fontWeight="400"
+          position="relative"
+          px={2}
+        >
+          or sign in with
+        </Typography>
+      </Divider>
+    </Box>
       <FormikProvider value={formik}>
         <Form onSubmit={handleSubmit}>
           <Stack>
