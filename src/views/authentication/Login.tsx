@@ -1,10 +1,11 @@
 import React from 'react';
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, Stack, Typography } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import img1 from 'src/assets/images/backgrounds/login-bg.svg';
 import Logo from 'src/layouts/full/shared/logo/Logo';
 import AuthLogin from './AuthLogin';
 import Notification from 'src/layouts/full/shared/notification/Notification';
+import { Link } from 'react-router-dom';
 
 const Login = () => (
   <PageContainer title="Login" description="this is Login page">
@@ -68,6 +69,24 @@ const Login = () => (
         <Box p={4}>
           <AuthLogin
             title="Welcome to XoAuto Admin Panel"
+            subtitle={
+              <Stack direction="row" spacing={1} mt={3}>
+                <Typography color="textSecondary" variant="h6" fontWeight="500">
+                  New to XoAuto Team?
+                </Typography>
+                <Typography
+                  component={Link}
+                  to="/auth/register"
+                  fontWeight="500"
+                  sx={{
+                    textDecoration: 'none',
+                    color: 'primary.main',
+                  }}
+                >
+                  Create an account
+                </Typography>
+              </Stack>
+            }
           />
         </Box>
       </Grid>

@@ -42,15 +42,6 @@ const handlers: any = {
     isAuthenticated: false,
     user: null,
   }),
-  REGISTER: (state: InitialStateType, action: any) => {
-    const { user } = action.payload;
-
-    return {
-      ...state,
-      isAuthenticated: true,
-      user,
-    };
-  },
 };
 
 const reducer = (state: InitialStateType, action: any) =>
@@ -62,6 +53,7 @@ const AuthContext = createContext<any | null>({
   signup: () => Promise.resolve(),
   signin: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  confirmEmail: () => Promise.resolve(),
 });
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -76,8 +68,10 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
-          const response = await axios.get(`${API_URL}/user/my-account`);
-          const { user } = response.data.data;
+          const response = await axios.get(`${API_URL}/cognito/verify`, {
+            params: { accessToken },
+          });
+          const { user } = response.data;
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -110,11 +104,11 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
   }, []);
 
   const signin = async (email: string, password: string) => {
-    const response = await axios.post(`${API_URL}/user/login`, {
+    const response = await axios.post(`${API_URL}/cognito/login`, {
       email,
       password,
     });
-    const { accessToken, user } = response.data.data;
+    const { accessToken, user } = response.data;
 
     setSession(accessToken);
     dispatch({
@@ -123,6 +117,32 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
         user,
       },
     });
+  };
+
+  const signup = async (email: string, username: string, password: string) => {
+    await axios.post(`${API_URL}/cognito/signup`, {
+      email,
+      username,
+      password,
+    });
+  };
+
+  const confirmEmail = async (user: string, code: string) => {
+    try {
+      const response = await axios.post(`${API_URL}/cognito/confirm-email`, {
+        user,
+        code,
+      });
+      if (response.data.success) {
+        return true;
+      }
+
+      return false;
+    } catch (err) {
+      return false;
+    }
+
+    return true;
   };
 
   const logout = async () => {
@@ -137,6 +157,8 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
         method: 'jwt',
         signin,
         logout,
+        signup,
+        confirmEmail,
       }}
     >
       {children}
