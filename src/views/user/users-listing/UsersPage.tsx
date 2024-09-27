@@ -18,21 +18,21 @@ const BCrumb = [
 ];
 
 const UsersPage = () => {
-  const usersCount = useSelector((state) =>
-    state.userReducer.count
-  )
+  const usersCount = useSelector((state) => state.userReducer.count);
 
-  return <PageContainer title="Users List" description="this is Users page">
-    <Breadcrumb title="Users" items={BCrumb} breadcrumbImg={UsersBcImg} />
-    <ParentCard title={`Users (${usersCount})`}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Box>
-            <UsersTable role="USER" />
-          </Box>
+  return (
+    <PageContainer title="Users List" description="this is Users page">
+      <Breadcrumb title="Users" items={BCrumb} breadcrumbImg={UsersBcImg} />
+      <ParentCard title={`Users (${usersCount})`}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Box>
+              <UsersTable />
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </ParentCard>
-  </PageContainer >
-}
+      </ParentCard>
+    </PageContainer>
+  );
+};
 export default UsersPage;

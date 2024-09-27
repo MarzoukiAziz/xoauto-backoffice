@@ -10,9 +10,7 @@ import {
   Chip,
 } from '@mui/material';
 import profilecover from 'src/assets/images/backgrounds/profilebg.jpg';
-import {
-  IconCar,
-} from '@tabler/icons';
+import { IconCar } from '@tabler/icons';
 import BlankCard from 'src/components/shared/BlankCard';
 import { UserType } from 'src/types/user';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
@@ -20,8 +18,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'src/store/Store';
 
 type ProfileBannerProps = {
-  user: UserType
-}
+  user: UserType;
+};
 const ProfileBanner = ({ user }: ProfileBannerProps) => {
   const ProfileImage = styled(Box)(() => ({
     backgroundImage: 'linear-gradient(#50b2fc,#f44c66)',
@@ -31,11 +29,11 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: '0 auto'
+    margin: '0 auto',
   }));
 
   const handleSendEmail = (email: string) => {
-    window.location.href = "mailto:" + email;
+    window.location.href = 'mailto:' + email;
   };
   const adsCount: number = useSelector((state: AppState) => state.adReducer.count);
 
@@ -45,9 +43,16 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
         <CardMedia component="img" image={profilecover} alt={profilecover} width="100%" />
         <Grid container spacing={0} justifyContent="center" alignItems="center">
           <Grid
-            item lg={4} sm={12} md={5} xs={12} sx={{
+            item
+            lg={4}
+            sm={12}
+            md={5}
+            xs={12}
+            sx={{
               order: {
-                xs: '2', sm: '2', lg: '1',
+                xs: '2',
+                sm: '2',
+                lg: '1',
               },
             }}
           >
@@ -66,9 +71,15 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
             </Stack>
           </Grid>
           <Grid
-            item lg={4} sm={12} xs={12} sx={{
+            item
+            lg={4}
+            sm={12}
+            xs={12}
+            sx={{
               order: {
-                xs: '1', sm: '1', lg: '2',
+                xs: '1',
+                sm: '1',
+                lg: '2',
               },
             }}
           >
@@ -94,35 +105,59 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
                     }}
                   />
                 </ProfileImage>
-                {user.pro ? <Chip
-                  sx={{ marginLeft: 'auto', marginTop: '5px', backgroundColor: 'green', color: 'white' }}
-                  label="Pro"
-                  size="small"
-                ></Chip> : <Chip
-                  sx={{ marginLeft: 'auto', marginTop: '5px', backgroundColor: 'grey', color: 'white' }}
-                  label="Particular"
-                  size="small"
-                ></Chip>}
+                {user.pro ? (
+                  <Chip
+                    sx={{
+                      marginLeft: 'auto',
+                      marginTop: '5px',
+                      backgroundColor: 'green',
+                      color: 'white',
+                    }}
+                    label="Pro"
+                    size="small"
+                  ></Chip>
+                ) : (
+                  <Chip
+                    sx={{
+                      marginLeft: 'auto',
+                      marginTop: '5px',
+                      backgroundColor: 'grey',
+                      color: 'white',
+                    }}
+                    label="Particular"
+                    size="small"
+                  ></Chip>
+                )}
                 <Box mt={1}>
                   <Typography fontWeight={600} variant="h5">
                     {user.name}
                   </Typography>
                   <Typography color="textSecondary" variant="h6" fontWeight={400}>
-                    {user.roles.join(', ')}
+                    {user.roles?.join(', ')}
                   </Typography>
                 </Box>
               </Box>
             </Box>
           </Grid>
           <Grid
-            item lg={4} sm={12} xs={12} sx={{
+            item
+            lg={4}
+            sm={12}
+            xs={12}
+            sx={{
               order: {
-                xs: '3', sm: '3', lg: '3',
+                xs: '3',
+                sm: '3',
+                lg: '3',
               },
             }}
           >
             <Stack direction={'row'} gap={2} alignItems="center" justifyContent="center" my={2}>
-              <Button color="primary" variant="contained" onClick={() => handleSendEmail(user.email)}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => handleSendEmail(user.email)}
+              >
                 Send Email
               </Button>
             </Stack>
