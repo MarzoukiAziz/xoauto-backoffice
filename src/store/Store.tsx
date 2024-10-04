@@ -7,6 +7,7 @@ import AdReducer from './ad/AdSlice';
 import NotificationReducer from './notification/NotificationSlice';
 import InsightsReducer from './insights/InsightsSlice';
 import BrandSettingsReducer from './settings/BrandSlice';
+import ModelSettingsReducer from './settings/ModelSlice';
 
 import { combineReducers } from 'redux';
 import {
@@ -25,6 +26,7 @@ export const store = configureStore({
     adReducer: AdReducer,
     insightsReducer: InsightsReducer,
     brandSettingsReducer: BrandSettingsReducer,
+    modelSettingsReducer: ModelSettingsReducer,
   },
 });
 
@@ -37,6 +39,7 @@ const rootReducer = combineReducers({
   adReducer: AdReducer,
   insightsReducer: InsightsReducer,
   brandSettingsReducer: BrandSettingsReducer,
+  modelSettingsReducer: ModelSettingsReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
