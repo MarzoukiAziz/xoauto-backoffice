@@ -6,6 +6,13 @@ import UserReducer from './user/UserSlice';
 import AdReducer from './ad/AdSlice';
 import NotificationReducer from './notification/NotificationSlice';
 import InsightsReducer from './insights/InsightsSlice';
+import BrandSettingsReducer from './settings/BrandSlice';
+import ModelSettingsReducer from './settings/ModelSlice';
+import EnergySettingsReducer from './settings/EnergySlice';
+import CategorySettingsReducer from './settings/CategorySlice';
+import RegionSettingsReducer from './settings/RegionSlice';
+import ColorSettingsReducer from './settings/ColorSlice';
+
 import { combineReducers } from 'redux';
 import {
   useDispatch as useAppDispatch,
@@ -21,7 +28,13 @@ export const store = configureStore({
     articleCatgoryReducer: ArticleCatgoryReducer,
     userReducer: UserReducer,
     adReducer: AdReducer,
-    insightsReducer: InsightsReducer
+    insightsReducer: InsightsReducer,
+    brandSettingsReducer: BrandSettingsReducer,
+    modelSettingsReducer: ModelSettingsReducer,
+    energySettingsReducer: EnergySettingsReducer,
+    categorySettingsReducer: CategorySettingsReducer,
+    regionSettingsReducer: RegionSettingsReducer,
+    colorSettingsReducer: ColorSettingsReducer,
   },
 });
 
@@ -32,7 +45,13 @@ const rootReducer = combineReducers({
   articleCatgoryReducer: ArticleCatgoryReducer,
   userReducer: UserReducer,
   adReducer: AdReducer,
-  insightsReducer: InsightsReducer
+  insightsReducer: InsightsReducer,
+  brandSettingsReducer: BrandSettingsReducer,
+  modelSettingsReducer: ModelSettingsReducer,
+  energySettingsReducer: EnergySettingsReducer,
+  categorySettingsReducer: CategorySettingsReducer,
+  regionSettingsReducer: RegionSettingsReducer,
+  colorSettingsReducer: ColorSettingsReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

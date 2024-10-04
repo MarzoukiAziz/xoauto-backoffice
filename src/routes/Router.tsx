@@ -42,6 +42,20 @@ const BlogSettingsPage = Loadable(
 const UsersPage = Loadable(lazy(() => import('../views/user/users-listing/UsersPage')));
 const UserDetailsPage = Loadable(lazy(() => import('../views/user/user-details/UserDetailsPage')));
 
+/* ****Settings***** */
+const BrandSettingsPage = Loadable(lazy(() => import('../views/settings/Brand/BrandSettingsPage')));
+const ModelSettingsPage = Loadable(lazy(() => import('../views/settings/Model/ModelSettingsPage')));
+const EnergySettingsPage = Loadable(
+  lazy(() => import('../views/settings/Energy/EnergySettingsPage')),
+);
+const CategorySettingsPage = Loadable(
+  lazy(() => import('../views/settings/Category/CategorySettingsPage')),
+);
+const ColorSettingsPage = Loadable(lazy(() => import('../views/settings/Color/ColorSettingsPage')));
+const RegionSettingsPage = Loadable(
+  lazy(() => import('../views/settings/Region/RegionSettingsPage')),
+);
+
 const Router = [
   {
     path: '/',
@@ -63,6 +77,13 @@ const Router = [
       { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
       { path: '/user/:id', element: <UserDetailsPage /> },
+      { path: '/settings/brands', element: <BrandSettingsPage /> },
+      { path: '/settings/models', element: <ModelSettingsPage /> },
+      { path: '/settings/energies', element: <EnergySettingsPage /> },
+      { path: '/settings/categories', element: <CategorySettingsPage /> },
+      { path: '/settings/colors', element: <ColorSettingsPage /> },
+      { path: '/settings/regions', element: <RegionSettingsPage /> },
+
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
