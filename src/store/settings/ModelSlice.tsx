@@ -41,7 +41,7 @@ export const fetchModels = () => async (dispatch: AppDispatch) => {
   }
 };
 
-// Add a new category
+// Add a new model
 export const addNewModel = (newModel: ModelType) => async (dispatch: AppDispatch) => {
   try {
     const response = await axios.post(`${API_URL}/settings/models`, newModel);
@@ -51,7 +51,7 @@ export const addNewModel = (newModel: ModelType) => async (dispatch: AppDispatch
   }
 };
 
-// Delete a category
+// Delete a model
 export const deleteSelectedModel = (id: string) => async (dispatch: AppDispatch) => {
   try {
     await axios.delete(`${API_URL}/settings/models/${id}`);

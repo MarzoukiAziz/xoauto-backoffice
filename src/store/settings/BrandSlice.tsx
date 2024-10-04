@@ -41,7 +41,7 @@ export const fetchBrands = () => async (dispatch: AppDispatch) => {
   }
 };
 
-// Add a new category
+// Add a new brand
 export const addNewBrand = (newBrand: BrandType) => async (dispatch: AppDispatch) => {
   try {
     const response = await axios.post(`${API_URL}/settings/brands`, newBrand);
@@ -51,7 +51,7 @@ export const addNewBrand = (newBrand: BrandType) => async (dispatch: AppDispatch
   }
 };
 
-// Delete a category
+// Delete a brand
 export const deleteSelectedBrand = (id: string) => async (dispatch: AppDispatch) => {
   try {
     await axios.delete(`${API_URL}/settings/brands/${id}`);

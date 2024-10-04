@@ -45,6 +45,9 @@ const UserDetailsPage = Loadable(lazy(() => import('../views/user/user-details/U
 /* ****Settings***** */
 const BrandSettingsPage = Loadable(lazy(() => import('../views/settings/Brand/BrandSettingsPage')));
 const ModelSettingsPage = Loadable(lazy(() => import('../views/settings/Model/ModelSettingsPage')));
+const EnergySettingsPage = Loadable(
+  lazy(() => import('../views/settings/Energy/EnergySettingsPage')),
+);
 
 const Router = [
   {
@@ -69,6 +72,7 @@ const Router = [
       { path: '/user/:id', element: <UserDetailsPage /> },
       { path: '/settings/brands', element: <BrandSettingsPage /> },
       { path: '/settings/models', element: <ModelSettingsPage /> },
+      { path: '/settings/energies', element: <EnergySettingsPage /> },
 
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
