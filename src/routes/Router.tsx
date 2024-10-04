@@ -52,6 +52,9 @@ const CategorySettingsPage = Loadable(
   lazy(() => import('../views/settings/Category/CategorySettingsPage')),
 );
 const ColorSettingsPage = Loadable(lazy(() => import('../views/settings/Color/ColorSettingsPage')));
+const RegionSettingsPage = Loadable(
+  lazy(() => import('../views/settings/Region/RegionSettingsPage')),
+);
 
 const Router = [
   {
@@ -79,6 +82,7 @@ const Router = [
       { path: '/settings/energies', element: <EnergySettingsPage /> },
       { path: '/settings/categories', element: <CategorySettingsPage /> },
       { path: '/settings/colors', element: <ColorSettingsPage /> },
+      { path: '/settings/regions', element: <RegionSettingsPage /> },
 
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
