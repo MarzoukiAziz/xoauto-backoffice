@@ -51,6 +51,7 @@ const EnergySettingsPage = Loadable(
 const CategorySettingsPage = Loadable(
   lazy(() => import('../views/settings/Category/CategorySettingsPage')),
 );
+const ColorSettingsPage = Loadable(lazy(() => import('../views/settings/Color/ColorSettingsPage')));
 
 const Router = [
   {
@@ -77,6 +78,7 @@ const Router = [
       { path: '/settings/models', element: <ModelSettingsPage /> },
       { path: '/settings/energies', element: <EnergySettingsPage /> },
       { path: '/settings/categories', element: <CategorySettingsPage /> },
+      { path: '/settings/colors', element: <ColorSettingsPage /> },
 
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
