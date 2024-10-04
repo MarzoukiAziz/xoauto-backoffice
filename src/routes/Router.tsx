@@ -42,6 +42,9 @@ const BlogSettingsPage = Loadable(
 const UsersPage = Loadable(lazy(() => import('../views/user/users-listing/UsersPage')));
 const UserDetailsPage = Loadable(lazy(() => import('../views/user/user-details/UserDetailsPage')));
 
+/* ****Settings***** */
+const BrandSettingsPage = Loadable(lazy(() => import('../views/settings/BrandSettingsPage')));
+
 const Router = [
   {
     path: '/',
@@ -63,6 +66,7 @@ const Router = [
       { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
       { path: '/user/:id', element: <UserDetailsPage /> },
+      { path: '/settings/brands', element: <BrandSettingsPage /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
