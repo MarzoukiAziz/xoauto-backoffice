@@ -106,6 +106,12 @@ const Menuitems: MenuitemsType[] = [
         icon: IconPoint,
         href: '/settings/colors',
       },
+      {
+        id: uniqueId(),
+        title: 'Equipments',
+        icon: IconPoint,
+        href: '/settings/equipments',
+      },
     ],
   },
 ];
