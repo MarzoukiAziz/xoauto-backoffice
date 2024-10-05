@@ -12,6 +12,7 @@ import EnergySettingsReducer from './settings/EnergySlice';
 import CategorySettingsReducer from './settings/CategorySlice';
 import RegionSettingsReducer from './settings/RegionSlice';
 import ColorSettingsReducer from './settings/ColorSlice';
+import EquipmentsReducer from './settings/EquipmentSlice';
 
 import { combineReducers } from 'redux';
 import {
@@ -35,6 +36,7 @@ export const store = configureStore({
     categorySettingsReducer: CategorySettingsReducer,
     regionSettingsReducer: RegionSettingsReducer,
     colorSettingsReducer: ColorSettingsReducer,
+    equipmentsReducer: EquipmentsReducer,
   },
 });
 
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   categorySettingsReducer: CategorySettingsReducer,
   regionSettingsReducer: RegionSettingsReducer,
   colorSettingsReducer: ColorSettingsReducer,
+  equipmentsReducer: EquipmentsReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
