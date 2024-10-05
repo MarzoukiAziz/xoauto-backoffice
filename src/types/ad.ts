@@ -1,58 +1,65 @@
 export interface AdType {
-    _id: string;
-    uid: string;
-    title?: string;
-    description?: string;
-    price: number;
-    type: 'new' | 'used';
-    brand: string;
-    model: string;
-    version?: string;
-    category: string;
-    mileage: number;
-    first_registration: {
-        month?: number;
-        year: number;
+  _id: string;
+  uid: string;
+  title?: string;
+  description?: string;
+  price: number;
+  type: 'new' | 'used';
+  brand: string;
+  model: string;
+  version?: string;
+  category: string;
+  mileage: number;
+  first_registration: {
+    month?: number;
+    year: number;
+  };
+  fuel_type: string;
+  seats?: number;
+  color?: string;
+  crit_air?: string;
+  horsepower?: number;
+  power_kw?: number;
+  autonomy_wltp_km?: number;
+  options_vehicule: {
+    non_smoker?: boolean;
+    first_hand?: boolean;
+    manufacturer_warranty?: boolean;
+    others?: string[];
+  };
+  equipments: {
+    safety: {
+      type: string[];
+      default: [];
     };
-    fuel_type: string;
-    seats?: number;
-    color?: string;
-    crit_air?: string;
-    horsepower?: number;
-    power_kw?: number;
-    autonomy_wltp_km?: number;
-    options_vehicule: {
-        heads_up_display?: boolean;
-        parking_assist?: boolean;
-        tow_hitch?: boolean;
-        roof_racks?: boolean;
-        bluetooth?: boolean;
-        rear_camera?: boolean;
-        automatic_climate_control?: boolean;
-        gps?: boolean;
-        non_smoker?: boolean;
-        first_hand?: boolean;
-        rear_radar?: boolean;
-        leather_seats?: boolean;
-        heated_seats?: boolean;
-        manufacturer_warranty?: boolean;
-        sound_system?: boolean;
-        sunroof?: boolean;
-        panoramic_roof?: boolean;
-        others?: string[];
+    outdoor: {
+      type: string[];
+      default: [];
     };
-    courant: {
-        AC?: string;
-        DC?: string;
+    indoor: {
+      type: string[];
+      default: [];
     };
-    photos: string[];
-    interior_video?: string;
-    exterior_video?: string;
-    address?: string;
-    phone_number?: string;
-    mask_phone: boolean;
-    active: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
-    views?: number
+    functional: {
+      type: string[];
+      default: [];
+    };
+  };
+  courant: {
+    AC?: string;
+    DC?: string;
+  };
+  photos: string[];
+  interior_video?: string;
+  exterior_video?: string;
+  address?: string;
+  region?: string;
+  phone_number?: string;
+  mask_phone: boolean;
+  active: boolean;
+  pro: boolean;
+  sold: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  views?: number;
 }
