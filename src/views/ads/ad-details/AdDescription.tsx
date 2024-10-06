@@ -19,12 +19,12 @@ import { UserType } from 'src/types/user';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 
-type AdDescProps = {
+type AdDescriptionProps = {
   ad: AdType;
   user: UserType;
 };
 
-const AdDesc = ({ ad, user }: AdDescProps) => {
+const AdDescription = ({ ad, user }: AdDescriptionProps) => {
   const [value, setValue] = useState(0);
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -197,4 +197,4 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
   );
 };
 
-export default AdDesc;
+export default AdDescription;
