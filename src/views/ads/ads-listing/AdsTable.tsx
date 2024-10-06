@@ -33,7 +33,6 @@ const AdsTable = () => {
   const ads: AdType[] | any[] = useSelector((state) => state.adReducer.ads);
   const adsCount: number = useSelector((state) => state.adReducer.count);
   const currency = process.env.REACT_APP_CURRENCY;
-  console.log('curr', currency);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
@@ -89,7 +88,11 @@ const AdsTable = () => {
                           </Link>
                         </Typography>
                       </TableCell>
-                      <TableCell>{ad.uid?.name}</TableCell>
+                      <TableCell>
+                        <Typography component={Link} to={`/user/${ad.uid?._id}`} variant="h6">
+                          {ad.uid?.name}
+                        </Typography>
+                      </TableCell>
                       <TableCell>
                         <Typography variant="subtitle1" color="textSecondary">
                           {currency} {Intl.NumberFormat('en-US').format(ad.price)}
