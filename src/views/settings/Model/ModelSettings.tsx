@@ -33,6 +33,7 @@ const ModelSettings = () => {
   const brands = useSelector((state) => state.brandSettingsReducer.brands);
   const [newModelName, setNewModelName] = useState('');
   const [newModelBrand, setNewModelBrand] = useState<BrandType | undefined>(undefined);
+  const [selectedBrand, setSelectedBrand] = useState<string>(''); // State for the selected brand filter
 
   useEffect(() => {
     dispatch(fetchModels());
@@ -81,6 +82,15 @@ const ModelSettings = () => {
     setNewModelBrand(newBrand[0]);
   };
 
+  const handleFilterBrandChange = (event: SelectChangeEvent<string>) => {
+    setSelectedBrand(event.target.value);
+  };
+
+  // Filter models by selected brand
+  const filteredModels = selectedBrand
+    ? models.filter((model) => model.brandId._id === selectedBrand)
+    : models;
+
   return (
     <ParentCard title={`Models (${models.length})`}>
       <Grid container spacing={3}>
@@ -88,6 +98,23 @@ const ModelSettings = () => {
           <Box sx={{ flex: '1 1 100%' }}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
+                {/* Add filter by brand */}
+                <Stack spacing={2} direction={'row'} justifyContent="end">
+                  <h4>Filter by Brand</h4>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select value={selectedBrand} onChange={handleFilterBrandChange}>
+                      <SelectMenuItem value="">
+                        <em>All Brands</em>
+                      </SelectMenuItem>
+                      {brands.map((brand: BrandType) => (
+                        <SelectMenuItem key={brand._id} value={brand._id}>
+                          {brand.name}
+                        </SelectMenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Stack>
+                {/* Table for models */}
                 <TableContainer component={Paper}>
                   <Table>
                     <TableHead>
@@ -98,7 +125,7 @@ const ModelSettings = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {models.map((model) => (
+                      {filteredModels.map((model) => (
                         <TableRow key={model._id}>
                           <TableCell>{model.name}</TableCell>
                           <TableCell>{model.brandId.name}</TableCell>
