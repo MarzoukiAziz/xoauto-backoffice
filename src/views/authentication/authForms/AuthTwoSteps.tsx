@@ -8,13 +8,13 @@ import { dispatch } from 'src/store/Store';
 import { useNavigate } from 'react-router';
 
 type AuthTwoStepsProps = {
-  email: string;
+  phone: string;
 };
 
-const AuthTwoSteps = ({ email }: AuthTwoStepsProps) => {
+const AuthTwoSteps = ({ phone }: AuthTwoStepsProps) => {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
-  const { confirmEmail } = useAuth();
+  const { confirmPhone } = useAuth();
   const navigate = useNavigate();
 
   const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +35,11 @@ const AuthTwoSteps = ({ email }: AuthTwoStepsProps) => {
       return;
     }
     setError('');
-    if (await confirmEmail(email, code)) {
+    if (await confirmPhone(phone, code)) {
       dispatch(
         showNotification({
           title: 'Success',
-          subtitle: 'Email verified!',
+          subtitle: 'Phone verified!',
           severity: 'success',
         }),
       );

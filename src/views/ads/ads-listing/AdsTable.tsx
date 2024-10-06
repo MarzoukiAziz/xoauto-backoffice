@@ -23,12 +23,11 @@ import { AdType } from 'src/types/ad';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 
 const AdsTable = () => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   useEffect(() => {
-    dispatch(fetchAds("", pageSize, currentPage, sortOrder));
+    dispatch(fetchAds('', pageSize, currentPage, sortOrder));
   }, [currentPage, pageSize, sortOrder]);
 
   const ads: AdType[] | any[] = useSelector((state) => state.adReducer.ads);
@@ -38,7 +37,7 @@ const AdsTable = () => {
     setCurrentPage(page);
   };
 
-  const handleSortOrderChange = (event: SelectChangeEvent<"asc" | "desc">) => {
+  const handleSortOrderChange = (event: SelectChangeEvent<'asc' | 'desc'>) => {
     const newSortOrder = event.target.value as 'asc' | 'desc';
     setSortOrder(newSortOrder);
   };
@@ -59,43 +58,54 @@ const AdsTable = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell><Typography variant="h6">Title</Typography></TableCell>
-                <TableCell><Typography variant="h6">Publisher</Typography></TableCell>
-                <TableCell><Typography variant="h6">Price</Typography></TableCell>
-                <TableCell><Typography variant="h6">Views</Typography></TableCell>
-                <TableCell><Typography variant="h6">Published At</Typography></TableCell>
+                <TableCell>
+                  <Typography variant="h6">Vehicule</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Publisher</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Price</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Views</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h6">Published At</Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {ads.map((ad) => (
-                ad._id && (
-                  <TableRow key={ad._id}>
-                    <TableCell>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        <Link to={`/ad/${ad._id}`}>{ad.title}</Link>
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {ad.uid?.name}
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        €{Intl.NumberFormat('en-US').format(ad.price)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        {ad.views}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        {ad.createdAt ? formattedDate(ad.createdAt) : 'N/A'}
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
-                )
-              ))}
+              {ads.map(
+                (ad) =>
+                  ad._id && (
+                    <TableRow key={ad._id}>
+                      <TableCell>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          <Link to={`/ad/${ad._id}`}>
+                            {ad.brand + ' ' + ad.model + ' ' + ad.version}
+                          </Link>
+                        </Typography>
+                      </TableCell>
+                      <TableCell>{ad.uid?.name}</TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          €{Intl.NumberFormat('en-US').format(ad.price)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {ad.views}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {ad.createdAt ? formattedDate(ad.createdAt) : 'N/A'}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ),
+              )}
             </TableBody>
           </Table>
           {/* Pagination Controls */}
@@ -107,7 +117,8 @@ const AdsTable = () => {
             sx={{ mt: 2, mb: 3, display: 'flex', justifyContent: 'center' }}
           />
         </TableContainer>
-      </BlankCard></>
+      </BlankCard>
+    </>
   );
 };
 

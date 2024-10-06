@@ -325,7 +325,7 @@ const AdUpdatePage = () => {
                 label="AC Charging"
                 name="AC"
                 fullWidth
-                value={adData.courant.AC}
+                value={adData?.courant?.AC}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -334,7 +334,7 @@ const AdUpdatePage = () => {
                 label="DC Charging"
                 name="DC"
                 fullWidth
-                value={adData.courant.DC}
+                value={adData?.courant?.DC}
                 onChange={handleInputChange}
               />
             </Grid>
