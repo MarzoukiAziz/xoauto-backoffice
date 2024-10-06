@@ -15,12 +15,17 @@ import BlankCard from 'src/components/shared/BlankCard';
 import { UserType } from 'src/types/user';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 import { useSelector } from 'react-redux';
-import { AppState } from 'src/store/Store';
+import { AppState, dispatch } from 'src/store/Store';
+import axiosServices from 'src/utils/axios';
+import { fetchUser } from 'src/store/user/UserSlice';
+import { showNotification } from 'src/store/notification/NotificationSlice';
 
 type ProfileBannerProps = {
   user: UserType;
 };
 const ProfileBanner = ({ user }: ProfileBannerProps) => {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const ProfileImage = styled(Box)(() => ({
     backgroundImage: 'linear-gradient(#50b2fc,#f44c66)',
     borderRadius: '50%',
@@ -35,6 +40,32 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
   const handleSendEmail = (email: string) => {
     window.location.href = 'mailto:' + email;
   };
+
+  const handleChangeUserAccess = async () => {
+    const action = user.enable ? 'Disable' : 'Enable';
+    if (window.confirm(`Are you sure you want to ${action} this user?`)) {
+      try {
+        const response = await axiosServices.put(`${API_URL}/cognito/change-user-access`, {
+          username: user.id,
+          action: user.enable ? 'disable' : 'enable',
+        });
+
+        dispatch(fetchUser(user._id));
+
+        dispatch(
+          showNotification({
+            title: 'Info',
+            subtitle: response.data,
+            severity: 'info',
+          }),
+        );
+      } catch (err: any) {
+        console.log(err);
+        throw new Error(err);
+      }
+    }
+  };
+
   const adsCount: number = useSelector((state: AppState) => state.adReducer.count);
 
   return (
@@ -153,6 +184,13 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
             }}
           >
             <Stack direction={'row'} gap={2} alignItems="center" justifyContent="center" my={2}>
+              <Button
+                color={user.enable ? 'error' : 'success'}
+                variant="contained"
+                onClick={() => handleChangeUserAccess()}
+              >
+                {user.enable ? 'Disable' : 'Enable'}
+              </Button>
               <Button
                 color="primary"
                 variant="contained"

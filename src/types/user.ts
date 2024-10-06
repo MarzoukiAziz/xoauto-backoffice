@@ -1,5 +1,6 @@
 export interface UserType {
   _id: string;
+  id?: string;
   name: string;
   email: string;
   phone_number?: string;
@@ -9,7 +10,7 @@ export interface UserType {
   email_verified?: boolean;
   phone_number_verified?: boolean;
   favorite_ads?: string[];
-  enable?: boolean;
+  enable: boolean;
   createdAt?: Date;
   updatedAt?: Date;
   lastLogin?: Date;
