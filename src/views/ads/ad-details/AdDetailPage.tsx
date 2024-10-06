@@ -12,7 +12,7 @@ import AdDetail from './AdDetail';
 import AdDescription from './AdDescription';
 import AdsBcImg from 'src/assets/images/breadcrumb/AdsBc.png';
 
-const AdDetailsPage = () => {
+const AdDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -50,4 +50,4 @@ const AdDetailsPage = () => {
   );
 };
 
-export default AdDetailsPage;
+export default AdDetailPage;

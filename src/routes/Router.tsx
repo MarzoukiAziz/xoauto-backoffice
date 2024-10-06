@@ -22,7 +22,7 @@ const Dashboard = Loadable(lazy(() => import('../views/dashboard/Dashboard')));
 
 /* ****Ads***** */
 const AdsPage = Loadable(lazy(() => import('../views/ads/ads-listing/AdsPage')));
-const AdDetailsPage = Loadable(lazy(() => import('../views/ads/ad-details/AdDetailsPage')));
+const AdDetailsPage = Loadable(lazy(() => import('../views/ads/ad-details/AdDetailPage')));
 const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdatePage')));
 
 /* ****Blog***** */
