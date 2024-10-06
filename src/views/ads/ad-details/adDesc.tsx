@@ -58,8 +58,8 @@ const AdDesc = ({ ad, user }: AdDescProps) => {
           <br />
           <Typography variant="h6">Current Charging:</Typography>
           <ul>
-            {ad.courant.AC && <li>AC: {ad.courant.AC}</li>}
-            {ad.courant.DC && <li>DC: {ad.courant.DC}</li>}
+            {ad?.courant?.AC && <li>AC: {ad.courant.AC}</li>}
+            {ad?.courant?.DC && <li>DC: {ad.courant.DC}</li>}
           </ul>
           <br />
           <br />

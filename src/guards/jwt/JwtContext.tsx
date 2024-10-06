@@ -53,7 +53,7 @@ const AuthContext = createContext<any | null>({
   signup: () => Promise.resolve(),
   signin: () => Promise.resolve(),
   logout: () => Promise.resolve(),
-  confirmEmail: () => Promise.resolve(),
+  confirmPhone: () => Promise.resolve(),
 });
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -128,9 +128,9 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
     });
   };
 
-  const confirmEmail = async (user: string, code: string) => {
+  const confirmPhone = async (user: string, code: string) => {
     try {
-      const response = await axios.post(`${API_URL}/cognito/confirm-email`, {
+      const response = await axios.post(`${API_URL}/cognito/confirm-phone`, {
         user,
         code,
       });
@@ -159,7 +159,7 @@ function AuthProvider({ children }: { children: React.ReactElement }) {
         signin,
         logout,
         signup,
-        confirmEmail,
+        confirmPhone,
       }}
     >
       {children}

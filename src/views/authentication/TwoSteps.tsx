@@ -8,10 +8,10 @@ import { useParams } from 'react-router';
 import Notification from 'src/layouts/full/shared/notification/Notification';
 
 const TwoSteps = () => {
-  const { email } = useParams<{ email: string }>();
+  const { phone } = useParams<{ phone: string }>();
 
   return (
-    <PageContainer title="Confirm email" description="this is Two Steps page">
+    <PageContainer title="Confirm phone" description="this is Two Steps page">
       <Grid container spacing={0} justifyContent="center" sx={{ overflowX: 'hidden' }}>
         <Grid
           item
@@ -75,12 +75,12 @@ const TwoSteps = () => {
             </Typography>
 
             <Typography variant="subtitle1" color="textSecondary" mt={2} mb={1}>
-              We sent a verification code to your email. Enter the code in the field below.
+              We sent a verification code to your phone. Enter the code in the field below.
             </Typography>
             <Typography variant="subtitle1" fontWeight="700" mb={1}>
-              {email}
+              {phone}
             </Typography>
-            <AuthTwoSteps email={email!} />
+            <AuthTwoSteps phone={phone!} />
           </Box>
         </Grid>
       </Grid>
