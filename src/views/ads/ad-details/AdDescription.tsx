@@ -100,6 +100,34 @@ const AdDescription = ({ ad, user }: AdDescriptionProps) => {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
+          <Typography variant="h6">InDoor Equipments:</Typography>
+          <ul>
+            {ad.equipments?.indoor?.map((eq: string, index: number) => (
+              <li key={index}>{eq}</li>
+            ))}
+          </ul>
+
+          <Typography variant="h6">OutDoor Equipments:</Typography>
+          <ul>
+            {ad.equipments?.outdoor?.map((eq: string, index: number) => (
+              <li key={index}>{eq}</li>
+            ))}
+          </ul>
+
+          <Typography variant="h6">Safety Equipments:</Typography>
+          <ul>
+            {ad.equipments?.safety?.map((eq: string, index: number) => (
+              <li key={index}>{eq}</li>
+            ))}
+          </ul>
+
+          <Typography variant="h6">Functional Equipments:</Typography>
+          <ul>
+            {ad.equipments?.functional?.map((eq: string, index: number) => (
+              <li key={index}>{eq}</li>
+            ))}
+          </ul>
+
           <Typography variant="h6">Available Options:</Typography>
           <ul>
             {ad.options_vehicule?.non_smoker && <li>Non-Smoker</li>}
@@ -161,6 +189,9 @@ const AdDescription = ({ ad, user }: AdDescriptionProps) => {
           <br />
           <Typography variant="body1">
             {ad.address ? `Address : ${ad.address}` : 'Address not provided'}
+          </Typography>
+          <Typography variant="body1">
+            {ad.region ? `Region : ${ad.region}` : 'Region not provided'}
           </Typography>
           <Typography variant="body1">
             Phone : {ad.phone_number}

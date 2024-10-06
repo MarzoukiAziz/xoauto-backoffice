@@ -9,14 +9,12 @@ import { deleteSelectedAd, updateAdById } from 'src/store/ad/AdSlice';
 
 type AdDetailProps = {
   ad: AdType;
-  username: string;
 };
 
-const AdDetail = ({ ad, username }: AdDetailProps) => {
+const AdDetail = ({ ad }: AdDetailProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const currency = process.env.REACT_APP_CURRENCY;
-
   const handleDeleteAd = (id: string) => {
     if (window.confirm('Are you sure you want to delete this ad?')) {
       try {
@@ -68,7 +66,11 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
   return (
     <Box p={2}>
       <Box display="flex" alignItems="center">
-        <Chip label={ad.type} color="success" size="small" />
+        <Box display="flex" gap={1}>
+          {ad.pro && <Chip label="Pro" color="primary" size="small" />}
+          <Chip label={ad.type} color="success" size="small" />
+        </Box>
+
         <Typography color="textSecondary" variant="caption" ml={1} textTransform="capitalize">
           {ad.category}
         </Typography>
@@ -129,9 +131,14 @@ const AdDetail = ({ ad, username }: AdDetailProps) => {
         </Grid>
       </Grid>
       <Typography color="textSecondary" variant="body1" mt={4}>
-        By : <strong>{username}</strong> <br />
+        By :
+        <Typography component={Link} to={`/user/${ad.uid?._id}`} variant="h6">
+          {ad.uid?.name}
+        </Typography>
+        <br />
         Created At : {ad.createdAt ? formattedDate(ad.createdAt) : 'N/A'} <br />
-        Updated At : {ad.updatedAt ? formattedDate(ad.updatedAt) : 'N/A'}
+        Updated At : {ad.updatedAt ? formattedDate(ad.updatedAt) : 'N/A'} <br />
+        Sold : {ad.sold ? 'NO' : 'Yes'}
       </Typography>
       <Typography color="textSecondary" variant="body1" mt={4}></Typography>
     </Box>

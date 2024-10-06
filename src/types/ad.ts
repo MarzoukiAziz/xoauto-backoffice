@@ -1,6 +1,6 @@
 export interface AdType {
   _id: string;
-  uid: string;
+  uid: any;
   title?: string;
   description?: string;
   price: number;
@@ -28,22 +28,10 @@ export interface AdType {
     others?: string[];
   };
   equipments: {
-    safety: {
-      type: string[];
-      default: [];
-    };
-    outdoor: {
-      type: string[];
-      default: [];
-    };
-    indoor: {
-      type: string[];
-      default: [];
-    };
-    functional: {
-      type: string[];
-      default: [];
-    };
+    safety: string[];
+    outdoor: string[];
+    indoor: string[];
+    functional: string[];
   };
   courant: {
     AC?: string;
