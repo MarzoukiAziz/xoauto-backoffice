@@ -76,6 +76,30 @@ const AdUpdatePage = () => {
     );
   };
 
+  const handleProChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    setAdData((prevState) =>
+      prevState
+        ? {
+            ...prevState,
+            pro: checked,
+          }
+        : prevState,
+    );
+  };
+
+  const handleSoldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    setAdData((prevState) =>
+      prevState
+        ? {
+            ...prevState,
+            sold: checked,
+          }
+        : prevState,
+    );
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (adData) {
@@ -116,6 +140,20 @@ const AdUpdatePage = () => {
                 value={adData.title}
                 onChange={handleInputChange}
               />
+              <Grid item xs={12} sm={6}>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={adData.sold} onChange={handleSoldChange} name="sold" />
+                  }
+                  label="Sold"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControlLabel
+                  control={<Checkbox checked={adData.pro} onChange={handleProChange} name="pro" />}
+                  label="Pro"
+                />
+              </Grid>
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -339,6 +377,100 @@ const AdUpdatePage = () => {
               />
             </Grid>
           </Grid>
+
+          <Box my={3} bgcolor="primary.light" py={1} pl={3}>
+            <Typography variant="h6">Equipements</Typography>
+          </Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <TextField
+                label="InDoor Equipements"
+                name="indoor"
+                value={adData.equipments?.indoor.join(', ')}
+                onChange={(e) =>
+                  setAdData({
+                    ...adData,
+                    equipments: {
+                      ...adData.equipments,
+                      indoor:
+                        e.target.value.length > 0
+                          ? e.target.value.split(',').map((opt) => opt.trim())
+                          : [],
+                    },
+                  })
+                }
+                fullWidth
+                multiline
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="OutDoor Equipements"
+                name="outdoor"
+                value={adData.equipments?.outdoor.join(', ')}
+                onChange={(e) =>
+                  setAdData({
+                    ...adData,
+                    equipments: {
+                      ...adData.equipments,
+                      outdoor:
+                        e.target.value.length > 0
+                          ? e.target.value.split(',').map((opt) => opt.trim())
+                          : [],
+                    },
+                  })
+                }
+                fullWidth
+                multiline
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="Safety Equipements"
+                name="safety"
+                value={adData.equipments?.safety.join(', ')}
+                onChange={(e) =>
+                  setAdData({
+                    ...adData,
+                    equipments: {
+                      ...adData.equipments,
+                      safety:
+                        e.target.value.length > 0
+                          ? e.target.value.split(',').map((opt) => opt.trim())
+                          : [],
+                    },
+                  })
+                }
+                fullWidth
+                multiline
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="Functional Equipements"
+                name="functional"
+                value={adData.equipments?.functional.join(', ')}
+                onChange={(e) =>
+                  setAdData({
+                    ...adData,
+                    equipments: {
+                      ...adData.equipments,
+                      functional:
+                        e.target.value.length > 0
+                          ? e.target.value.split(',').map((opt) => opt.trim())
+                          : [],
+                    },
+                  })
+                }
+                fullWidth
+                multiline
+              />
+            </Grid>
+          </Grid>
+
           <Box my={3} bgcolor="primary.light" py={1} pl={3}>
             <Typography variant="h6">Options</Typography>
           </Box>
@@ -392,7 +524,10 @@ const AdUpdatePage = () => {
                     ...adData,
                     options_vehicule: {
                       ...adData.options_vehicule,
-                      others: e.target.value.split(',').map((opt) => opt.trim()),
+                      others:
+                        e.target.value.length > 0
+                          ? e.target.value.split(',').map((opt) => opt.trim())
+                          : [],
                     },
                   })
                 }
@@ -407,8 +542,16 @@ const AdUpdatePage = () => {
               <TextField
                 label="Photos"
                 name="photos"
-                type="string"
-                onChange={handleInputChange}
+                value={adData.photos?.join(', ')}
+                onChange={(e) =>
+                  setAdData({
+                    ...adData,
+                    photos:
+                      e.target.value.length > 0
+                        ? e.target.value.split(',').map((opt) => opt.trim())
+                        : [],
+                  })
+                }
                 fullWidth
                 multiline
               />
@@ -443,6 +586,16 @@ const AdUpdatePage = () => {
                 label="Address"
                 name="address"
                 value={adData.address || ''}
+                onChange={handleInputChange}
+                fullWidth
+              />
+            </Grid>
+
+            <Grid item xs={6}>
+              <TextField
+                label="Region"
+                name="region"
+                value={adData.region || ''}
                 onChange={handleInputChange}
                 fullWidth
               />
