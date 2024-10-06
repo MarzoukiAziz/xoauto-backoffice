@@ -12,9 +12,7 @@ const IntroCard = ({ user }: IntroCardProps) => (
   <ChildCard>
     <Stack direction="row" gap={2} alignItems="center" mb={3}>
       <IconMail size="21" />
-      <Typography variant="h6">
-        {user.email} {user.email_verified ? ' (Verified)' : ' (Not Verified)'}
-      </Typography>
+      <Typography variant="h6">{user.email}</Typography>
     </Stack>
     <Stack direction="row" gap={2} alignItems="center" mb={3}>
       <IconPhone size="21" />
@@ -27,11 +25,7 @@ const IntroCard = ({ user }: IntroCardProps) => (
         Created At: {user.createdAt ? formattedDate(user.createdAt) : 'N/A'}
       </Typography>
     </Stack>
-    <Stack direction="row" gap={2} alignItems="center" mb={3}>
-      <Typography variant="body1">
-        Updated At: {user.updatedAt ? formattedDate(user.updatedAt) : 'N/A'}
-      </Typography>
-    </Stack>
+
     <Stack direction="row" gap={2} alignItems="center" mb={3}>
       <Typography variant="body1">
         Last Login At: {user.lastLogin ? formattedDate(user.lastLogin) : 'N/A'}

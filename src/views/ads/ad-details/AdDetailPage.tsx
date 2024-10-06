@@ -26,8 +26,15 @@ const AdDetailPage = () => {
 
   return (
     ad && (
-      <PageContainer title={ad.title} description={ad.title}>
-        <Breadcrumb title={ad.title} items={BCrumb} breadcrumbImg={AdsBcImg} />
+      <PageContainer
+        title={ad.brand + ' ' + ad.model + ' ' + ad.version}
+        description={ad.brand + ' ' + ad.model + ' ' + ad.version}
+      >
+        <Breadcrumb
+          title={ad.brand + ' ' + ad.model + ' ' + ad.version}
+          items={BCrumb}
+          breadcrumbImg={AdsBcImg}
+        />
         <Grid container spacing={3} sx={{ maxWidth: { lg: '1055px', xl: '1200px' } }}>
           <Grid item xs={12} sm={12} lg={12}>
             <ChildCard>
@@ -36,7 +43,7 @@ const AdDetailPage = () => {
                   <AdCarousel ad={ad} />
                 </Grid>
                 <Grid item xs={12} sm={12} lg={6}>
-                  <AdDetail ad={ad} username={ad.uid?.name} />
+                  <AdDetail ad={ad} />
                 </Grid>
               </Grid>
             </ChildCard>

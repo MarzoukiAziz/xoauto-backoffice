@@ -64,7 +64,7 @@ const UserAdsTable = ({ uid }: UserAdsTableProps) => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Typography variant="h6">Title</Typography>
+                  <Typography variant="h6">Vehicule</Typography>
                 </TableCell>
                 <TableCell>
                   <Typography variant="h6">Price</Typography>
@@ -84,7 +84,9 @@ const UserAdsTable = ({ uid }: UserAdsTableProps) => {
                     <TableRow key={ad._id}>
                       <TableCell>
                         <Typography variant="subtitle1" color="textSecondary">
-                          <Link to={`/ad/${ad._id}`}>{ad.title}</Link>
+                          <Link to={`/ad/${ad._id}`}>
+                            {ad.brand + ' ' + ad.model + ' ' + ad.version}
+                          </Link>
                         </Typography>
                       </TableCell>
                       <TableCell>
