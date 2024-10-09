@@ -17,10 +17,10 @@ const NewSettings = () => {
   useEffect(() => {
     dispatch(fetchBrands());
     dispatch(fetchNewSettings());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
-    if (settings?.brands && settings.brands !== selectedBrands) {
+    if (settings?.brands) {
       setSelectedBrands(settings.brands);
     }
   }, [settings?.brands]);

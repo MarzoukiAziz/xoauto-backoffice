@@ -17,7 +17,7 @@ const EquipmentSettings = () => {
 
   useEffect(() => {
     dispatch(fetchEquipments());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (equipments) {
