@@ -58,6 +58,8 @@ const RegionSettingsPage = Loadable(
 const EquipmentsSettingsPage = Loadable(
   lazy(() => import('../views/settings/Equipments/EquipmentSettingsPage')),
 );
+const NewSettingsPage = Loadable(lazy(() => import('../views/settings/New/NewSettingsPage')));
+
 const Router = [
   {
     path: '/',
@@ -79,6 +81,7 @@ const Router = [
       { path: '/blog/update', element: <ArticleUpdatePage /> },
       { path: '/users/', element: <UsersPage /> },
       { path: '/user/:id', element: <UserDetailsPage /> },
+      { path: '/settings/new', element: <NewSettingsPage /> },
       { path: '/settings/brands', element: <BrandSettingsPage /> },
       { path: '/settings/models', element: <ModelSettingsPage /> },
       { path: '/settings/energies', element: <EnergySettingsPage /> },
