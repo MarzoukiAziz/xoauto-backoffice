@@ -19,6 +19,15 @@ const EquipmentSettings = () => {
     dispatch(fetchEquipments());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (equipments) {
+      setSafety(equipments.safety || []);
+      setOutdoor(equipments.outdoor || []);
+      setIndoor(equipments.indoor || []);
+      setFunctional(equipments.functional || []);
+    }
+  }, [equipments]);
+
   const handleUpdateEquipments = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(
