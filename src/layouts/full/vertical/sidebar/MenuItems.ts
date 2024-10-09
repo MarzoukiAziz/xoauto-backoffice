@@ -72,6 +72,12 @@ const Menuitems: MenuitemsType[] = [
     children: [
       {
         id: uniqueId(),
+        title: 'New',
+        icon: IconPoint,
+        href: '/settings/new',
+      },
+      {
+        id: uniqueId(),
         title: 'Brands',
         icon: IconPoint,
         href: '/settings/brands',
