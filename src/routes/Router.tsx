@@ -25,6 +25,9 @@ const AdsPage = Loadable(lazy(() => import('../views/ads/ads-listing/AdsPage')))
 const AdDetailsPage = Loadable(lazy(() => import('../views/ads/ad-details/AdDetailPage')));
 const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdatePage')));
 
+/* ****New Cars***** */
+const NewAdsPage = Loadable(lazy(() => import('../views/new/ads-listing/NewAdsPage')));
+
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
 const ArticleDetailsPage = Loadable(
@@ -74,6 +77,7 @@ const Router = [
       { path: '/ad/', element: <AdsPage /> },
       { path: '/ad/edit/:id', element: <AdUpdatePage /> },
       { path: '/ad/:id', element: <AdDetailsPage /> },
+      { path: '/new/', element: <NewAdsPage /> },
       { path: '/blog/', element: <ArticlesPage /> },
       { path: '/blog/settings', element: <BlogSettingsPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
