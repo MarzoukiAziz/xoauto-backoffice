@@ -9,7 +9,7 @@ export interface UserType {
   roles?: string[];
   email_verified?: boolean;
   phone_number_verified?: boolean;
-  favorite_ads?: string[];
+  saved_ads?: string[];
   enable: boolean;
   createdAt?: Date;
   updatedAt?: Date;
