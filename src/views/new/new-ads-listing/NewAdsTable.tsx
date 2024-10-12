@@ -88,9 +88,9 @@ const NewAdsTable = () => {
                   <TableCell>
                     <Typography variant="subtitle1" color="textSecondary">
                       {newAd.versions.map((version: VersionType) => (
-                        <>
+                        <Box key={newAd._id + version.version}>
                           <span>- {version.version}</span> <br />
-                        </>
+                        </Box>
                       ))}
                     </Typography>
                   </TableCell>
