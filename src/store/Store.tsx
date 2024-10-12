@@ -14,6 +14,7 @@ import RegionSettingsReducer from './settings/RegionSlice';
 import ColorSettingsReducer from './settings/ColorSlice';
 import EquipmentsReducer from './settings/EquipmentSlice';
 import NewReducer from './settings/NewSlice';
+import NewAdReducer from './new/NewAdSlice';
 
 import { combineReducers } from 'redux';
 import {
@@ -39,6 +40,7 @@ export const store = configureStore({
     colorSettingsReducer: ColorSettingsReducer,
     equipmentsReducer: EquipmentsReducer,
     newSettingsReducer: NewReducer,
+    newAdReducer: NewAdReducer,
   },
 });
 
@@ -58,6 +60,7 @@ const rootReducer = combineReducers({
   colorSettingsReducer: ColorSettingsReducer,
   equipmentsReducer: EquipmentsReducer,
   newSettingsReducer: NewReducer,
+  newAdReducer: NewAdReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
