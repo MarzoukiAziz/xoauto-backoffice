@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import ChildCard from 'src/components/shared/ChildCard';
 import { AdType } from 'src/types/ad';
-import { a11yProps, TabPanel } from './TabPanel';
+import { a11yProps, TabPanel } from '../../../components/shared/TabPanel';
 import { UserType } from 'src/types/user';
 import { formattedDate } from 'src/utils/usefulFunctions/formattedDate';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
