@@ -27,6 +27,7 @@ const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdate
 
 /* ****New Cars***** */
 const NewAdsPage = Loadable(lazy(() => import('../views/new/new-ads-listing/NewAdsPage')));
+const NewAdDetailPage = Loadable(lazy(() => import('../views/new/new-ad-detail/NewAdDetailPage')));
 
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
@@ -78,6 +79,7 @@ const Router = [
       { path: '/ad/edit/:id', element: <AdUpdatePage /> },
       { path: '/ad/:id', element: <AdDetailsPage /> },
       { path: '/new/', element: <NewAdsPage /> },
+      { path: '/new/:brand/:model', element: <NewAdDetailPage /> },
       { path: '/blog/', element: <ArticlesPage /> },
       { path: '/blog/settings', element: <BlogSettingsPage /> },
       { path: '/blog/article/:id', element: <ArticleDetailsPage /> },
