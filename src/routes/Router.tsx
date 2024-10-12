@@ -26,7 +26,7 @@ const AdDetailsPage = Loadable(lazy(() => import('../views/ads/ad-details/AdDeta
 const AdUpdatePage = Loadable(lazy(() => import('../views/ads/ad-update/AdUpdatePage')));
 
 /* ****New Cars***** */
-const NewAdsPage = Loadable(lazy(() => import('../views/new/ads-listing/NewAdsPage')));
+const NewAdsPage = Loadable(lazy(() => import('../views/new/new-ads-listing/NewAdsPage')));
 
 /* ****Blog***** */
 const ArticlesPage = Loadable(lazy(() => import('../views/blog/articles-listing/ArticlesPage')));
