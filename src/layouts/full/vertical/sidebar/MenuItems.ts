@@ -21,6 +21,7 @@ import {
   IconDashboard,
   IconPoint,
   IconSettings,
+  IconBox,
 } from '@tabler/icons';
 
 const Menuitems: MenuitemsType[] = [
@@ -39,6 +40,12 @@ const Menuitems: MenuitemsType[] = [
     title: 'Users',
     icon: IconUserCircle,
     href: '/users/',
+  },
+  {
+    id: uniqueId(),
+    title: 'New Cars',
+    icon: IconBox,
+    href: '/new/',
   },
   {
     id: uniqueId(),
