@@ -48,6 +48,8 @@ export interface VersionType {
   photos: string[];
   promo?: boolean;
   new?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface TechnicalSheetType {

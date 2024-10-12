@@ -57,10 +57,12 @@ export const fetchNewAds =
     }
   };
 
-export const fetchNewAdById = (id: string) => async (dispatch: AppDispatch) => {
+export const fetchNewAd = (brand: string, model: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/new-ads/${id}`);
-    dispatch(getNewAd(response.data));
+    const response = await axios.get(`${API_URL}/new-ads/brand`, {
+      params: { brand, model },
+    });
+    dispatch(getNewAd(response.data.ads[0]));
   } catch (err) {
     throw new Error('Failed to fetch new ad');
   }

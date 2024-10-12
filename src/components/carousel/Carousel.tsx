@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Carousel.css';
-import { AdType } from 'src/types/ad';
+import { IconPhotoOff } from '@tabler/icons';
 
-type AdCarouselProps = {
-  ad: AdType;
+type CarouselProps = {
+  photos: string[];
 };
 
-const AdCarousel = ({ ad }: AdCarouselProps) => {
+const Carousel = ({ photos }: CarouselProps) => {
   const [state, setState] = useState<any>({ nav1: null, nav2: null });
   const slider1 = useRef();
   const slider2 = useRef();
@@ -34,27 +34,32 @@ const AdCarousel = ({ ad }: AdCarouselProps) => {
     className: 'centerThumb',
     speed: 500,
   };
-
-  return (
-    ad && (
+  if (photos && photos.length > 0) {
+    return (
       <Box>
         <Slider asNavFor={nav2} ref={(slider: any) => (slider1.current = slider)}>
-          {ad.photos.map((photo) => (
+          {photos.map((photo) => (
             <Box key={photo}>
-              <img src={photo} alt={ad._id} width="100%" style={{ borderRadius: '5px' }} />
+              <img src={photo} alt={photo} width="100%" style={{ borderRadius: '5px' }} />
             </Box>
           ))}
         </Slider>
         <Slider asNavFor={nav1} ref={(slider: any) => (slider2.current = slider)} {...settings}>
-          {ad.photos.map((photo) => (
+          {photos.map((photo) => (
             <Box key={photo} sx={{ p: 1, cursor: 'pointer' }}>
-              <img src={photo} alt={ad._id} width="100%" style={{ borderRadius: '5px' }} />
+              <img src={photo} alt={photo} width="100%" style={{ borderRadius: '5px' }} />
             </Box>
           ))}
         </Slider>
       </Box>
-    )
+    );
+  }
+
+  return (
+    <Typography variant="h4" style={{ textAlign: 'center', marginTop: 80 }}>
+      No Photos <IconPhotoOff />
+    </Typography>
   );
 };
 
-export default AdCarousel;
+export default Carousel;

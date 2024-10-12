@@ -7,7 +7,7 @@ import PageContainer from 'src/components/container/PageContainer';
 import { fetchAdById } from 'src/store/ad/AdSlice';
 import { AdType } from 'src/types/ad';
 import ChildCard from 'src/components/shared/ChildCard';
-import AdCarousel from './AdCarousel';
+import Carousel from '../../../components/carousel/Carousel';
 import AdDetail from './AdDetail';
 import AdDescription from './AdDescription';
 import AdsBcImg from 'src/assets/images/breadcrumb/AdsBc.png';
@@ -40,7 +40,7 @@ const AdDetailPage = () => {
             <ChildCard>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} lg={6}>
-                  <AdCarousel ad={ad} />
+                  <Carousel photos={ad.photos} />
                 </Grid>
                 <Grid item xs={12} sm={12} lg={6}>
                   <AdDetail ad={ad} />
