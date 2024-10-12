@@ -2,22 +2,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography, Button } from '@mui/material';
 import { dispatch } from 'src/store/Store';
 import { showNotification } from 'src/store/notification/NotificationSlice';
-import { deleteSelectedAd } from 'src/store/ad/AdSlice';
 import { VersionType } from 'src/types/new';
+import { deleteSelectedNewAd } from 'src/store/new/NewAdSlice';
 
 type VersionDetailProps = {
   brand: string;
   model: string;
   version: VersionType;
+  versionsLengh: number;
 };
 
-const VersionDetail = ({ model, brand, version }: VersionDetailProps) => {
+const VersionDetail = ({ model, brand, version, versionsLengh }: VersionDetailProps) => {
   const navigate = useNavigate();
   const currency = process.env.REACT_APP_CURRENCY;
   const handleDeleteAd = (id: string) => {
     if (window.confirm('Are you sure you want to delete this version?')) {
       try {
-        dispatch(deleteSelectedAd(id));
+        dispatch(deleteSelectedNewAd(id));
         dispatch(
           showNotification({
             title: 'Success',
@@ -25,7 +26,11 @@ const VersionDetail = ({ model, brand, version }: VersionDetailProps) => {
             severity: 'success',
           }),
         );
-        navigate('/ad');
+        if (versionsLengh > 1) {
+          window.location.reload();
+        } else {
+          navigate('/new/');
+        }
       } catch (error) {
         dispatch(
           showNotification({

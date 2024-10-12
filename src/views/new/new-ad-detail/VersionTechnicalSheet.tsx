@@ -51,7 +51,12 @@ const VersionTechnicalSheet = ({ model }: VersionTechnicalSheetProps) => {
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={12} lg={6}>
-                    <NewAdDetail brand={model.brand} model={model.model} version={version} />
+                    <NewAdDetail
+                      brand={model.brand}
+                      model={model.model}
+                      version={version}
+                      versionsLengh={model.versions.length}
+                    />
                   </Grid>
                 </Grid>
               </ChildCard>
