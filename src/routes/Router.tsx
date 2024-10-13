@@ -110,7 +110,7 @@ const Router = [
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
-      { path: '/auth/confirm-phone/:phone', element: <TwoSteps /> },
+      { path: '/auth/confirm-email/:email', element: <TwoSteps /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },

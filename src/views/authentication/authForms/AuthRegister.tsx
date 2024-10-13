@@ -44,7 +44,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
     onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
       try {
         await signup(values.email, values.UserName, values.phone, values.password);
-        navigate('/auth/confirm-phone/' + values.phone);
+        navigate('/auth/confirm-email/' + values.email);
         if (mounted.current) {
           setStatus({ success: true });
           setSubmitting(true);
