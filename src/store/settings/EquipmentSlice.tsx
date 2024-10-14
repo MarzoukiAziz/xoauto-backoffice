@@ -28,12 +28,12 @@ export const EquipmentSlice = createSlice({
 
 export const { setEquipments } = EquipmentSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch equipments from the API
 export const fetchEquipments = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/equipments`);
+    const response = await axios.get(`${AD_API_URL}/settings/equipments`);
     dispatch(setEquipments(response.data));
   } catch (err) {
     throw new Error('Failed to fetch equipments');
@@ -43,7 +43,7 @@ export const fetchEquipments = () => async (dispatch: AppDispatch) => {
 // Update equipment
 export const updateEquipment = (newEquipments: EquipmentType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.put(`${API_URL}/settings/equipments`, newEquipments);
+    const response = await axios.put(`${AD_API_URL}/settings/equipments`, newEquipments);
     dispatch(setEquipments(response.data));
   } catch (err) {
     throw new Error('Failed to add new equipment');

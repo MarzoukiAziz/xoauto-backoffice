@@ -29,12 +29,12 @@ export const RegionSlice = createSlice({
 
 export const { getRegions, addRegion, deleteRegion } = RegionSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch regions from the API
 export const fetchRegions = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/regions`);
+    const response = await axios.get(`${AD_API_URL}/settings/regions`);
     dispatch(getRegions(response.data));
   } catch (err) {
     throw new Error('Failed to fetch regions');
@@ -44,7 +44,7 @@ export const fetchRegions = () => async (dispatch: AppDispatch) => {
 // Add a new region
 export const addNewRegion = (newRegion: RegionType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/settings/regions`, newRegion);
+    const response = await axios.post(`${AD_API_URL}/settings/regions`, newRegion);
     dispatch(addRegion(response.data));
   } catch (err) {
     throw new Error('Failed to add new region');
@@ -54,7 +54,7 @@ export const addNewRegion = (newRegion: RegionType) => async (dispatch: AppDispa
 // Delete a region
 export const deleteSelectedRegion = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/settings/regions/${id}`);
+    await axios.delete(`${AD_API_URL}/settings/regions/${id}`);
     dispatch(deleteRegion(id));
   } catch (err) {
     throw new Error('Failed to delete region');

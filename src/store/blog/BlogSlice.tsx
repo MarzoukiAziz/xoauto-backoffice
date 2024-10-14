@@ -32,69 +32,73 @@ export const ArticleSlice = createSlice({
       state.articles.push(action.payload);
     },
     updateArticle: (state, action: PayloadAction<ArticleType>) => {
-      state.articles = state.articles.map(article =>
-        article._id === action.payload._id ? action.payload : article
+      state.articles = state.articles.map((article) =>
+        article._id === action.payload._id ? action.payload : article,
       );
     },
     deleteArticle: (state, action: PayloadAction<string>) => {
-      state.articles = state.articles.filter(article => article._id !== action.payload);
+      state.articles = state.articles.filter((article) => article._id !== action.payload);
     },
     deleteComment: (state, action: PayloadAction<{ commentId: string }>) => {
       if (state.selectedArticle?.comments) {
-        state.selectedArticle.comments = state.selectedArticle.comments.filter(comment => comment._id !== action.payload.commentId);
+        state.selectedArticle.comments = state.selectedArticle.comments.filter(
+          (comment) => comment._id !== action.payload.commentId,
+        );
       }
-
     },
   },
 });
 
-export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle, deleteComment } = ArticleSlice.actions;
+export const { getArticles, getArticle, addArticle, updateArticle, deleteArticle, deleteComment } =
+  ArticleSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const BLOG_API_URL = process.env.REACT_APP_BLOG_API_URL;
 
 // Fetch articles from the API
 export const fetchArticles =
-  (keywords?: string, category?: string, size = 10, page = 1, sort = "desc") =>
-    async (dispatch: AppDispatch) => {
-      try {
-        const response = await axios.get(`${API_URL}/article`, {
-          params: {
-            category,
-            keywords,
-            size,
-            page,
-            sort
-          },
-        });
-        dispatch(getArticles(response.data));
-      } catch (err) {
-        throw new Error();
-      }
-    };
+  (keywords?: string, category?: string, size = 10, page = 1, sort = 'desc') =>
+  async (dispatch: AppDispatch) => {
+    try {
+      const response = await axios.get(`${BLOG_API_URL}/article`, {
+        params: {
+          category,
+          keywords,
+          size,
+          page,
+          sort,
+        },
+      });
+      dispatch(getArticles(response.data));
+    } catch (err) {
+      throw new Error();
+    }
+  };
 
 // Fetch a specific article by ID
-export const fetchArticle = (id: string, withComments = false) => async (dispatch: AppDispatch) => {
-  try {
-    const responseArticle = await axios.get(`${API_URL}/article/${id}`, {
-      params: {
-        view: false,
-      },
-    });
-    const article = responseArticle.data
-    if (withComments) {
-      const responseComments = await axios.get(`${API_URL}/comment/article/${id}`);
-      article.comments = responseComments.data
+export const fetchArticle =
+  (id: string, withComments = false) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      const responseArticle = await axios.get(`${BLOG_API_URL}/article/${id}`, {
+        params: {
+          view: false,
+        },
+      });
+      const article = responseArticle.data;
+      if (withComments) {
+        const responseComments = await axios.get(`${BLOG_API_URL}/comment/article/${id}`);
+        article.comments = responseComments.data;
+      }
+      dispatch(getArticle(article));
+    } catch (err) {
+      throw new Error();
     }
-    dispatch(getArticle(article));
-  } catch (err) {
-    throw new Error();
-  }
-};
+  };
 
 // Add a new article
 export const addNewArticle = (newArticle: ArticleType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/article`, newArticle);
+    const response = await axios.post(`${BLOG_API_URL}/article`, newArticle);
     dispatch(addArticle(response.data));
   } catch (err) {
     throw new Error('Failed to add new article');
@@ -104,7 +108,10 @@ export const addNewArticle = (newArticle: ArticleType) => async (dispatch: AppDi
 // Update an existing article
 export const updateArticleById = (updatedArticle: ArticleType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.put(`${API_URL}/article/${updatedArticle._id}`, updatedArticle);
+    const response = await axios.put(
+      `${BLOG_API_URL}/article/${updatedArticle._id}`,
+      updatedArticle,
+    );
 
     dispatch(updateArticle(response.data));
   } catch (err) {
@@ -115,7 +122,7 @@ export const updateArticleById = (updatedArticle: ArticleType) => async (dispatc
 // Delete an article
 export const deleteSelectedArticle = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/article/${id}`);
+    await axios.delete(`${BLOG_API_URL}/article/${id}`);
     dispatch(deleteArticle(id));
   } catch (err) {
     throw new Error('Failed to delete article');
@@ -125,7 +132,7 @@ export const deleteSelectedArticle = (id: string) => async (dispatch: AppDispatc
 // Delete a comment
 export const deleteSelectedComment = (commentId: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/comment/${commentId}`);
+    await axios.delete(`${BLOG_API_URL}/comment/${commentId}`);
     dispatch(deleteComment({ commentId }));
   } catch (err) {
     throw new Error('Failed to delete comment');

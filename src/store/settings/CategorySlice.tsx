@@ -29,12 +29,12 @@ export const CategorySlice = createSlice({
 
 export const { getCategories, addCategory, deleteCategory } = CategorySlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch categories from the API
 export const fetchCategories = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/categories`);
+    const response = await axios.get(`${AD_API_URL}/settings/categories`);
     dispatch(getCategories(response.data));
   } catch (err) {
     throw new Error('Failed to fetch categories');
@@ -44,7 +44,7 @@ export const fetchCategories = () => async (dispatch: AppDispatch) => {
 // Add a new category
 export const addNewCategory = (newCategory: CategoryType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/settings/categories`, newCategory);
+    const response = await axios.post(`${AD_API_URL}/settings/categories`, newCategory);
     dispatch(addCategory(response.data));
   } catch (err) {
     throw new Error('Failed to add new category');
@@ -54,7 +54,7 @@ export const addNewCategory = (newCategory: CategoryType) => async (dispatch: Ap
 // Delete a category
 export const deleteSelectedCategory = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/settings/categories/${id}`);
+    await axios.delete(`${AD_API_URL}/settings/categories/${id}`);
     dispatch(deleteCategory(id));
   } catch (err) {
     throw new Error('Failed to delete category');
