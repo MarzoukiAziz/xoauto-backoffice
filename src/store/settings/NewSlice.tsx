@@ -25,12 +25,12 @@ export const NewSettingsSlice = createSlice({
 
 export const { setNewSettings } = NewSettingsSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const NEWAD_API_URL = process.env.REACT_APP_NEWAD_API_URL;
 
 // Fetch settings from the API
 export const fetchNewSettings = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/new`);
+    const response = await axios.get(`${NEWAD_API_URL}/settings/new`);
     dispatch(setNewSettings(response.data));
   } catch (err) {
     throw new Error('Failed to fetch settings');
@@ -41,7 +41,7 @@ export const fetchNewSettings = () => async (dispatch: AppDispatch) => {
 export const updateNewSettings =
   (newNewSettings: NewSettingsType) => async (dispatch: AppDispatch) => {
     try {
-      const response = await axios.put(`${API_URL}/settings/new`, newNewSettings);
+      const response = await axios.put(`${NEWAD_API_URL}/settings/new`, newNewSettings);
       dispatch(setNewSettings(response.data));
     } catch (err) {
       throw new Error('Failed to update settinfs');

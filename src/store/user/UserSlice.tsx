@@ -35,13 +35,13 @@ export const UserSlice = createSlice({
 
 export const { getUsers, getUser } = UserSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const USER_API_URL = process.env.REACT_APP_USER_API_URL;
 
 export const fetchUsers =
   (keywords?: string, size = 10, page = 1, sort = 'desc') =>
   async (dispatch: AppDispatch) => {
     try {
-      const response = await axios.get(`${API_URL}/user`, {
+      const response = await axios.get(`${USER_API_URL}/user`, {
         params: {
           keywords,
           size,
@@ -56,7 +56,7 @@ export const fetchUsers =
   };
 export const fetchUser = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/user/${id}`);
+    const response = await axios.get(`${USER_API_URL}/user/${id}`);
     dispatch(getUser(response.data));
   } catch (err: any) {
     throw new Error(err);

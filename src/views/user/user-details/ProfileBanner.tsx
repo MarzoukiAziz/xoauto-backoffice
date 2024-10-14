@@ -24,7 +24,7 @@ type ProfileBannerProps = {
   user: UserType;
 };
 const ProfileBanner = ({ user }: ProfileBannerProps) => {
-  const API_URL = process.env.REACT_APP_API_URL;
+  const USER_API_URL = process.env.REACT_APP_USER_API_URL;
 
   const ProfileImage = styled(Box)(() => ({
     backgroundImage: 'linear-gradient(#50b2fc,#f44c66)',
@@ -45,7 +45,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
     const action = user.enable ? 'Disable' : 'Enable';
     if (window.confirm(`Are you sure you want to ${action} this user?`)) {
       try {
-        const response = await axiosServices.put(`${API_URL}/cognito/change-user-access`, {
+        const response = await axiosServices.put(`${USER_API_URL}/cognito/change-user-access`, {
           username: user.id,
           action: user.enable ? 'disable' : 'enable',
         });

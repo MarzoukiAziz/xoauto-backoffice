@@ -29,12 +29,12 @@ export const EnergySlice = createSlice({
 
 export const { getEnergies, addEnergy, deleteEnergy } = EnergySlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch energies from the API
 export const fetchEnergies = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/energies`);
+    const response = await axios.get(`${AD_API_URL}/settings/energies`);
     dispatch(getEnergies(response.data));
   } catch (err) {
     throw new Error('Failed to fetch energies');
@@ -44,7 +44,7 @@ export const fetchEnergies = () => async (dispatch: AppDispatch) => {
 // Add a new energy
 export const addNewEnergy = (newEnergy: EnergyType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/settings/energies`, newEnergy);
+    const response = await axios.post(`${AD_API_URL}/settings/energies`, newEnergy);
     dispatch(addEnergy(response.data));
   } catch (err) {
     throw new Error('Failed to add new energy');
@@ -54,7 +54,7 @@ export const addNewEnergy = (newEnergy: EnergyType) => async (dispatch: AppDispa
 // Delete a energy
 export const deleteSelectedEnergy = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/settings/energies/${id}`);
+    await axios.delete(`${AD_API_URL}/settings/energies/${id}`);
     dispatch(deleteEnergy(id));
   } catch (err) {
     throw new Error('Failed to delete energy');

@@ -47,14 +47,14 @@ export const AdSlice = createSlice({
 export const { getAds, getAd, addAd, updateAd, deleteAd } = AdSlice.actions;
 
 // API URL
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch ads from the API
 export const fetchAds =
   (uid = '', size = 10, page = 1, sort = 'desc') =>
   async (dispatch: AppDispatch) => {
     try {
-      const response = await axios.get(`${API_URL}/ads/search`, {
+      const response = await axios.get(`${AD_API_URL}/ads/search`, {
         params: { size, page, sort, includeViews: true, uid },
       });
       dispatch(getAds(response.data));
@@ -66,7 +66,7 @@ export const fetchAds =
 // Fetch a specific ad by ID
 export const fetchAdById = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/ads/${id}`, {
+    const response = await axios.get(`${AD_API_URL}/ads/${id}`, {
       params: { view: false, includeViews: true },
     });
     dispatch(getAd(response.data));
@@ -78,7 +78,7 @@ export const fetchAdById = (id: string) => async (dispatch: AppDispatch) => {
 // Add a new ad
 export const addNewAd = (newAd: AdType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/ads`, newAd);
+    const response = await axios.post(`${AD_API_URL}/ads`, newAd);
     dispatch(addAd(response.data));
   } catch (err) {
     throw new Error('Failed to add new ad');
@@ -88,7 +88,7 @@ export const addNewAd = (newAd: AdType) => async (dispatch: AppDispatch) => {
 // Update an existing ad
 export const updateAdById = (updatedAd: AdType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.put(`${API_URL}/ads/${updatedAd._id}`, updatedAd);
+    const response = await axios.put(`${AD_API_URL}/ads/${updatedAd._id}`, updatedAd);
     dispatch(updateAd(response.data));
   } catch (err) {
     throw new Error('Failed to update ad');
@@ -98,7 +98,7 @@ export const updateAdById = (updatedAd: AdType) => async (dispatch: AppDispatch)
 // Delete an ad
 export const deleteSelectedAd = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/ads/${id}`);
+    await axios.delete(`${AD_API_URL}/ads/${id}`);
     dispatch(deleteAd(id));
   } catch (err) {
     throw new Error('Failed to delete ad');

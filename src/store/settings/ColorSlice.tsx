@@ -29,12 +29,12 @@ export const ColorSlice = createSlice({
 
 export const { getColors, addColor, deleteColor } = ColorSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch colors from the API
 export const fetchColors = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/colors`);
+    const response = await axios.get(`${AD_API_URL}/settings/colors`);
     dispatch(getColors(response.data));
   } catch (err) {
     throw new Error('Failed to fetch colors');
@@ -44,7 +44,7 @@ export const fetchColors = () => async (dispatch: AppDispatch) => {
 // Add a new color
 export const addNewColor = (newColor: ColorType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/settings/colors`, newColor);
+    const response = await axios.post(`${AD_API_URL}/settings/colors`, newColor);
     dispatch(addColor(response.data));
   } catch (err) {
     throw new Error('Failed to add new color');
@@ -54,7 +54,7 @@ export const addNewColor = (newColor: ColorType) => async (dispatch: AppDispatch
 // Delete a color
 export const deleteSelectedColor = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/settings/colors/${id}`);
+    await axios.delete(`${AD_API_URL}/settings/colors/${id}`);
     dispatch(deleteColor(id));
   } catch (err) {
     throw new Error('Failed to delete color');

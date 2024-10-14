@@ -29,12 +29,12 @@ export const ModelSlice = createSlice({
 
 export const { getModels, addModel, deleteModel } = ModelSlice.actions;
 
-const API_URL = process.env.REACT_APP_API_URL;
+const AD_API_URL = process.env.REACT_APP_AD_API_URL;
 
 // Fetch models from the API
 export const fetchModels = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}/settings/models/brands`);
+    const response = await axios.get(`${AD_API_URL}/settings/models/brands`);
     dispatch(getModels(response.data));
   } catch (err) {
     throw new Error('Failed to fetch models');
@@ -44,7 +44,7 @@ export const fetchModels = () => async (dispatch: AppDispatch) => {
 // Add a new model
 export const addNewModel = (newModel: ModelType) => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/settings/models`, newModel);
+    const response = await axios.post(`${AD_API_URL}/settings/models`, newModel);
     dispatch(addModel(response.data));
   } catch (err) {
     throw new Error('Failed to add new model');
@@ -54,7 +54,7 @@ export const addNewModel = (newModel: ModelType) => async (dispatch: AppDispatch
 // Delete a model
 export const deleteSelectedModel = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    await axios.delete(`${API_URL}/settings/models/${id}`);
+    await axios.delete(`${AD_API_URL}/settings/models/${id}`);
     dispatch(deleteModel(id));
   } catch (err) {
     throw new Error('Failed to delete model');
