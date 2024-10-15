@@ -74,10 +74,10 @@ const NewAdsTable = () => {
             </TableHead>
             <TableBody>
               {newAds.map((newAd) => (
-                <TableRow key={newAd.brand + newAd.model}>
+                <TableRow key={newAd.brand + newAd.modele}>
                   <TableCell>
                     <Typography variant="subtitle1" color="textSecondary">
-                      <Link to={`/new/${newAd.brand}/${newAd.model}`}>{newAd.model} </Link>
+                      <Link to={`/new/${newAd.brand}/${newAd.modele}`}>{newAd.modele} </Link>
                     </Typography>
                   </TableCell>
                   <TableCell>
