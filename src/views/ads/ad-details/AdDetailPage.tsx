@@ -27,11 +27,11 @@ const AdDetailPage = () => {
   return (
     ad && (
       <PageContainer
-        title={ad.brand + ' ' + ad.model + ' ' + ad.version}
-        description={ad.brand + ' ' + ad.model + ' ' + ad.version}
+        title={ad.brand + ' ' + ad.car_model + ' ' + ad.version}
+        description={ad.brand + ' ' + ad.car_model + ' ' + ad.version}
       >
         <Breadcrumb
-          title={ad.brand + ' ' + ad.model + ' ' + ad.version}
+          title={ad.brand + ' ' + ad.car_model + ' ' + ad.version}
           items={BCrumb}
           breadcrumbImg={AdsBcImg}
         />

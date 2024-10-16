@@ -84,7 +84,7 @@ const AdsTable = () => {
                       <TableCell>
                         <Typography variant="subtitle1" color="textSecondary">
                           <Link to={`/ad/${ad._id}`}>
-                            {ad.brand + ' ' + ad.model + ' ' + ad.version}
+                            {ad.brand + ' ' + ad.car_model + ' ' + ad.version}
                           </Link>
                         </Typography>
                       </TableCell>

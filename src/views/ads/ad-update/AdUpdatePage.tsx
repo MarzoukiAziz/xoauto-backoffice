@@ -212,7 +212,7 @@ const AdUpdatePage = () => {
                 label="Model"
                 name="model"
                 fullWidth
-                value={adData.model}
+                value={adData.car_model}
                 onChange={handleInputChange}
               />
             </Grid>

@@ -80,7 +80,7 @@ const AdDetail = ({ ad }: AdDetailProps) => {
       </Typography>
       <Typography variant="subtitle2" mt={1} color={theme.palette.text.secondary}>
         Brand: <strong>{ad.brand}</strong> <br />
-        Model: <strong>{ad.model}</strong> <br />
+        Model: <strong>{ad.car_model}</strong> <br />
         Version: <strong>{ad.version}</strong> <br />
         Mileage: <strong>{Intl.NumberFormat('en-US').format(ad.mileage)} KM</strong>
         <br />
